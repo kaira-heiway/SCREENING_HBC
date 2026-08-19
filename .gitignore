@@ -1,4 +1,4 @@
-*.app
+# *.app
 *.flf
 *.bclicense
 *.g.xlf
@@ -9,13 +9,13 @@ bcptTestResults*.json
 BuildOutput.txt
 rad.json
 .output/
-.dependencies/
-.buildartifacts/
-.alpackages/
-.packages/
+# .dependencies/
+# .buildartifacts/
+# .alpackages/
+# .packages/
 .alcache/
 .altemplates/
 .altestrunner/
-.snapshots/
+# .snapshots/
 cache_*
 ~$*

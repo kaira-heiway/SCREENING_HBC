@@ -1,0 +1,209 @@
+tableextension 50162 RoutingVersionExtFND extends "Routing Version"
+{
+    // version NAVW110.0,HEI.04
+
+    //  HEI.01 RFC-CHG0257267 IBM.AB 15.10.2018
+    //   # New field Active created
+    //   # Code added to validate Activation of BOM Version
+    // HEI.02 CHG2150741 IBM GOKULS01 01/07/2022 #Validation added in status feild
+    //   #To validated the starting date must have value
+    //   #to check all the bom lines has the routing link code
+    //   #To check same routing link code not tagged in multiple bom's
+    // HEI.03 CHG2150741 IBM GOKULS01 12/07/2022 #Validation added in status feild
+    //   #To fix issues in Routing link code validation
+    // HEI.04 CHG2150741 NORRIQ KOROLA04 04.10.2022
+    //   #Status - OnValidate() - modified
+    //   #DataValidation - function added
+
+    fields
+    {
+        modify("Routing No.")
+        {
+            CaptionML = ENU = 'Routing No.', FRA = 'N° gamme';
+        }
+        modify("Version Code")
+        {
+            CaptionML = ENU = 'Version Code', FRA = 'Code version';
+        }
+        modify(Description)
+        {
+            CaptionML = ENU = 'Description', FRA = 'Désignation';
+        }
+        modify("Starting Date")
+        {
+            CaptionML = ENU = 'Starting Date', FRA = 'Date début';
+        }
+        modify(Status)
+        {
+            CaptionML = ENU = 'Status', FRA = 'Statut';
+            //OptionCaptionML = ENU = 'New,Certified,Under Development,Closed', FRA = 'Création en cours,Validée,Modification en cours,Clôturée';
+            //BCUPGRADE YADAVM09 Code added >>
+            trigger OnBeforeValidate()
+            begin
+                //>>HEI.02
+                IF Status = Status::Certified THEN BEGIN
+                    //HEI.04 TESTFIELD("Starting Date"); //Validate starting date must have value
+                    DataValidation();//HEI.04
+                end;
+                //<<HEI.02
+
+            end;
+
+            trigger OnAfterValidate()
+            begin
+                //HEI.01>>
+                IF (Status <> xRec.Status) AND (Status <> Status::Certified) THEN BEGIN
+                    "Active FND" := FALSE;
+                    MODIFY(TRUE);
+                end;
+                //HEI.01<<
+            end;
+            //BCUPGRADE YADAVM09 Code added <<
+        }
+        modify(Type)
+        {
+            CaptionML = ENU = 'Type', FRA = 'Type';
+            OptionCaptionML = ENU = 'Serial,Parallel', FRA = 'Séquentielle,Parallèle';
+        }
+        modify("Last Date Modified")
+        {
+            CaptionML = ENU = 'Last Date Modified', FRA = 'Date dern. modification';
+        }
+        modify("No. Series")
+        {
+            CaptionML = ENU = 'No. Series', FRA = 'Souches de n°';
+        }
+
+        //Unsupported feature: CodeModification on "Status(Field 20).OnValidate". Please convert manually.
+
+        //trigger OnValidate();
+        //Parameters and return type have not been exported.
+        //>>>> ORIGINAL CODE:
+        //begin
+        /*
+        if (Status <> xRec.Status) and (Status = Status::Certified) then begin
+          RtngHeader.GET("Routing No.");
+          CheckRouting.Calculate(RtngHeader,"Version Code");
+        end;
+        MODIFY(true);
+        COMMIT;
+        */
+        //end;
+        //>>>> MODIFIED CODE:
+        //begin
+        /*
+        //>>HEI.02
+        if Status = Status::Certified then begin
+          //HEI.04 TESTFIELD("Starting Date"); //Validate starting date must have value
+          DataValidation;//HEI.04
+        end;
+        //<<HEI.02
+
+        #1..6
+        //HEI.01>>
+        if (Status <> xRec.Status) and (Status <> Status::Certified) then begin
+            Active := false;
+            MODIFY(true);
+        end;
+        //HEI.01<<
+        */
+        //end;
+        field(50000; "Active FND"; Boolean)
+        {
+            Caption = 'Active';
+            Description = 'HEI.01';
+
+            trigger OnValidate();
+            begin
+                //HEI.01>>
+                TESTFIELD(Status, Status::Certified);
+                if "Active FND" then begin
+                    RoutingVersion.RESET();
+                    RoutingVersion.SETRANGE(RoutingVersion."Routing No.", "Routing No.");
+                    RoutingVersion.SETRANGE(RoutingVersion."Active FND", true);
+                    if RoutingVersion.FINDFIRST() then
+                        ERROR(Text002, RoutingVersion."Routing No.");
+                end;
+                //HEI.01<<
+            end;
+        }
+    }
+
+    //Unsupported feature: InsertAfter on "Documentation". Please convert manually.
+
+
+    //Unsupported feature: PropertyChange. Please convert manually.
+
+
+    //Unsupported feature: PropertyChange. Please convert manually.
+
+
+
+    //Unsupported feature: PropertyModification on "Text000(Variable 1008)". Please convert manually.
+
+    //var
+    //>>>> ORIGINAL VALUE:
+    //Text000 : ENU=The new %1 cannot be generated by default\because the %2 for %3 %4 contains more than %5 characters.;
+    //Variable type has not been exported.
+    //>>>> MODIFIED VALUE:
+    //Text000 : ENU=The new %1 cannot be generated by default\because the %2 for %3 %4 contains more than %5 characters.;FRA=Le nouveau %1 ne peut pas être généré par défaut\car le %2 de la %3 %4 dépasse %5 caractères.;
+    //Variable type has not been exported.
+
+
+    //Unsupported feature: PropertyModification on "Text001(Variable 1004)". Please convert manually.
+
+    //var
+    //>>>> ORIGINAL VALUE:
+    //Text001 : ENU=You cannot rename the %1 when %2 is %3.;
+    //Variable type has not been exported.
+    //>>>> MODIFIED VALUE:
+    //Text001 : ENU=You cannot rename the %1 when %2 is %3.;FRA=Vous ne pouvez pas renommer l'enregistrement %1 lorsque la valeur %2 est %3.;
+    //Variable type has not been exported.
+    //BCUPGRADE YADAVM09 Function Added added >>
+    procedure Datavalidation()
+    var
+        RtngLine: Record "Routing Line";
+        RoutingVersion: Record "Routing Version";
+        RoutingLinkCode: Code[20];
+        Text001: Label 'You cannot rename the %1 when %2 is %3.';
+        Text004: Label 'Routing Link Code tagged in another Routing No.: %1 Version Code : %2'; // BC Upgrade kamnay01 
+    begin
+        //checking routing link code exists for all the lines
+        RtngLine.RESET();
+        RtngLine.SETRANGE("Routing No.", "Routing No.");
+        RtngLine.SETRANGE("Version Code", "Version Code");
+        RtngLine.SETFILTER("Routing Link Code", '%1', '');
+        IF RtngLine.FINDLAST() THEN
+            ERROR(Text001, RtngLine."Operation No.", RtngLine."No.");
+        //checking same routing link not mapped in multiple Production BOM's.
+        RtngLine.RESET();
+        RtngLine.SETRANGE("Routing No.", "Routing No.");
+        RtngLine.SETRANGE("Version Code", "Version Code");
+        RtngLine.SETFILTER("Routing Link Code", '<>%1', '');
+        IF RtngLine.FINDFIRST() THEN BEGIN
+            RoutingLinkCode := RtngLine."Routing Link Code";
+            CLEAR(RtngLine);
+            RtngLine.RESET();
+            RtngLine.SETRANGE("Routing No.", "Routing No.");//HEI.05
+            RtngLine.SETFILTER("Version Code", '<>%1', "Version Code");//HEI.05
+            RtngLine.SETFILTER("Routing Link Code", '%1', RoutingLinkCode);
+            IF RtngLine.findset(false) THEN
+                //>>HEI.03 Code changed
+                REPEAT
+                    //HEI.05 >>
+                    IF RoutingVersion.GET(RtngLine."Routing No.", RtngLine."Version Code") THEN
+                        IF RoutingVersion.Status = RoutingVersion.Status::Certified THEN
+                            ERROR(Text004, RtngLine."Routing No.", RtngLine."Version Code");//BC Upgrade Kamnay01 - Bug Fix:** Previously, `Text002` was used for this error, but that message belongs to different logic. As per the Heilite implementation, the error message has been updated to  Text004 match the correct logic.
+                //HEI.05 <<
+                UNTIL RtngLine.NEXT() = 0;
+            //<<HEI.03 Code changed
+        end;
+        //BCUPGRADE YADAVM09 Function Added added <<
+
+    end;
+
+    var
+        RoutingVersion: Record "Routing Version";
+        Text002: Label 'There is already one Active Routing Version.';
+}
+

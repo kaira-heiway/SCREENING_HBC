@@ -1,0 +1,129 @@
+{
+  "id": "dd0cdf9a-d725-4978-be60-d069a73b976d",
+  "name": "Heilite_Common_Business",
+  "publisher": "IBM",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "811f4260-30ed-4070-af68-fcdd5158c5dd",
+      "name": "Heilite_Foundation",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "81915655-f812-4f10-8976-267e1e80c59a",
+      "name": "Aptean Beverage Foundation Layer for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2602.0.332063.0"
+    },
+    {
+      "id": "d45c993b-5b2f-4ebb-bc0f-e44e6ca99eca",
+      "name": "Aptean Beverage Foundation Management for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2601.5.305266.0"
+    },
+    {
+      "id": "c740bad8-331b-4885-8822-09c3d54323ec",
+      "name": "Aptean Beverage Logistics for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2506.2.279851.0"
+    },
+    {
+      "id": "11e4d388-3932-41d7-b69a-b44fc92fafcb",
+      "name": "Container Management",
+      "publisher": "Aptean Professional Services",
+      "version": "1.0.295306.0"
+    },
+    {
+      "id": "5b6faa68-c4fb-40bd-8792-6700f616f420",
+      "name": "Aptean Beverage Customs Document Management for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2505.0.272784.0"
+    },
+    {
+      "id": "0cba6000-b89d-42a6-b0cb-3c31ec5a64ec",
+      "name": "Aptean Beverage Empty Goods for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2601.2.0.0"
+    },
+    {
+    "id": "2c87fcd8-c5ae-406f-bc35-a6d2b7fd7892",
+    "name": "Aptean Inspection Status for Food and Beverage",
+    "publisher": "Aptean",
+    "version": "2602.0.312748.0"
+    },
+   {
+    "id": "71869434-92d1-4bfd-a367-d32dd64431b1",
+    "name": "Aptean Quality Control for Food and Beverage",
+    "publisher": "Aptean",
+    "version": "2601.5.305294.0"
+   },
+   {
+    "id": "6094e72b-43e6-4b50-acc8-abd3a64a4d7f",
+    "name": "Aptean Beverage Foundation Layer AWM for Drink-IT Edition",
+    "publisher": "Aptean",
+    "version": "2507.2.305112.0"
+   },
+   {
+    "id": "1a06f0da-5a4d-4a2f-bce2-c04530adac17",
+    "name": "Aptean Foundation Layer for Food and Beverage" ,
+    "publisher": "Aptean",
+    "version": "2603.0.312222.0"
+   },
+   {
+      "id": "3d47efad-7111-453d-8389-afe7f4f8075b",
+      "name": "Aptean Beverage Sales-Purchase Conditions for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2507.1.0.0"
+    },
+    {
+    "id": "4630fd6b-ef15-42f5-9be2-0edcf56fca22",
+    "name": "Aptean Beverage Tax Management for Drink-IT Edition",
+    "publisher": "Aptean",
+     "version": "2602.1.314337.0"
+    },
+    { 
+      "id": "0b662be8-93c1-40a1-acb7-529700685704", 
+      "name": "Aptean Trade Management for Food and Beverage", 
+      "publisher": "Aptean", 
+      "version": "2602.1.320193.0" 
+    },
+    { 
+      "id": "baa36ef5-7d8c-40d1-a91b-4d073923c390", 
+      "name": "Aptean Beverage Advanced Warehouse Management for Drink-IT Edition", 
+      "publisher": "Aptean", 
+      "version": "2602.0.0.0"
+    },
+    {
+      "id": "f5823ef5-81ba-4368-ba3a-515e68798456",
+      "name": "Record To Report",
+      "publisher": "Aptean",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "27.0.0.0",
+  "idRanges": [
+    {
+      "from": 51000,
+      "to": 51499
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "16.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

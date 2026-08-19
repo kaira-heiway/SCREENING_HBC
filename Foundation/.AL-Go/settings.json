@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v9.1/.Modules/settings.schema.json",
+  "country": "w1",
+  "appFolders": [],
+  "testFolders": [],
+  "bcptTestFolders": [],
+  "generateDependencyArtifact": true,
+  "installApps": [
+    "https://github.com/kaira-heiway/dependency/releases/download/ApteanApp/LatestBuildApps.zip"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "65da0336-646d-4691-bb8b-bc4dc3d56ff5",
+  "name": "Heilite_RTR",
+  "publisher": "IBM",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "811f4260-30ed-4070-af68-fcdd5158c5dd",
+      "name": "Heilite_Foundation",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0cdf9a-d725-4978-be60-d069a73b976d",
+      "name": "Heilite_Common_Business",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },    
+    {
+      "id": "81915655-f812-4f10-8976-267e1e80c59a",
+      "name": "Aptean Beverage Foundation Layer for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2602.0.332063.0"
+    },
+      {
+      "id": "11e4d388-3932-41d7-b69a-b44fc92fafcb",
+      "name": "Container Management",
+      "publisher": "Aptean Professional Services",
+      "version": "1.0.295306.0"   
+    },
+    {
+      "id": "d45c993b-5b2f-4ebb-bc0f-e44e6ca99eca",
+      "name": "Aptean Beverage Foundation Management for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2601.5.305266.0"
+    } ,
+    {
+      "id": "9e6c4199-7f36-4717-9505-aae4f2f35fc5",
+      "name": "Trade Cost Enhancement APS",
+      "publisher": "Aptean",
+      "version": "2601.0.0.188"
+    } 
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "27.0.0.0",
+  "idRanges": [
+    {
+      "from": 55000,
+      "to": 55999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "16.0",
+  "features": [
+    "NoImplicitWith"
+  ],"suppressWarnings": ["AA0215"]
+}

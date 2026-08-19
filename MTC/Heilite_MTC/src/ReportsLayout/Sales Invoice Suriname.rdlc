@@ -1,0 +1,1291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="lblPayTerms">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblPayTerms</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblPayTerms</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblShipMethod">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblShipMethod</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblShipMethod</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblAmtPaid">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblAmtPaid</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblAmtPaid</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblSalesCondition">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblSalesCondition</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblSalesCondition</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblTotalQty">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblTotalQty</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblTotalQty</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblSalesPerson">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblSalesPerson</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblSalesPerson</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblUOM">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblUOM</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblUOM</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblUnitPrice">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblUnitPrice</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblUnitPrice</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblSaleLAmt">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblSaleLAmt</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblSaleLAmt</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblPageNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblPageNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblPageNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblOrderNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblOrderNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblOrderNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblInvoiceNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblInvoiceNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblInvoiceNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblVATAmt">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblVATAmt</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblVATAmt</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblPostDate">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblPostDate</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblPostDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblDueDate">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblDueDate</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblDueDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblPriceIncVAT">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblPriceIncVAT</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblPriceIncVAT</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblDriver">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblDriver</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblDriver</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblWarehouse">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblWarehouse</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblWarehouse</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblSecurity">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblSecurity</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblSecurity</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="lblPrintDate">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>lblPrintDate</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>lblPrintDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblBillToAddress">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblBillToAddress</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblBillToAddress</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCustomerName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCustomerName</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCustomerName</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblAddress">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblAddress</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblAddress</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblAddress2">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblAddress2</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblAddress2</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblPostCode">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblPostCode</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblPostCode</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCity">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCity</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCity</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCountry">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCountry</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCountry</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblVatRegistrationNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblVatRegistrationNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblVatRegistrationNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCompanyTaxId">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCompanyTaxId</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCompanyTaxId</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblSoldToAddress">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblSoldToAddress</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblSoldToAddress</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCustomerPoNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCustomerPoNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCustomerPoNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblTaxDetails">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblTaxDetails</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblTaxDetails</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblBankInfo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblBankInfo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblBankInfo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblAccountNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblAccountNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblAccountNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblBankName">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblBankName</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblBankName</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblGiro">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblGiro</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblGiro</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblIban">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblIban</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblIban</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblSwiftCode">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblSwiftCode</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblSwiftCode</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblSignature">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblSignature</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblSignature</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblVatPercent">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblVatPercent</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblVatPercent</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblVatAmount">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblVatAmount</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblVatAmount</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblIncoTerm">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblIncoTerm</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblIncoTerm</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Lbldisc">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Lbldisc</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Lbldisc</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblShipToAddress">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblShipToAddress</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblShipToAddress</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblCustomerNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblCustomerNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblCustomerNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblInvoiceCurrency">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblInvoiceCurrency</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblInvoiceCurrency</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblVersion">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblVersion</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblVersion</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblItemNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblItemNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblItemNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblQty">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblQty</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblQty</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblPayMethod">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblPayMethod</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblPayMethod</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblInvoiceCurrLCY">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblInvoiceCurrLCY</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblInvoiceCurrLCY</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblTotalToBePaid">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblTotalToBePaid</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblTotalToBePaid</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblDiscTotal">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblDiscTotal</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblDiscTotal</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="GrossWeightLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>GrossWeightLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>GrossWeightLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NetWeightLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>NetWeightLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>NetWeightLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BillOfLadingNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BillOfLadingNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BillOfLadingNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VesselNameLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VesselNameLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VesselNameLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ETDLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ETDLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ETDLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ETALbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ETALbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ETALbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AirWayBillNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AirWayBillNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AirWayBillNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CommodityCodeLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CommodityCodeLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CommodityCodeLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CustomTariffCodeLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CustomTariffCodeLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CustomTariffCodeLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BankInfo2Lbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BankInfo2Lbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BankInfo2Lbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BankInfo3Lbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BankInfo3Lbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BankInfo3Lbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BankInfo4Lbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BankInfo4Lbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BankInfo4Lbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CustomerServiceEmailLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CustomerServiceEmailLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CustomerServiceEmailLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LblPhoneNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LblPhoneNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LblPhoneNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesHCustNoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesHCustNoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesHCustNoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesHVATRegNoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesHVATRegNoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesHVATRegNoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesItemCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesItemCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesItemCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesDescripCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesDescripCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesDescripCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesQtyCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesQtyCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesQtyCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SalesVATPerCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SalesVATPerCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SalesVATPerCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="No_TempUnderChargeLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>No_TempUnderChargeLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>No_TempUnderChargeLineCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Description_TempUnderChargeLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Description_TempUnderChargeLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Description_TempUnderChargeLineCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Quantity_TempUnderChargeLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Quantity_TempUnderChargeLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Quantity_TempUnderChargeLineCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="SalesHDocNo">
+          <DataField>SalesHDocNo</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address2">
+          <DataField>CompanyInfo_Address2</DataField>
+        </Field>
+        <Field Name="Customer_PhoneNo">
+          <DataField>Customer_PhoneNo</DataField>
+        </Field>
+        <Field Name="CompanyInfoContryName">
+          <DataField>CompanyInfoContryName</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="CompanyInfo_BankAccNo">
+          <DataField>CompanyInfo_BankAccNo</DataField>
+        </Field>
+        <Field Name="CompanyInfo_BankName">
+          <DataField>CompanyInfo_BankName</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Giro">
+          <DataField>CompanyInfo_Giro</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Iban">
+          <DataField>CompanyInfo_Iban</DataField>
+        </Field>
+        <Field Name="CompanyInfo_swiftCode">
+          <DataField>CompanyInfo_swiftCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PostCode">
+          <DataField>CompanyInfo_PostCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="OriginalCopy">
+          <DataField>OriginalCopy</DataField>
+        </Field>
+        <Field Name="DepositOnTheNetPrice">
+          <DataField>DepositOnTheNetPrice</DataField>
+        </Field>
+        <Field Name="ExportInvoice">
+          <DataField>ExportInvoice</DataField>
+        </Field>
+        <Field Name="CompanyInfo_OpCoFooter">
+          <DataField>CompanyInfo_OpCoFooter</DataField>
+        </Field>
+        <Field Name="CompanyText">
+          <DataField>CompanyText</DataField>
+        </Field>
+        <Field Name="CompanyInfo_BankName2">
+          <DataField>CompanyInfo_BankName2</DataField>
+        </Field>
+        <Field Name="CompanyInfo_BankAcc2">
+          <DataField>CompanyInfo_BankAcc2</DataField>
+        </Field>
+        <Field Name="CompanyInfo_IBAN2">
+          <DataField>CompanyInfo_IBAN2</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Swift2">
+          <DataField>CompanyInfo_Swift2</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_BankName3">
+          <DataField>GeneralOpCoSetup_BankName3</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_BankAcc3">
+          <DataField>GeneralOpCoSetup_BankAcc3</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_IBAN3">
+          <DataField>GeneralOpCoSetup_IBAN3</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_Swift3">
+          <DataField>GeneralOpCoSetup_Swift3</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_InvoiceType3">
+          <DataField>GeneralOpCoSetup_InvoiceType3</DataField>
+        </Field>
+        <Field Name="Show_BankDetails3">
+          <DataField>Show_BankDetails3</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_BankName4">
+          <DataField>GeneralOpCoSetup_BankName4</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_BankAcc4">
+          <DataField>GeneralOpCoSetup_BankAcc4</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_IBAN4">
+          <DataField>GeneralOpCoSetup_IBAN4</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_Swift4">
+          <DataField>GeneralOpCoSetup_Swift4</DataField>
+        </Field>
+        <Field Name="GeneralOpCoSetup_InvoiceType4">
+          <DataField>GeneralOpCoSetup_InvoiceType4</DataField>
+        </Field>
+        <Field Name="Show_BankDetails4">
+          <DataField>Show_BankDetails4</DataField>
+        </Field>
+        <Field Name="CompanyFooter1">
+          <DataField>CompanyFooter1</DataField>
+        </Field>
+        <Field Name="CompanyFooter2">
+          <DataField>CompanyFooter2</DataField>
+        </Field>
+        <Field Name="CompanyFooter3">
+          <DataField>CompanyFooter3</DataField>
+        </Field>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="CustomerServiceEmail">
+          <DataField>CustomerServiceEmail</DataField>
+        </Field>
+        <Field Name="CustomerAttributestext">
+          <DataField>CustomerAttributestext</DataField>
+        </Field>
+        <Field Name="OrderConfirmCopyCaption">
+          <DataField>OrderConfirmCopyCaption</DataField>
+        </Field>
+        <Field Name="SalesHCustNo">
+          <DataField>SalesHCustNo</DataField>
+        </Field>
+        <Field Name="SalesHPostDate">
+          <DataField>SalesHPostDate</DataField>
+        </Field>
+        <Field Name="SalesHDueDate">
+          <DataField>SalesHDueDate</DataField>
+        </Field>
+        <Field Name="SalesHDocDate">
+          <DataField>SalesHDocDate</DataField>
+        </Field>
+        <Field Name="SalesHIncVAT">
+          <DataField>SalesHIncVAT</DataField>
+        </Field>
+        <Field Name="SalesHSalesPerName">
+          <DataField>SalesHSalesPerName</DataField>
+        </Field>
+        <Field Name="SalesPersonCode">
+          <DataField>SalesPersonCode</DataField>
+        </Field>
+        <Field Name="OutputNo">
+          <DataField>OutputNo</DataField>
+        </Field>
+        <Field Name="SalesHOrdNo">
+          <DataField>SalesHOrdNo</DataField>
+        </Field>
+        <Field Name="SalesHReference">
+          <DataField>SalesHReference</DataField>
+        </Field>
+        <Field Name="SalesHExtRefNo">
+          <DataField>SalesHExtRefNo</DataField>
+        </Field>
+        <Field Name="SalesHVATRegNo">
+          <DataField>SalesHVATRegNo</DataField>
+        </Field>
+        <Field Name="PaymentTermDescrip">
+          <DataField>PaymentTermDescrip</DataField>
+        </Field>
+        <Field Name="PaymentMethodDesc">
+          <DataField>PaymentMethodDesc</DataField>
+        </Field>
+        <Field Name="ShipMethodDescrip">
+          <DataField>ShipMethodDescrip</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+        <Field Name="CustAddress">
+          <DataField>CustAddress</DataField>
+        </Field>
+        <Field Name="SubTotal">
+          <DataField>SubTotal</DataField>
+        </Field>
+        <Field Name="SubTotalFormat">
+          <DataField>SubTotalFormat</DataField>
+        </Field>
+        <Field Name="VATAmount">
+          <DataField>VATAmount</DataField>
+        </Field>
+        <Field Name="VATAmountFormat">
+          <DataField>VATAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalIncText">
+          <DataField>TotalIncText</DataField>
+        </Field>
+        <Field Name="SubTotalExcText">
+          <DataField>SubTotalExcText</DataField>
+        </Field>
+        <Field Name="TaxAmount">
+          <DataField>TaxAmount</DataField>
+        </Field>
+        <Field Name="TaxAmountFormat">
+          <DataField>TaxAmountFormat</DataField>
+        </Field>
+        <Field Name="TaxAmtCaption">
+          <DataField>TaxAmtCaption</DataField>
+        </Field>
+        <Field Name="DepositAmount">
+          <DataField>DepositAmount</DataField>
+        </Field>
+        <Field Name="DepositAmountFormat">
+          <DataField>DepositAmountFormat</DataField>
+        </Field>
+        <Field Name="DepositAmtCaption">
+          <DataField>DepositAmtCaption</DataField>
+        </Field>
+        <Field Name="ShippingAmount">
+          <DataField>ShippingAmount</DataField>
+        </Field>
+        <Field Name="ShippingAmountFormat">
+          <DataField>ShippingAmountFormat</DataField>
+        </Field>
+        <Field Name="ShippingAmtCaption">
+          <DataField>ShippingAmtCaption</DataField>
+        </Field>
+        <Field Name="LineDiscountAmt">
+          <DataField>LineDiscountAmt</DataField>
+        </Field>
+        <Field Name="LineDiscountAmtFormat">
+          <DataField>LineDiscountAmtFormat</DataField>
+        </Field>
+        <Field Name="LineDiscCaption">
+          <DataField>LineDiscCaption</DataField>
+        </Field>
+        <Field Name="AmountPaid">
+          <DataField>AmountPaid</DataField>
+        </Field>
+        <Field Name="AmountPaidFormat">
+          <DataField>AmountPaidFormat</DataField>
+        </Field>
+        <Field Name="InvTotalAmt">
+          <DataField>InvTotalAmt</DataField>
+        </Field>
+        <Field Name="InvTotalAmtFormat">
+          <DataField>InvTotalAmtFormat</DataField>
+        </Field>
+        <Field Name="ShippingChargesAmount">
+          <DataField>ShippingChargesAmount</DataField>
+        </Field>
+        <Field Name="ShippingChargesAmountFormat">
+          <DataField>ShippingChargesAmountFormat</DataField>
+        </Field>
+        <Field Name="ShippingChargeAmtCaption">
+          <DataField>ShippingChargeAmtCaption</DataField>
+        </Field>
+        <Field Name="MarkupChargeAmtCaption">
+          <DataField>MarkupChargeAmtCaption</DataField>
+        </Field>
+        <Field Name="MarkupChargesAmount">
+          <DataField>MarkupChargesAmount</DataField>
+        </Field>
+        <Field Name="MarkupChargesAmountFormat">
+          <DataField>MarkupChargesAmountFormat</DataField>
+        </Field>
+        <Field Name="BaseMarginAmt">
+          <DataField>BaseMarginAmt</DataField>
+        </Field>
+        <Field Name="BaseMarginAmtFormat">
+          <DataField>BaseMarginAmtFormat</DataField>
+        </Field>
+        <Field Name="BaseMarginAmtCaption">
+          <DataField>BaseMarginAmtCaption</DataField>
+        </Field>
+        <Field Name="SplitVatPercent1">
+          <DataField>SplitVatPercent1</DataField>
+        </Field>
+        <Field Name="SplitVatPercent2">
+          <DataField>SplitVatPercent2</DataField>
+        </Field>
+        <Field Name="SplitVatPercent3">
+          <DataField>SplitVatPercent3</DataField>
+        </Field>
+        <Field Name="SplitVatAmount1">
+          <DataField>SplitVatAmount1</DataField>
+        </Field>
+        <Field Name="SplitVatAmount2">
+          <DataField>SplitVatAmount2</DataField>
+        </Field>
+        <Field Name="SplitVatAmount3">
+          <DataField>SplitVatAmount3</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_BillToName">
+          <DataField>SalesInvHeader_BillToName</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_BillToPostCode">
+          <DataField>SalesInvHeader_BillToPostCode</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_BillToCity">
+          <DataField>SalesInvHeader_BillToCity</DataField>
+        </Field>
+        <Field Name="BillToVatRegNo">
+          <DataField>BillToVatRegNo</DataField>
+        </Field>
+        <Field Name="BillToCountryName">
+          <DataField>BillToCountryName</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_SellToName">
+          <DataField>SalesInvHeader_SellToName</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_SellToCity">
+          <DataField>SalesInvHeader_SellToCity</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_SellToPostCode">
+          <DataField>SalesInvHeader_SellToPostCode</DataField>
+        </Field>
+        <Field Name="SellToCustomer_PhoneNo">
+          <DataField>SellToCustomer_PhoneNo</DataField>
+        </Field>
+        <Field Name="SellToCountryName">
+          <DataField>SellToCountryName</DataField>
+        </Field>
+        <Field Name="SellToVatRegNo">
+          <DataField>SellToVatRegNo</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_BillToAddress">
+          <DataField>SalesInvHeader_BillToAddress</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_BillToAddress2">
+          <DataField>SalesInvHeader_BillToAddress2</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_SellToAddress">
+          <DataField>SalesInvHeader_SellToAddress</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_SellToAddress2">
+          <DataField>SalesInvHeader_SellToAddress2</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_ShipToName">
+          <DataField>SalesInvHeader_ShipToName</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_Address">
+          <DataField>SalesInvHeader_Address</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_Address2">
+          <DataField>SalesInvHeader_Address2</DataField>
+        </Field>
+        <Field Name="SalesInvHeader_City">
+          <DataField>SalesInvHeader_City</DataField>
+        </Field>
+        <Field Name="SellCustomerNo">
+          <DataField>SellCustomerNo</DataField>
+        </Field>
+        <Field Name="InvalidTxt">
+          <DataField>InvalidTxt</DataField>
+        </Field>
+        <Field Name="TotalAmountLCY">
+          <DataField>TotalAmountLCY</DataField>
+        </Field>
+        <Field Name="TotalAmountLCYFormat">
+          <DataField>TotalAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="InCoTerms">
+          <DataField>InCoTerms</DataField>
+        </Field>
+        <Field Name="SubTotalCharges">
+          <DataField>SubTotalCharges</DataField>
+        </Field>
+        <Field Name="SubTotalChargesFormat">
+          <DataField>SubTotalChargesFormat</DataField>
+        </Field>
+        <Field Name="BillOfLadingNo">
+          <DataField>BillOfLadingNo</DataField>
+        </Field>
+        <Field Name="VesselName">
+          <DataField>VesselName</DataField>
+        </Field>
+        <Field Name="ETD">
+          <DataField>ETD</DataField>
+        </Field>
+        <Field Name="ETA">
+          <DataField>ETA</DataField>
+        </Field>
+        <Field Name="AirWayBillNo">
+          <DataField>AirWayBillNo</DataField>
+        </Field>
+        <Field Name="CommodityCode">
+          <DataField>CommodityCode</DataField>
+        </Field>
+        <Field Name="CustomTariffCode">
+          <DataField>CustomTariffCode</DataField>
+        </Field>
+        <Field Name="TotalGrossWeight">
+          <DataField>TotalGrossWeight</DataField>
+        </Field>
+        <Field Name="TotalGrossWeightFormat">
+          <DataField>TotalGrossWeightFormat</DataField>
+        </Field>
+        <Field Name="TotalNetWeight">
+          <DataField>TotalNetWeight</DataField>
+        </Field>
+        <Field Name="TotalNetWeightFormat">
+          <DataField>TotalNetWeightFormat</DataField>
+        </Field>
+        <Field Name="InvDisAmount">
+          <DataField>InvDisAmount</DataField>
+        </Field>
+        <Field Name="InvDisAmountFormat">
+          <DataField>InvDisAmountFormat</DataField>
+        </Field>
+        <Field Name="type">
+          <DataField>type</DataField>
+        </Field>
+        <Field Name="itemDeposit">
+          <DataField>itemDeposit</DataField>
+        </Field>
+        <Field Name="itemDepositFormat">
+          <DataField>itemDepositFormat</DataField>
+        </Field>
+        <Field Name="IsDisount">
+          <DataField>IsDisount</DataField>
+        </Field>
+        <Field Name="SalesLineNo">
+          <DataField>SalesLineNo</DataField>
+        </Field>
+        <Field Name="IsDeposit">
+          <DataField>IsDeposit</DataField>
+        </Field>
+        <Field Name="IsNotUnderitem">
+          <DataField>IsNotUnderitem</DataField>
+        </Field>
+        <Field Name="SalesLType">
+          <DataField>SalesLType</DataField>
+        </Field>
+        <Field Name="SalesItem">
+          <DataField>SalesItem</DataField>
+        </Field>
+        <Field Name="SalesDescrip">
+          <DataField>SalesDescrip</DataField>
+        </Field>
+        <Field Name="SalesQty">
+          <DataField>SalesQty</DataField>
+        </Field>
+        <Field Name="SalesQtyFormat">
+          <DataField>SalesQtyFormat</DataField>
+        </Field>
+        <Field Name="SalesUOM">
+          <DataField>SalesUOM</DataField>
+        </Field>
+        <Field Name="SalesPrice">
+          <DataField>SalesPrice</DataField>
+        </Field>
+        <Field Name="SalesPriceFormat">
+          <DataField>SalesPriceFormat</DataField>
+        </Field>
+        <Field Name="SalesVATPer">
+          <DataField>SalesVATPer</DataField>
+        </Field>
+        <Field Name="SalesVATPerFormat">
+          <DataField>SalesVATPerFormat</DataField>
+        </Field>
+        <Field Name="SalesAmount">
+          <DataField>SalesAmount</DataField>
+        </Field>
+        <Field Name="SalesAmountFormat">
+          <DataField>SalesAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalQuantity">
+          <DataField>TotalQuantity</DataField>
+        </Field>
+        <Field Name="TotalQuantityFormat">
+          <DataField>TotalQuantityFormat</DataField>
+        </Field>
+        <Field Name="SalesDiscount">
+          <DataField>SalesDiscount</DataField>
+        </Field>
+        <Field Name="SalesDiscountFormat">
+          <DataField>SalesDiscountFormat</DataField>
+        </Field>
+        <Field Name="SalesDiscount1">
+          <DataField>SalesDiscount1</DataField>
+        </Field>
+        <Field Name="SalesDiscount1Format">
+          <DataField>SalesDiscount1Format</DataField>
+        </Field>
+        <Field Name="TotalInvDis">
+          <DataField>TotalInvDis</DataField>
+        </Field>
+        <Field Name="TotalInvDisFormat">
+          <DataField>TotalInvDisFormat</DataField>
+        </Field>
+        <Field Name="PrintUnderLineCharge">
+          <DataField>PrintUnderLineCharge</DataField>
+        </Field>
+        <Field Name="DiscIncluded">
+          <DataField>DiscIncluded</DataField>
+        </Field>
+        <Field Name="DiscIncludedFormat">
+          <DataField>DiscIncludedFormat</DataField>
+        </Field>
+        <Field Name="No_TempUnderChargeLine">
+          <DataField>No_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="Description_TempUnderChargeLine">
+          <DataField>Description_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="Quantity_TempUnderChargeLine">
+          <DataField>Quantity_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="Quantity_TempUnderChargeLineFormat">
+          <DataField>Quantity_TempUnderChargeLineFormat</DataField>
+        </Field>
+        <Field Name="UnitPrice_TempUnderChargeLine">
+          <DataField>UnitPrice_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="UnitPrice_TempUnderChargeLineFormat">
+          <DataField>UnitPrice_TempUnderChargeLineFormat</DataField>
+        </Field>
+        <Field Name="VATIdentifier_TempUnderChargeLine">
+          <DataField>VATIdentifier_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="LineAmount_TempUnderChargeLine">
+          <DataField>LineAmount_TempUnderChargeLine</DataField>
+        </Field>
+        <Field Name="LineAmount_TempUnderChargeLineFormat">
+          <DataField>LineAmount_TempUnderChargeLineFormat</DataField>
+        </Field>
+        <Field Name="TEMPAccSchedKPIBuffer_VatPercent">
+          <DataField>TEMPAccSchedKPIBuffer_VatPercent</DataField>
+        </Field>
+        <Field Name="TEMPAccSchedKPIBuffer_VatAmount">
+          <DataField>TEMPAccSchedKPIBuffer_VatAmount</DataField>
+        </Field>
+        <Field Name="TEMPAccSchedKPIBuffer_VatAmountFormat">
+          <DataField>TEMPAccSchedKPIBuffer_VatAmountFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

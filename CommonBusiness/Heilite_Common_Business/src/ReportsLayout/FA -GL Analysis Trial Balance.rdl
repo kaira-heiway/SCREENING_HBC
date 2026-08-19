@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="TodayFormatted">
+          <DataField>TodayFormatted</DataField>
+        </Field>
+        <Field Name="DeprBookText">
+          <DataField>DeprBookText</DataField>
+        </Field>
+        <Field Name="FixedAssetCaption">
+          <DataField>FixedAssetCaption</DataField>
+        </Field>
+        <Field Name="FAFilter">
+          <DataField>FAFilter</DataField>
+        </Field>
+        <Field Name="HeadLineText1">
+          <DataField>HeadLineText1</DataField>
+        </Field>
+        <Field Name="GroupCodeName">
+          <DataField>GroupCodeName</DataField>
+        </Field>
+        <Field Name="FANo">
+          <DataField>FANo</DataField>
+        </Field>
+        <Field Name="FADescription">
+          <DataField>FADescription</DataField>
+        </Field>
+        <Field Name="HeadLineText2">
+          <DataField>HeadLineText2</DataField>
+        </Field>
+        <Field Name="HeadLineText3">
+          <DataField>HeadLineText3</DataField>
+        </Field>
+        <Field Name="HeadLineText4">
+          <DataField>HeadLineText4</DataField>
+        </Field>
+        <Field Name="HeadLineText5">
+          <DataField>HeadLineText5</DataField>
+        </Field>
+        <Field Name="GroupTotalsPrintDetails">
+          <DataField>GroupTotalsPrintDetails</DataField>
+        </Field>
+        <Field Name="PrintDetailsGroupTotals">
+          <DataField>PrintDetailsGroupTotals</DataField>
+        </Field>
+        <Field Name="GroupHeadLine">
+          <DataField>GroupHeadLine</DataField>
+        </Field>
+        <Field Name="No_FixedAsset">
+          <DataField>No_FixedAsset</DataField>
+        </Field>
+        <Field Name="Description_FixedAsset">
+          <DataField>Description_FixedAsset</DataField>
+        </Field>
+        <Field Name="Amounts1">
+          <DataField>Amounts1</DataField>
+        </Field>
+        <Field Name="Amounts1Format">
+          <DataField>Amounts1Format</DataField>
+        </Field>
+        <Field Name="Amounts2">
+          <DataField>Amounts2</DataField>
+        </Field>
+        <Field Name="Amounts2Format">
+          <DataField>Amounts2Format</DataField>
+        </Field>
+        <Field Name="Amounts3">
+          <DataField>Amounts3</DataField>
+        </Field>
+        <Field Name="Amounts3Format">
+          <DataField>Amounts3Format</DataField>
+        </Field>
+        <Field Name="Date1">
+          <DataField>Date1</DataField>
+        </Field>
+        <Field Name="Date2">
+          <DataField>Date2</DataField>
+        </Field>
+        <Field Name="PrintDetails">
+          <DataField>PrintDetails</DataField>
+        </Field>
+        <Field Name="GroupAmounts1">
+          <DataField>GroupAmounts1</DataField>
+        </Field>
+        <Field Name="GroupAmounts1Format">
+          <DataField>GroupAmounts1Format</DataField>
+        </Field>
+        <Field Name="GroupAmounts2">
+          <DataField>GroupAmounts2</DataField>
+        </Field>
+        <Field Name="GroupAmounts2Format">
+          <DataField>GroupAmounts2Format</DataField>
+        </Field>
+        <Field Name="GroupAmounts3">
+          <DataField>GroupAmounts3</DataField>
+        </Field>
+        <Field Name="GroupAmounts3Format">
+          <DataField>GroupAmounts3Format</DataField>
+        </Field>
+        <Field Name="GroupTotalGroupHeadLine">
+          <DataField>GroupTotalGroupHeadLine</DataField>
+        </Field>
+        <Field Name="GroupTotalsNotEqualZero">
+          <DataField>GroupTotalsNotEqualZero</DataField>
+        </Field>
+        <Field Name="TotalAmounts1">
+          <DataField>TotalAmounts1</DataField>
+        </Field>
+        <Field Name="TotalAmounts1Format">
+          <DataField>TotalAmounts1Format</DataField>
+        </Field>
+        <Field Name="TotalAmounts2">
+          <DataField>TotalAmounts2</DataField>
+        </Field>
+        <Field Name="TotalAmounts2Format">
+          <DataField>TotalAmounts2Format</DataField>
+        </Field>
+        <Field Name="TotalAmounts3">
+          <DataField>TotalAmounts3</DataField>
+        </Field>
+        <Field Name="TotalAmounts3Format">
+          <DataField>TotalAmounts3Format</DataField>
+        </Field>
+        <Field Name="CurrReportPageNoCaption">
+          <DataField>CurrReportPageNoCaption</DataField>
+        </Field>
+        <Field Name="FixedAssetGLAnalysisCptn">
+          <DataField>FixedAssetGLAnalysisCptn</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="GLAccountLbl">
+          <DataField>GLAccountLbl</DataField>
+        </Field>
+        <Field Name="GlAccountNameLbl">
+          <DataField>GlAccountNameLbl</DataField>
+        </Field>
+        <Field Name="GlAccountNetChange">
+          <DataField>GlAccountNetChange</DataField>
+        </Field>
+        <Field Name="GLAccountBalanceLbl">
+          <DataField>GLAccountBalanceLbl</DataField>
+        </Field>
+        <Field Name="DebitLbl">
+          <DataField>DebitLbl</DataField>
+        </Field>
+        <Field Name="CreditLbl">
+          <DataField>CreditLbl</DataField>
+        </Field>
+        <Field Name="FAPostingSetupLbl">
+          <DataField>FAPostingSetupLbl</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+        <Field Name="GLAccountNo">
+          <DataField>GLAccountNo</DataField>
+        </Field>
+        <Field Name="GLAccountName">
+          <DataField>GLAccountName</DataField>
+        </Field>
+        <Field Name="NetChange">
+          <DataField>NetChange</DataField>
+        </Field>
+        <Field Name="NetChangeFormat">
+          <DataField>NetChangeFormat</DataField>
+        </Field>
+        <Field Name="NetChangeNegative">
+          <DataField>NetChangeNegative</DataField>
+        </Field>
+        <Field Name="NetChangeNegativeFormat">
+          <DataField>NetChangeNegativeFormat</DataField>
+        </Field>
+        <Field Name="BalanceAtDate">
+          <DataField>BalanceAtDate</DataField>
+        </Field>
+        <Field Name="BalanceAtDateFormat">
+          <DataField>BalanceAtDateFormat</DataField>
+        </Field>
+        <Field Name="BalanceAtDateNegative">
+          <DataField>BalanceAtDateNegative</DataField>
+        </Field>
+        <Field Name="BalanceAtDateNegativeFormat">
+          <DataField>BalanceAtDateNegativeFormat</DataField>
+        </Field>
+        <Field Name="GLAccountType">
+          <DataField>GLAccountType</DataField>
+        </Field>
+        <Field Name="GLAccountFieldCaption">
+          <DataField>GLAccountFieldCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

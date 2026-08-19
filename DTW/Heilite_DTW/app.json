@@ -1,0 +1,75 @@
+{
+  "id": "9bdd3bc8-91e8-4202-adc1-bffe1f02f139",
+  "name": "Heilite_DTW",
+  "publisher": "IBM",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "811f4260-30ed-4070-af68-fcdd5158c5dd",
+      "name": "Heilite_Foundation",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0cdf9a-d725-4978-be60-d069a73b976d",
+      "name": "Heilite_Common_Business",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },    
+    {
+      "id": "81915655-f812-4f10-8976-267e1e80c59a",
+      "name": "Aptean Beverage Foundation Layer for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2602.0.332063.0"
+    },
+    {
+      "id": "c740bad8-331b-4885-8822-09c3d54323ec",
+      "name": "Aptean Beverage Logistics for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2506.2.279851.0"
+    },
+    {
+      "id": "d45c993b-5b2f-4ebb-bc0f-e44e6ca99eca",
+      "name": "Aptean Beverage Foundation Management for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2601.5.305266.0"
+    },
+    {
+      "id": "71869434-92d1-4bfd-a367-d32dd64431b1",
+      "name": "Aptean Quality Control for Food and Beverage",
+      "publisher": "Aptean",
+      "version": "2601.5.305294.0"
+    },
+    {
+    "id": "1a06f0da-5a4d-4a2f-bce2-c04530adac17",
+    "name": "Aptean Foundation Layer for Food and Beverage",
+    "publisher": "Aptean",
+    "version": "2603.0.312222.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "27.0.0.0",
+  "idRanges": [
+    {
+      "from": 54000,
+      "to": 54999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "16.0",
+  "features": [
+    "NoImplicitWith"
+  ],"suppressWarnings": ["AA0215"]
+}

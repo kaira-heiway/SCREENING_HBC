@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="DocType_CustLedgEntryCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DocType_CustLedgEntryCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DocType_CustLedgEntryCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DocNo_CustLedgEntryCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DocNo_CustLedgEntryCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DocNo_CustLedgEntryCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Desc_CustLedgEntryCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Desc_CustLedgEntryCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Desc_CustLedgEntryCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EntryNo_CustLedgEntryCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>EntryNo_CustLedgEntryCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>EntryNo_CustLedgEntryCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="PrintAmountsInLCY">
+          <DataField>PrintAmountsInLCY</DataField>
+        </Field>
+        <Field Name="PrintOpCoLogo">
+          <DataField>PrintOpCoLogo</DataField>
+        </Field>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+        </Field>
+        <Field Name="OpCoLogo">
+          <DataField>OpCoLogo</DataField>
+        </Field>
+        <Field Name="PeriodCustDatetFilter">
+          <DataField>PeriodCustDatetFilter</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address2">
+          <DataField>CompanyInfo_Address2</DataField>
+        </Field>
+        <Field Name="CompanyInfo_CityPostCode">
+          <DataField>CompanyInfo_CityPostCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_CountryRegionName">
+          <DataField>CompanyInfo_CountryRegionName</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PhoneNo">
+          <DataField>CompanyInfo_PhoneNo</DataField>
+        </Field>
+        <Field Name="CompanyInfo_EMail">
+          <DataField>CompanyInfo_EMail</DataField>
+        </Field>
+        <Field Name="AmountCaption">
+          <DataField>AmountCaption</DataField>
+        </Field>
+        <Field Name="RemainingAmtCaption">
+          <DataField>RemainingAmtCaption</DataField>
+        </Field>
+        <Field Name="OrginalAmountCaption">
+          <DataField>OrginalAmountCaption</DataField>
+        </Field>
+        <Field Name="ShowOrginalAmt">
+          <DataField>ShowOrginalAmt</DataField>
+        </Field>
+        <Field Name="Name_Cust">
+          <DataField>Name_Cust</DataField>
+        </Field>
+        <Field Name="Address_Cust">
+          <DataField>Address_Cust</DataField>
+        </Field>
+        <Field Name="Address2_Cust">
+          <DataField>Address2_Cust</DataField>
+        </Field>
+        <Field Name="CityPostCode_Cust">
+          <DataField>CityPostCode_Cust</DataField>
+        </Field>
+        <Field Name="CountryRegionName_Cust">
+          <DataField>CountryRegionName_Cust</DataField>
+        </Field>
+        <Field Name="Contact_Cust">
+          <DataField>Contact_Cust</DataField>
+        </Field>
+        <Field Name="PhoneNo_Cust">
+          <DataField>PhoneNo_Cust</DataField>
+        </Field>
+        <Field Name="EMail_Cust">
+          <DataField>EMail_Cust</DataField>
+        </Field>
+        <Field Name="No_Cust">
+          <DataField>No_Cust</DataField>
+        </Field>
+        <Field Name="VATRegistrationNo_Cust">
+          <DataField>VATRegistrationNo_Cust</DataField>
+        </Field>
+        <Field Name="PhoneNoCP">
+          <DataField>PhoneNoCP</DataField>
+        </Field>
+        <Field Name="EmailIDCp">
+          <DataField>EmailIDCp</DataField>
+        </Field>
+        <Field Name="CustNoCp">
+          <DataField>CustNoCp</DataField>
+        </Field>
+        <Field Name="VATRegisNoCp">
+          <DataField>VATRegisNoCp</DataField>
+        </Field>
+        <Field Name="ContactPersonCp">
+          <DataField>ContactPersonCp</DataField>
+        </Field>
+        <Field Name="StartBalanceLCY">
+          <DataField>StartBalanceLCY</DataField>
+        </Field>
+        <Field Name="StartBalanceLCYFormat">
+          <DataField>StartBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="StartBalAdjLCY">
+          <DataField>StartBalAdjLCY</DataField>
+        </Field>
+        <Field Name="StartBalAdjLCYFormat">
+          <DataField>StartBalAdjLCYFormat</DataField>
+        </Field>
+        <Field Name="CustBalanceLCY">
+          <DataField>CustBalanceLCY</DataField>
+        </Field>
+        <Field Name="CustBalanceLCYFormat">
+          <DataField>CustBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="StartBalanceLCYAdjLCY">
+          <DataField>StartBalanceLCYAdjLCY</DataField>
+        </Field>
+        <Field Name="StartBalanceLCYAdjLCYFormat">
+          <DataField>StartBalanceLCYAdjLCYFormat</DataField>
+        </Field>
+        <Field Name="ReportCaption">
+          <DataField>ReportCaption</DataField>
+        </Field>
+        <Field Name="PageNoCp">
+          <DataField>PageNoCp</DataField>
+        </Field>
+        <Field Name="OfCp">
+          <DataField>OfCp</DataField>
+        </Field>
+        <Field Name="AllAmtsLCYCp">
+          <DataField>AllAmtsLCYCp</DataField>
+        </Field>
+        <Field Name="PostingDateCaption">
+          <DataField>PostingDateCaption</DataField>
+        </Field>
+        <Field Name="DueDateCaption">
+          <DataField>DueDateCaption</DataField>
+        </Field>
+        <Field Name="BalanceLCYCaption">
+          <DataField>BalanceLCYCaption</DataField>
+        </Field>
+        <Field Name="AdjOpeningBalCaption">
+          <DataField>AdjOpeningBalCaption</DataField>
+        </Field>
+        <Field Name="OpeningBalCaption">
+          <DataField>OpeningBalCaption</DataField>
+        </Field>
+        <Field Name="ReportType">
+          <DataField>ReportType</DataField>
+        </Field>
+        <Field Name="AgingInterval">
+          <DataField>AgingInterval</DataField>
+        </Field>
+        <Field Name="AgingPeriod_1">
+          <DataField>AgingPeriod_1</DataField>
+        </Field>
+        <Field Name="AgingPeriod_2">
+          <DataField>AgingPeriod_2</DataField>
+        </Field>
+        <Field Name="AgingPeriod_3">
+          <DataField>AgingPeriod_3</DataField>
+        </Field>
+        <Field Name="AgingPeriod_4">
+          <DataField>AgingPeriod_4</DataField>
+        </Field>
+        <Field Name="AgingPeriod_5">
+          <DataField>AgingPeriod_5</DataField>
+        </Field>
+        <Field Name="DisputeCaseCp">
+          <DataField>DisputeCaseCp</DataField>
+        </Field>
+        <Field Name="InvoicesCp">
+          <DataField>InvoicesCp</DataField>
+        </Field>
+        <Field Name="CreditMemoCp">
+          <DataField>CreditMemoCp</DataField>
+        </Field>
+        <Field Name="UnAllocatedPayCp">
+          <DataField>UnAllocatedPayCp</DataField>
+        </Field>
+        <Field Name="LineAmountCp">
+          <DataField>LineAmountCp</DataField>
+        </Field>
+        <Field Name="SummaryCp">
+          <DataField>SummaryCp</DataField>
+        </Field>
+        <Field Name="AgingPeriodCp">
+          <DataField>AgingPeriodCp</DataField>
+        </Field>
+        <Field Name="TotalAmountCp">
+          <DataField>TotalAmountCp</DataField>
+        </Field>
+        <Field Name="DisputedAmt_1">
+          <DataField>DisputedAmt_1</DataField>
+        </Field>
+        <Field Name="DisputedAmt_1Format">
+          <DataField>DisputedAmt_1Format</DataField>
+        </Field>
+        <Field Name="DisputedAmt_2">
+          <DataField>DisputedAmt_2</DataField>
+        </Field>
+        <Field Name="DisputedAmt_2Format">
+          <DataField>DisputedAmt_2Format</DataField>
+        </Field>
+        <Field Name="DisputedAmt_3">
+          <DataField>DisputedAmt_3</DataField>
+        </Field>
+        <Field Name="DisputedAmt_3Format">
+          <DataField>DisputedAmt_3Format</DataField>
+        </Field>
+        <Field Name="DisputedAmt_4">
+          <DataField>DisputedAmt_4</DataField>
+        </Field>
+        <Field Name="DisputedAmt_4Format">
+          <DataField>DisputedAmt_4Format</DataField>
+        </Field>
+        <Field Name="DisputedAmt_5">
+          <DataField>DisputedAmt_5</DataField>
+        </Field>
+        <Field Name="DisputedAmt_5Format">
+          <DataField>DisputedAmt_5Format</DataField>
+        </Field>
+        <Field Name="DisputedAmt_Total">
+          <DataField>DisputedAmt_Total</DataField>
+        </Field>
+        <Field Name="DisputedAmt_TotalFormat">
+          <DataField>DisputedAmt_TotalFormat</DataField>
+        </Field>
+        <Field Name="DebitAmt_1">
+          <DataField>DebitAmt_1</DataField>
+        </Field>
+        <Field Name="DebitAmt_1Format">
+          <DataField>DebitAmt_1Format</DataField>
+        </Field>
+        <Field Name="DebitAmt_2">
+          <DataField>DebitAmt_2</DataField>
+        </Field>
+        <Field Name="DebitAmt_2Format">
+          <DataField>DebitAmt_2Format</DataField>
+        </Field>
+        <Field Name="DebitAmt_3">
+          <DataField>DebitAmt_3</DataField>
+        </Field>
+        <Field Name="DebitAmt_3Format">
+          <DataField>DebitAmt_3Format</DataField>
+        </Field>
+        <Field Name="DebitAmt_4">
+          <DataField>DebitAmt_4</DataField>
+        </Field>
+        <Field Name="DebitAmt_4Format">
+          <DataField>DebitAmt_4Format</DataField>
+        </Field>
+        <Field Name="DebitAmt_5">
+          <DataField>DebitAmt_5</DataField>
+        </Field>
+        <Field Name="DebitAmt_5Format">
+          <DataField>DebitAmt_5Format</DataField>
+        </Field>
+        <Field Name="DebitAmt_Total">
+          <DataField>DebitAmt_Total</DataField>
+        </Field>
+        <Field Name="DebitAmt_TotalFormat">
+          <DataField>DebitAmt_TotalFormat</DataField>
+        </Field>
+        <Field Name="CreditAmt_1">
+          <DataField>CreditAmt_1</DataField>
+        </Field>
+        <Field Name="CreditAmt_1Format">
+          <DataField>CreditAmt_1Format</DataField>
+        </Field>
+        <Field Name="CreditAmt_2">
+          <DataField>CreditAmt_2</DataField>
+        </Field>
+        <Field Name="CreditAmt_2Format">
+          <DataField>CreditAmt_2Format</DataField>
+        </Field>
+        <Field Name="CreditAmt_3">
+          <DataField>CreditAmt_3</DataField>
+        </Field>
+        <Field Name="CreditAmt_3Format">
+          <DataField>CreditAmt_3Format</DataField>
+        </Field>
+        <Field Name="CreditAmt_4">
+          <DataField>CreditAmt_4</DataField>
+        </Field>
+        <Field Name="CreditAmt_4Format">
+          <DataField>CreditAmt_4Format</DataField>
+        </Field>
+        <Field Name="CreditAmt_5">
+          <DataField>CreditAmt_5</DataField>
+        </Field>
+        <Field Name="CreditAmt_5Format">
+          <DataField>CreditAmt_5Format</DataField>
+        </Field>
+        <Field Name="CreditAmt_Total">
+          <DataField>CreditAmt_Total</DataField>
+        </Field>
+        <Field Name="CreditAmt_TotalFormat">
+          <DataField>CreditAmt_TotalFormat</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_1">
+          <DataField>UnAlloPaymtAmt_1</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_1Format">
+          <DataField>UnAlloPaymtAmt_1Format</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_2">
+          <DataField>UnAlloPaymtAmt_2</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_2Format">
+          <DataField>UnAlloPaymtAmt_2Format</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_3">
+          <DataField>UnAlloPaymtAmt_3</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_3Format">
+          <DataField>UnAlloPaymtAmt_3Format</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_4">
+          <DataField>UnAlloPaymtAmt_4</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_4Format">
+          <DataField>UnAlloPaymtAmt_4Format</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_5">
+          <DataField>UnAlloPaymtAmt_5</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_5Format">
+          <DataField>UnAlloPaymtAmt_5Format</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_Total">
+          <DataField>UnAlloPaymtAmt_Total</DataField>
+        </Field>
+        <Field Name="UnAlloPaymtAmt_TotalFormat">
+          <DataField>UnAlloPaymtAmt_TotalFormat</DataField>
+        </Field>
+        <Field Name="LineAmt_1">
+          <DataField>LineAmt_1</DataField>
+        </Field>
+        <Field Name="LineAmt_1Format">
+          <DataField>LineAmt_1Format</DataField>
+        </Field>
+        <Field Name="LineAmt_2">
+          <DataField>LineAmt_2</DataField>
+        </Field>
+        <Field Name="LineAmt_2Format">
+          <DataField>LineAmt_2Format</DataField>
+        </Field>
+        <Field Name="LineAmt_3">
+          <DataField>LineAmt_3</DataField>
+        </Field>
+        <Field Name="LineAmt_3Format">
+          <DataField>LineAmt_3Format</DataField>
+        </Field>
+        <Field Name="LineAmt_4">
+          <DataField>LineAmt_4</DataField>
+        </Field>
+        <Field Name="LineAmt_4Format">
+          <DataField>LineAmt_4Format</DataField>
+        </Field>
+        <Field Name="LineAmt_5">
+          <DataField>LineAmt_5</DataField>
+        </Field>
+        <Field Name="LineAmt_5Format">
+          <DataField>LineAmt_5Format</DataField>
+        </Field>
+        <Field Name="LineAmt_Total">
+          <DataField>LineAmt_Total</DataField>
+        </Field>
+        <Field Name="LineAmt_TotalFormat">
+          <DataField>LineAmt_TotalFormat</DataField>
+        </Field>
+        <Field Name="PostDate_CustLedgEntry">
+          <DataField>PostDate_CustLedgEntry</DataField>
+        </Field>
+        <Field Name="DocType_CustLedgEntry">
+          <DataField>DocType_CustLedgEntry</DataField>
+        </Field>
+        <Field Name="DocNo_CustLedgEntry">
+          <DataField>DocNo_CustLedgEntry</DataField>
+        </Field>
+        <Field Name="Desc_CustLedgEntry">
+          <DataField>Desc_CustLedgEntry</DataField>
+        </Field>
+        <Field Name="DisputeCase">
+          <DataField>DisputeCase</DataField>
+        </Field>
+        <Field Name="CustCurrencyCode">
+          <DataField>CustCurrencyCode</DataField>
+        </Field>
+        <Field Name="CustAmount">
+          <DataField>CustAmount</DataField>
+        </Field>
+        <Field Name="CustAmountFormat">
+          <DataField>CustAmountFormat</DataField>
+        </Field>
+        <Field Name="OriginalAmt">
+          <DataField>OriginalAmt</DataField>
+        </Field>
+        <Field Name="OriginalAmtFormat">
+          <DataField>OriginalAmtFormat</DataField>
+        </Field>
+        <Field Name="CustRemainAmount">
+          <DataField>CustRemainAmount</DataField>
+        </Field>
+        <Field Name="CustRemainAmountFormat">
+          <DataField>CustRemainAmountFormat</DataField>
+        </Field>
+        <Field Name="CustBalanceLCY1">
+          <DataField>CustBalanceLCY1</DataField>
+        </Field>
+        <Field Name="CustBalanceLCY1Format">
+          <DataField>CustBalanceLCY1Format</DataField>
+        </Field>
+        <Field Name="CustEntryDueDate">
+          <DataField>CustEntryDueDate</DataField>
+        </Field>
+        <Field Name="EntryNo_CustLedgEntry">
+          <DataField>EntryNo_CustLedgEntry</DataField>
+        </Field>
+        <Field Name="EntryType_DtldCustLedgEntry">
+          <DataField>EntryType_DtldCustLedgEntry</DataField>
+        </Field>
+        <Field Name="Correction">
+          <DataField>Correction</DataField>
+        </Field>
+        <Field Name="CorrectionFormat">
+          <DataField>CorrectionFormat</DataField>
+        </Field>
+        <Field Name="CustBalanceLCY2">
+          <DataField>CustBalanceLCY2</DataField>
+        </Field>
+        <Field Name="CustBalanceLCY2Format">
+          <DataField>CustBalanceLCY2Format</DataField>
+        </Field>
+        <Field Name="ApplicationRounding">
+          <DataField>ApplicationRounding</DataField>
+        </Field>
+        <Field Name="ApplicationRoundingFormat">
+          <DataField>ApplicationRoundingFormat</DataField>
+        </Field>
+        <Field Name="CustWiseTotal">
+          <DataField>CustWiseTotal</DataField>
+        </Field>
+        <Field Name="CustBalStBalStBalAdjLCY">
+          <DataField>CustBalStBalStBalAdjLCY</DataField>
+        </Field>
+        <Field Name="CustBalStBalStBalAdjLCYFormat">
+          <DataField>CustBalStBalStBalAdjLCYFormat</DataField>
+        </Field>
+        <Field Name="CustRemainAmountTot">
+          <DataField>CustRemainAmountTot</DataField>
+        </Field>
+        <Field Name="CustRemainAmountTotFormat">
+          <DataField>CustRemainAmountTotFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

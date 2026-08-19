@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>17.3733cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>7.6951cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Textbox Name="DescriptionLine2">
+                              <rd:DefaultName>DescriptionLine2</rd:DefaultName>
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!DescriptionLine2.Value)</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.9299cm</Top>
+                              <Left>0.49975cm</Left>
+                              <Height>0.6402cm</Height>
+                              <Width>0.27517cm</Width>
+                              <Visibility>
+                                <Hidden>=Code.SetData( 
+Cstr(Fields!Vendor_Name.Value) + Chr(177) + 
+Cstr(Fields!Vendor_Address.Value)+Chr(177) +
+Cstr(Fields!VendPhone.Value)+Chr(177) +
+Cstr(Fields!VendVATReg.Value)+Chr(177)  +
+Cstr(Fields!GenJnlLine_PostingDate.Value)+Chr(177) +
+Cstr(Fields!CompCity.Value)+Chr(177)  +
+Cstr(Fields!AmountText.Value) + Chr(177) +
+Cstr(Fields!Amount.Value) +Chr(177)  +
+Cstr(Fields!AmountText2.Value)+Chr(177)+Cstr(Fields!CurrencyCode.Value),1)</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>Red</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox51">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(7,1)</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>None</TextDecoration>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.60963cm</Top>
+                              <Left>3.6023cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>8.77652cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox53">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(6,1)</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.52714cm</Top>
+                              <Left>14.29939cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.52828cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox54">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(5,1)</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>4.26825cm</Top>
+                              <Left>14.29939cm</Left>
+                              <Height>0.71715cm</Height>
+                              <Width>2.52828cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox52">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=ABS(CDec(Code.GetData(8,1)))</Value>
+                                      <Style>
+                                        <Format>#,0</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>5.71285cm</Top>
+                              <Left>10.06555cm</Left>
+                              <Height>0.66574cm</Height>
+                              <Width>2.73195cm</Width>
+                              <ZIndex>4</ZIndex>
+                              <Visibility>
+                                <Hidden>true</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox59">
+                              <rd:DefaultName>Textbox59</rd:DefaultName>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(1,1)</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>4.26825cm</Top>
+                              <Left>2.81913cm</Left>
+                              <Height>0.71715cm</Height>
+                              <Width>9.30568cm</Width>
+                              <ZIndex>5</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox50">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=ABS(CDec(Code.GetData(8,1)))</Value>
+                                      <Style>
+                                        <FontSize>11.5pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Format>#,0</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.97534cm</Top>
+                              <Left>13.115cm</Left>
+                              <Height>0.66863cm</Height>
+                              <Width>3.71267cm</Width>
+                              <ZIndex>6</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox1">
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(9,1)</Value>
+                                      <Style>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>None</TextDecoration>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.52714cm</Top>
+                              <Left>0.79739cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>11.58143cm</Width>
+                              <ZIndex>7</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox2">
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.GetData(10,1)</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.97534cm</Top>
+                              <Left>11.54919cm</Left>
+                              <Height>0.66863cm</Height>
+                              <Width>1.56581cm</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Vendor_No.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Top>0.01386cm</Top>
+            <Left>0.1267cm</Left>
+            <Height>7.6951cm</Height>
+            <Width>17.3733cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>77.08958mm</Height>
+        <Style />
+      </Body>
+      <Width>175mm</Width>
+      <Page>
+        <PageFooter>
+          <Height>0.02646cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>8cm</PageHeight>
+        <PageWidth>17.5cm</PageWidth>
+        <InteractiveHeight>11in</InteractiveHeight>
+        <InteractiveWidth>8.5in</InteractiveWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="POBoxNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>POBoxNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>POBoxNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PayToTheOrderOfLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>PayToTheOrderOfLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>PayToTheOrderOfLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FirstCarrBankLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>FirstCarrBankLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>FirstCarrBankLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AddressLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AddressLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AddressLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>NoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>NoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PayDocLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>PayDocLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>PayDocLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeDateLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeDateLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeDateLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeAmtLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeAmtLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeAmtLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignatureLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignatureLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignatureLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignaturesLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignaturesLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignaturesLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LineNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LineNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LineNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorNameLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorNameLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorNameLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorBankLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorBankLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorBankLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorAddressLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorAddressLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorAddressLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="InvoiceNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>InvoiceNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>InvoiceNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ExternalDocNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ExternalDocNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ExternalDocNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AmountLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AmountLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AmountLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DeviseLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DeviseLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DeviseLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AmountLCYLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AmountLCYLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AmountLCYLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DueDateLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DueDateLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DueDateLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BankLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BankLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BankLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TotalLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>TotalLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TotalLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignatureLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignatureLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignatureLB</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>25</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>POBoxNoLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>PayToTheOrderOfLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>FirstCarrBankLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>AddressLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>NoLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>PayDocLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>ChequeDateLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>ChequeNoLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>ChequeAmtLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>SignatureLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>10</RowIndex>
+          <ParameterName>SignaturesLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>11</RowIndex>
+          <ParameterName>LineNoLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>12</RowIndex>
+          <ParameterName>VendorNoLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>13</RowIndex>
+          <ParameterName>VendorNameLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>14</RowIndex>
+          <ParameterName>VendorBankLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>15</RowIndex>
+          <ParameterName>VendorAddressLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>16</RowIndex>
+          <ParameterName>InvoiceNoLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>17</RowIndex>
+          <ParameterName>ExternalDocNoLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>18</RowIndex>
+          <ParameterName>AmountLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>19</RowIndex>
+          <ParameterName>DeviseLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>20</RowIndex>
+          <ParameterName>AmountLCYLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>21</RowIndex>
+          <ParameterName>DueDateLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>22</RowIndex>
+          <ParameterName>BankLB</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>23</RowIndex>
+          <ParameterName>TotalLbl</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>24</RowIndex>
+          <ParameterName>SignatureLB</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Shared Data1 as Object
+Shared Data2 as Object
+Shared Data3 as Object
+
+Public Function GetData(Num as Integer, Group as integer) as Object
+if Group = 1 then
+   Return Cstr(Choose(Num, Split(Cstr(Data1),Chr(177))))
+End If
+
+if Group = 2 then
+   Return Cstr(Choose(Num, Split(Cstr(Data2),Chr(177))))
+End If
+
+if Group = 3 then
+   Return Cstr(Choose(Num, Split(Cstr(Data3),Chr(177))))
+End If
+End Function
+
+Public Function SetData(NewData as Object,Group as integer)
+  If Group = 1 and NewData &gt; "" Then
+      Data1 = NewData
+  End If
+
+  If Group = 2 and NewData &gt; "" Then
+      Data2 = NewData
+  End If
+
+  If Group = 3 and NewData &gt; "" Then
+      Data3 = NewData
+  End If
+  Return True
+End Function</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompCity">
+          <DataField>CompCity</DataField>
+        </Field>
+        <Field Name="JournalTempName_GenJnlLine">
+          <DataField>JournalTempName_GenJnlLine</DataField>
+        </Field>
+        <Field Name="JournalBatchName_GenJnlLine">
+          <DataField>JournalBatchName_GenJnlLine</DataField>
+        </Field>
+        <Field Name="LineNo_GenJnlLine">
+          <DataField>LineNo_GenJnlLine</DataField>
+        </Field>
+        <Field Name="GenJnlLine_DocumentNo">
+          <DataField>GenJnlLine_DocumentNo</DataField>
+        </Field>
+        <Field Name="GenJnlLine_PostingDate">
+          <DataField>GenJnlLine_PostingDate</DataField>
+        </Field>
+        <Field Name="Vendor_No">
+          <DataField>Vendor_No</DataField>
+        </Field>
+        <Field Name="Vendor_Name">
+          <DataField>Vendor_Name</DataField>
+        </Field>
+        <Field Name="Vendor_POBox">
+          <DataField>Vendor_POBox</DataField>
+        </Field>
+        <Field Name="Vendor_Address">
+          <DataField>Vendor_Address</DataField>
+        </Field>
+        <Field Name="Vendor_City">
+          <DataField>Vendor_City</DataField>
+        </Field>
+        <Field Name="VendPhone">
+          <DataField>VendPhone</DataField>
+        </Field>
+        <Field Name="VendVATReg">
+          <DataField>VendVATReg</DataField>
+        </Field>
+        <Field Name="AmountText">
+          <DataField>AmountText</DataField>
+        </Field>
+        <Field Name="AmountText2">
+          <DataField>AmountText2</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="HNKBankAcc">
+          <DataField>HNKBankAcc</DataField>
+        </Field>
+        <Field Name="FirstPage">
+          <DataField>FirstPage</DataField>
+        </Field>
+        <Field Name="PreprintedStub">
+          <DataField>PreprintedStub</DataField>
+        </Field>
+        <Field Name="TotalLineAmount">
+          <DataField>TotalLineAmount</DataField>
+        </Field>
+        <Field Name="TotalLineAmountFormat">
+          <DataField>TotalLineAmountFormat</DataField>
+        </Field>
+        <Field Name="CheckNoText">
+          <DataField>CheckNoText</DataField>
+        </Field>
+        <Field Name="Currency_Description">
+          <DataField>Currency_Description</DataField>
+        </Field>
+        <Field Name="CheckAmountText">
+          <DataField>CheckAmountText</DataField>
+        </Field>
+        <Field Name="DescriptionLine1">
+          <DataField>DescriptionLine1</DataField>
+        </Field>
+        <Field Name="DescriptionLine2">
+          <DataField>DescriptionLine2</DataField>
+        </Field>
+        <Field Name="TotalText">
+          <DataField>TotalText</DataField>
+        </Field>
+        <Field Name="VoidText">
+          <DataField>VoidText</DataField>
+        </Field>
+        <Field Name="Vendor_Country">
+          <DataField>Vendor_Country</DataField>
+        </Field>
+        <Field Name="BankAcc_Signature">
+          <DataField>BankAcc_Signature</DataField>
+        </Field>
+        <Field Name="ShowBNS">
+          <DataField>ShowBNS</DataField>
+        </Field>
+        <Field Name="ShowFCIB">
+          <DataField>ShowFCIB</DataField>
+        </Field>
+        <Field Name="PL_DocNo">
+          <DataField>PL_DocNo</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+        <Field Name="PlineLineNo">
+          <DataField>PlineLineNo</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo_PaymentLine">
+          <DataField>ExternalDocumentNo_PaymentLine</DataField>
+        </Field>
+        <Field Name="AmountLine1">
+          <DataField>AmountLine1</DataField>
+        </Field>
+        <Field Name="AmountLine">
+          <DataField>AmountLine</DataField>
+        </Field>
+        <Field Name="AmountLineFormat">
+          <DataField>AmountLineFormat</DataField>
+        </Field>
+        <Field Name="VendorCode">
+          <DataField>VendorCode</DataField>
+        </Field>
+        <Field Name="VendorBankAccCode">
+          <DataField>VendorBankAccCode</DataField>
+        </Field>
+        <Field Name="DueDate">
+          <DataField>DueDate</DataField>
+        </Field>
+        <Field Name="AmountLineLCY">
+          <DataField>AmountLineLCY</DataField>
+        </Field>
+        <Field Name="AmountLineLCYFormat">
+          <DataField>AmountLineLCYFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

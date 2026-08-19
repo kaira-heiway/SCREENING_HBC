@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="CreationDateLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CreationDateLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CreationDateLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StmtDateAdOfLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>StmtDateAdOfLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>StmtDateAdOfLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CurrentFutureLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CurrentFutureLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CurrentFutureLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NoOfDaysOverdueLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>NoOfDaysOverdueLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>NoOfDaysOverdueLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TotalLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>TotalLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TotalLbl</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_Customer">
+          <DataField>No_Customer</DataField>
+        </Field>
+        <Field Name="Name_Customer">
+          <DataField>Name_Customer</DataField>
+        </Field>
+        <Field Name="Address_Customer">
+          <DataField>Address_Customer</DataField>
+        </Field>
+        <Field Name="Address2_Customer">
+          <DataField>Address2_Customer</DataField>
+        </Field>
+        <Field Name="PostCode_Customer">
+          <DataField>PostCode_Customer</DataField>
+        </Field>
+        <Field Name="City_Customer">
+          <DataField>City_Customer</DataField>
+        </Field>
+        <Field Name="CompanyText">
+          <DataField>CompanyText</DataField>
+        </Field>
+        <Field Name="VATRegistrationNo_Customer">
+          <DataField>VATRegistrationNo_Customer</DataField>
+        </Field>
+        <Field Name="Country_Customer">
+          <DataField>Country_Customer</DataField>
+        </Field>
+        <Field Name="CompanyInfo_OpCoFooter">
+          <DataField>CompanyInfo_OpCoFooter</DataField>
+        </Field>
+        <Field Name="Name_CompanyInfo">
+          <DataField>Name_CompanyInfo</DataField>
+        </Field>
+        <Field Name="Address_CompanyInfo">
+          <DataField>Address_CompanyInfo</DataField>
+        </Field>
+        <Field Name="Address2_CompanyInfo">
+          <DataField>Address2_CompanyInfo</DataField>
+        </Field>
+        <Field Name="City_CompanyInfo">
+          <DataField>City_CompanyInfo</DataField>
+        </Field>
+        <Field Name="PostCode_CompanyInfo">
+          <DataField>PostCode_CompanyInfo</DataField>
+        </Field>
+        <Field Name="Picture_CompanyInfo">
+          <DataField>Picture_CompanyInfo</DataField>
+        </Field>
+        <Field Name="Country_CompanyInfo">
+          <DataField>Country_CompanyInfo</DataField>
+        </Field>
+        <Field Name="StatementDate">
+          <DataField>StatementDate</DataField>
+        </Field>
+        <Field Name="CustomerStatementCap">
+          <DataField>CustomerStatementCap</DataField>
+        </Field>
+        <Field Name="CompNameCap">
+          <DataField>CompNameCap</DataField>
+        </Field>
+        <Field Name="CompAddressCap">
+          <DataField>CompAddressCap</DataField>
+        </Field>
+        <Field Name="CompPostCodeCap">
+          <DataField>CompPostCodeCap</DataField>
+        </Field>
+        <Field Name="CompCityCap">
+          <DataField>CompCityCap</DataField>
+        </Field>
+        <Field Name="CompPayCap">
+          <DataField>CompPayCap</DataField>
+        </Field>
+        <Field Name="ClientCap">
+          <DataField>ClientCap</DataField>
+        </Field>
+        <Field Name="ClientNameCap">
+          <DataField>ClientNameCap</DataField>
+        </Field>
+        <Field Name="ClientNoCap">
+          <DataField>ClientNoCap</DataField>
+        </Field>
+        <Field Name="ClientAddressCap">
+          <DataField>ClientAddressCap</DataField>
+        </Field>
+        <Field Name="ClientPostCodeCap">
+          <DataField>ClientPostCodeCap</DataField>
+        </Field>
+        <Field Name="ClientCityCap">
+          <DataField>ClientCityCap</DataField>
+        </Field>
+        <Field Name="ClientPayCap">
+          <DataField>ClientPayCap</DataField>
+        </Field>
+        <Field Name="ClientVATRegNoCap">
+          <DataField>ClientVATRegNoCap</DataField>
+        </Field>
+        <Field Name="CompanyTaxNoCap">
+          <DataField>CompanyTaxNoCap</DataField>
+        </Field>
+        <Field Name="DateOfDeclCap">
+          <DataField>DateOfDeclCap</DataField>
+        </Field>
+        <Field Name="PageNoCap">
+          <DataField>PageNoCap</DataField>
+        </Field>
+        <Field Name="DocCurrSummaryCap">
+          <DataField>DocCurrSummaryCap</DataField>
+        </Field>
+        <Field Name="AgingSummaryCap">
+          <DataField>AgingSummaryCap</DataField>
+        </Field>
+        <Field Name="CurrencyCap">
+          <DataField>CurrencyCap</DataField>
+        </Field>
+        <Field Name="IncludeAgingBand">
+          <DataField>IncludeAgingBand</DataField>
+        </Field>
+        <Field Name="SignatureCap">
+          <DataField>SignatureCap</DataField>
+        </Field>
+        <Field Name="CompanyTaxNo_Customer">
+          <DataField>CompanyTaxNo_Customer</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="PeriodCustDatetFilter">
+          <DataField>PeriodCustDatetFilter</DataField>
+        </Field>
+        <Field Name="PeriodCaption">
+          <DataField>PeriodCaption</DataField>
+        </Field>
+        <Field Name="ReportType">
+          <DataField>ReportType</DataField>
+        </Field>
+        <Field Name="NIF">
+          <DataField>NIF</DataField>
+        </Field>
+        <Field Name="PhoneNo_CompanyInfo">
+          <DataField>PhoneNo_CompanyInfo</DataField>
+        </Field>
+        <Field Name="Email_CompanyInfo">
+          <DataField>Email_CompanyInfo</DataField>
+        </Field>
+        <Field Name="CustomerEmail">
+          <DataField>CustomerEmail</DataField>
+        </Field>
+        <Field Name="PhoneLbl">
+          <DataField>PhoneLbl</DataField>
+        </Field>
+        <Field Name="EmailLbl">
+          <DataField>EmailLbl</DataField>
+        </Field>
+        <Field Name="NIFLbl">
+          <DataField>NIFLbl</DataField>
+        </Field>
+        <Field Name="FooterTextLbl">
+          <DataField>FooterTextLbl</DataField>
+        </Field>
+        <Field Name="DocumentDate_CustLedgerEntry">
+          <DataField>DocumentDate_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="DocumentDate_CLE">
+          <DataField>DocumentDate_CLE</DataField>
+        </Field>
+        <Field Name="DocumentNo_CustLedgerEntry">
+          <DataField>DocumentNo_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="DocumentType_CustLedgerEntry">
+          <DataField>DocumentType_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="Description_CustLedgerEntry">
+          <DataField>Description_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="Amount_CustLedgerEntry">
+          <DataField>Amount_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="Amount_CustLedgerEntryFormat">
+          <DataField>Amount_CustLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="CurrencyCode_CustLedgerEntry">
+          <DataField>CurrencyCode_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="DueDate_CustLedgerEntry">
+          <DataField>DueDate_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="DisputeCase_CustLedgerEntry">
+          <DataField>DisputeCase_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="RemainingAmount_CustLedgerEntry">
+          <DataField>RemainingAmount_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="RemainingAmount_CustLedgerEntryFormat">
+          <DataField>RemainingAmount_CustLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="WhseDocNo_CustLedgerEntry">
+          <DataField>WhseDocNo_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="EntryNo_CustLedgerEntry">
+          <DataField>EntryNo_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="LineDocumentDateCap">
+          <DataField>LineDocumentDateCap</DataField>
+        </Field>
+        <Field Name="LineDocumentNoCap">
+          <DataField>LineDocumentNoCap</DataField>
+        </Field>
+        <Field Name="LineDocTypeCap">
+          <DataField>LineDocTypeCap</DataField>
+        </Field>
+        <Field Name="LineWhseShpmtNoCap">
+          <DataField>LineWhseShpmtNoCap</DataField>
+        </Field>
+        <Field Name="LineDescriptionCap">
+          <DataField>LineDescriptionCap</DataField>
+        </Field>
+        <Field Name="LineAmountCap">
+          <DataField>LineAmountCap</DataField>
+        </Field>
+        <Field Name="LineCurrencyCap">
+          <DataField>LineCurrencyCap</DataField>
+        </Field>
+        <Field Name="LineDueDateCap">
+          <DataField>LineDueDateCap</DataField>
+        </Field>
+        <Field Name="LineDisputedCap">
+          <DataField>LineDisputedCap</DataField>
+        </Field>
+        <Field Name="LineAmountPaidCap">
+          <DataField>LineAmountPaidCap</DataField>
+        </Field>
+        <Field Name="LineUnallocatedAmountCap">
+          <DataField>LineUnallocatedAmountCap</DataField>
+        </Field>
+        <Field Name="LineBalanceDueCap">
+          <DataField>LineBalanceDueCap</DataField>
+        </Field>
+        <Field Name="isPayment">
+          <DataField>isPayment</DataField>
+        </Field>
+        <Field Name="LineItemChargeTypeCap">
+          <DataField>LineItemChargeTypeCap</DataField>
+        </Field>
+        <Field Name="ItemChargeType_CustLedgerEntry">
+          <DataField>ItemChargeType_CustLedgerEntry</DataField>
+        </Field>
+        <Field Name="NoOfDaysOverdue">
+          <DataField>NoOfDaysOverdue</DataField>
+        </Field>
+        <Field Name="Number_BlankLines">
+          <DataField>Number_BlankLines</DataField>
+        </Field>
+        <Field Name="Number_AgingBand">
+          <DataField>Number_AgingBand</DataField>
+        </Field>
+        <Field Name="Currency_AgingBand">
+          <DataField>Currency_AgingBand</DataField>
+        </Field>
+        <Field Name="Band1_AgingBand">
+          <DataField>Band1_AgingBand</DataField>
+        </Field>
+        <Field Name="Band1_AgingBandFormat">
+          <DataField>Band1_AgingBandFormat</DataField>
+        </Field>
+        <Field Name="Band2_AgingBand">
+          <DataField>Band2_AgingBand</DataField>
+        </Field>
+        <Field Name="Band2_AgingBandFormat">
+          <DataField>Band2_AgingBandFormat</DataField>
+        </Field>
+        <Field Name="Band3_AgingBand">
+          <DataField>Band3_AgingBand</DataField>
+        </Field>
+        <Field Name="Band3_AgingBandFormat">
+          <DataField>Band3_AgingBandFormat</DataField>
+        </Field>
+        <Field Name="Band4_AgingBand">
+          <DataField>Band4_AgingBand</DataField>
+        </Field>
+        <Field Name="Band4_AgingBandFormat">
+          <DataField>Band4_AgingBandFormat</DataField>
+        </Field>
+        <Field Name="Band5_AgingBand">
+          <DataField>Band5_AgingBand</DataField>
+        </Field>
+        <Field Name="Band5_AgingBandFormat">
+          <DataField>Band5_AgingBandFormat</DataField>
+        </Field>
+        <Field Name="Disputed_AgingBand">
+          <DataField>Disputed_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap1_AgingBand">
+          <DataField>AgingCap1_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap2_AgingBand">
+          <DataField>AgingCap2_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap3_AgingBand">
+          <DataField>AgingCap3_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap4_AgingBand">
+          <DataField>AgingCap4_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap5_AgingBand">
+          <DataField>AgingCap5_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingCap6_AgingBand">
+          <DataField>AgingCap6_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingTotalCap">
+          <DataField>AgingTotalCap</DataField>
+        </Field>
+        <Field Name="AgingDisputedCap">
+          <DataField>AgingDisputedCap</DataField>
+        </Field>
+        <Field Name="AgingBand6_Currency">
+          <DataField>AgingBand6_Currency</DataField>
+        </Field>
+        <Field Name="AgingBand6_Amt">
+          <DataField>AgingBand6_Amt</DataField>
+        </Field>
+        <Field Name="AgingBand6_AmtFormat">
+          <DataField>AgingBand6_AmtFormat</DataField>
+        </Field>
+        <Field Name="AgingBand6_DisputedAmt">
+          <DataField>AgingBand6_DisputedAmt</DataField>
+        </Field>
+        <Field Name="AgingBand6_DisputedAmtFormat">
+          <DataField>AgingBand6_DisputedAmtFormat</DataField>
+        </Field>
+        <Field Name="BandE1_AgingBand">
+          <DataField>BandE1_AgingBand</DataField>
+        </Field>
+        <Field Name="BandE2_AgingBand">
+          <DataField>BandE2_AgingBand</DataField>
+        </Field>
+        <Field Name="BandE3_AgingBand">
+          <DataField>BandE3_AgingBand</DataField>
+        </Field>
+        <Field Name="BandE4_AgingBand">
+          <DataField>BandE4_AgingBand</DataField>
+        </Field>
+        <Field Name="BandE5_AgingBand">
+          <DataField>BandE5_AgingBand</DataField>
+        </Field>
+        <Field Name="DisputedE_AgingBand">
+          <DataField>DisputedE_AgingBand</DataField>
+        </Field>
+        <Field Name="AgingBandE6_Currency">
+          <DataField>AgingBandE6_Currency</DataField>
+        </Field>
+        <Field Name="AgingBandE6_Amt">
+          <DataField>AgingBandE6_Amt</DataField>
+        </Field>
+        <Field Name="AgingBandE6_AmtFormat">
+          <DataField>AgingBandE6_AmtFormat</DataField>
+        </Field>
+        <Field Name="AgingBandE6_DisputedAmt">
+          <DataField>AgingBandE6_DisputedAmt</DataField>
+        </Field>
+        <Field Name="AgingBandE6_DisputedAmtFormat">
+          <DataField>AgingBandE6_DisputedAmtFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

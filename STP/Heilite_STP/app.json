@@ -1,0 +1,57 @@
+{
+  "id": "16834bfe-debe-4f78-89a7-4a67768dbe5c",
+  "name": "Heilite_STP",
+  "publisher": "IBM",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+   "dependencies": [
+    {
+      "id": "811f4260-30ed-4070-af68-fcdd5158c5dd",
+      "name": "Heilite_Foundation",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "dd0cdf9a-d725-4978-be60-d069a73b976d",
+      "name": "Heilite_Common_Business",
+      "publisher": "IBM",
+      "version": "1.0.0.0"
+    },    
+    {
+      "id": "4630fd6b-ef15-42f5-9be2-0edcf56fca22",
+      "name": "Aptean Beverage Tax Management for Drink-IT Edition",
+      "publisher": "Aptean",
+       "version": "2602.1.314337.0"
+      },
+    {
+      "id": "81915655-f812-4f10-8976-267e1e80c59a",
+      "name": "Aptean Beverage Foundation Layer for Drink-IT Edition",
+      "publisher": "Aptean",
+      "version": "2602.0.332063.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "27.0.0.0",
+  "idRanges": [
+    {
+      "from": 52000,
+      "to": 52999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "16.0",
+  "features": [
+    "NoImplicitWith"
+  ],"suppressWarnings": ["AA0215"]
+}

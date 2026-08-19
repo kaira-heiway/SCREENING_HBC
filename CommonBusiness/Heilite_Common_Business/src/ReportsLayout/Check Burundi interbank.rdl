@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="POBoxNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>POBoxNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>POBoxNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PayToTheOrderOfLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>PayToTheOrderOfLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>PayToTheOrderOfLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FirstCarrBankLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>FirstCarrBankLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>FirstCarrBankLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AddressLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AddressLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AddressLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>NoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>NoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PayDocLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>PayDocLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>PayDocLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeDateLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeDateLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeDateLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeNoLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeNoLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeNoLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ChequeAmtLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ChequeAmtLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ChequeAmtLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignatureLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignatureLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignatureLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignaturesLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignaturesLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignaturesLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LineNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LineNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LineNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorNameLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorNameLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorNameLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorBankLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorBankLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorBankLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="VendorAddressLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>VendorAddressLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>VendorAddressLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="InvoiceNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>InvoiceNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>InvoiceNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ExternalDocNoLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>ExternalDocNoLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>ExternalDocNoLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AmountLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AmountLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AmountLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DeviseLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DeviseLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DeviseLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AmountLCYLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AmountLCYLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AmountLCYLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DueDateLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DueDateLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DueDateLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BankLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BankLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BankLB</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TotalLbl">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>TotalLbl</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TotalLbl</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SignatureLB">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SignatureLB</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SignatureLB</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompCity">
+          <DataField>CompCity</DataField>
+        </Field>
+        <Field Name="JournalTempName_GenJnlLine">
+          <DataField>JournalTempName_GenJnlLine</DataField>
+        </Field>
+        <Field Name="JournalBatchName_GenJnlLine">
+          <DataField>JournalBatchName_GenJnlLine</DataField>
+        </Field>
+        <Field Name="LineNo_GenJnlLine">
+          <DataField>LineNo_GenJnlLine</DataField>
+        </Field>
+        <Field Name="GenJnlLine_DocumentNo">
+          <DataField>GenJnlLine_DocumentNo</DataField>
+        </Field>
+        <Field Name="GenJnlLine_PostingDate">
+          <DataField>GenJnlLine_PostingDate</DataField>
+        </Field>
+        <Field Name="Vendor_No">
+          <DataField>Vendor_No</DataField>
+        </Field>
+        <Field Name="Vendor_Name">
+          <DataField>Vendor_Name</DataField>
+        </Field>
+        <Field Name="Vendor_POBox">
+          <DataField>Vendor_POBox</DataField>
+        </Field>
+        <Field Name="Vendor_Address">
+          <DataField>Vendor_Address</DataField>
+        </Field>
+        <Field Name="Vendor_City">
+          <DataField>Vendor_City</DataField>
+        </Field>
+        <Field Name="VendPhone">
+          <DataField>VendPhone</DataField>
+        </Field>
+        <Field Name="VendVATReg">
+          <DataField>VendVATReg</DataField>
+        </Field>
+        <Field Name="AmountText">
+          <DataField>AmountText</DataField>
+        </Field>
+        <Field Name="AmountText2">
+          <DataField>AmountText2</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="HNKBankAcc">
+          <DataField>HNKBankAcc</DataField>
+        </Field>
+        <Field Name="FirstPage">
+          <DataField>FirstPage</DataField>
+        </Field>
+        <Field Name="PreprintedStub">
+          <DataField>PreprintedStub</DataField>
+        </Field>
+        <Field Name="TotalLineAmount">
+          <DataField>TotalLineAmount</DataField>
+        </Field>
+        <Field Name="TotalLineAmountFormat">
+          <DataField>TotalLineAmountFormat</DataField>
+        </Field>
+        <Field Name="CheckNoText">
+          <DataField>CheckNoText</DataField>
+        </Field>
+        <Field Name="Currency_Description">
+          <DataField>Currency_Description</DataField>
+        </Field>
+        <Field Name="CheckAmountText">
+          <DataField>CheckAmountText</DataField>
+        </Field>
+        <Field Name="DescriptionLine1">
+          <DataField>DescriptionLine1</DataField>
+        </Field>
+        <Field Name="DescriptionLine2">
+          <DataField>DescriptionLine2</DataField>
+        </Field>
+        <Field Name="TotalText">
+          <DataField>TotalText</DataField>
+        </Field>
+        <Field Name="VoidText">
+          <DataField>VoidText</DataField>
+        </Field>
+        <Field Name="Vendor_Country">
+          <DataField>Vendor_Country</DataField>
+        </Field>
+        <Field Name="BankAcc_Signature">
+          <DataField>BankAcc_Signature</DataField>
+        </Field>
+        <Field Name="ShowBNS">
+          <DataField>ShowBNS</DataField>
+        </Field>
+        <Field Name="ShowFCIB">
+          <DataField>ShowFCIB</DataField>
+        </Field>
+        <Field Name="PL_DocNo">
+          <DataField>PL_DocNo</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+        <Field Name="PlineLineNo">
+          <DataField>PlineLineNo</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo_PaymentLine">
+          <DataField>ExternalDocumentNo_PaymentLine</DataField>
+        </Field>
+        <Field Name="AmountLine1">
+          <DataField>AmountLine1</DataField>
+        </Field>
+        <Field Name="AmountLine">
+          <DataField>AmountLine</DataField>
+        </Field>
+        <Field Name="AmountLineFormat">
+          <DataField>AmountLineFormat</DataField>
+        </Field>
+        <Field Name="VendorCode">
+          <DataField>VendorCode</DataField>
+        </Field>
+        <Field Name="VendorBankAccCode">
+          <DataField>VendorBankAccCode</DataField>
+        </Field>
+        <Field Name="DueDate">
+          <DataField>DueDate</DataField>
+        </Field>
+        <Field Name="AmountLineLCY">
+          <DataField>AmountLineLCY</DataField>
+        </Field>
+        <Field Name="AmountLineLCYFormat">
+          <DataField>AmountLineLCYFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
