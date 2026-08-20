@@ -11483,7 +11483,8 @@ codeunit 50280 "Heineken BC Upgrade"
             WarehouseEntry."Unavailable Stock (Bin) FND" := Bin."Unavailable Stock FND";
         IF WarehouseEntry."Lot No." <> '' THEN
             // IF WarehouseEntry."Quality Status" = WarehouseEntry."Quality Status"::Blocked THEN BEGIN //PATHAA02 GAP014_DTW, IBM GAP DTW 43
-            IF WarehouseEntry."Inspection Status FND" = InventorySetup."Quality Blocked FND" THEN BEGIN //PATHAA02 GAP014_DTW, IBM GAP DTW 43                WarehouseEntry."Unavail. Stock (Quality) FND" := TRUE;
+            IF WarehouseEntry."Inspection Status FND" = InventorySetup."Quality Blocked FND" THEN BEGIN //PATHAA02 GAP014_DTW, IBM GAP DTW 43                
+                WarehouseEntry."Unavail. Stock (Quality) FND" := TRUE; //PATHAA02 18.08.26 SOH Fix
                 WarehouseEntry."Unavailable Stock FND" := TRUE;
             END ELSE BEGIN
                 WarehouseEntry."Unavail. Stock (Quality) FND" := FALSE;
@@ -12624,7 +12625,7 @@ codeunit 50280 "Heineken BC Upgrade"
 
         //HEI.13>>
         NewItemLedgEntry."Zone Code FND" := ItemJournalLine."Zone Code FND";
-        //  NewItemLedgEntry."Bin Code" := ItemJournalLine."Bin Code"; //BC upgrade GUNREM01 - In Itemledger entry Bin code is DIT
+        NewItemLedgEntry."Bin Code FND" := ItemJournalLine."Bin Code"; //BC upgrade GUNREM01 - Flows Bin code to ILE 
         //HEI.13<<
 
         NewItemLedgEntry."Source System Identifier FND" := ItemJournalLine."Source System Identifier FND"; // HEI.12
@@ -12765,7 +12766,14 @@ codeunit 50280 "Heineken BC Upgrade"
 
     //  GetItemJnlLine(VAR ItemJournalLine : Record "Item Journal Line") //BC Upgrade GUNREM01 - Moved to procedure below
     //BC Upgrade kamnay01 The event subscriber was deleted (rather than commented) to ensure it is fully removed from the extension metadata. In Business Central, commented code may still persist in the compiled version if the extension is not redeployed with a version change, causing the old subscriber to be triggered during debugging. Deletion guarantees clean removal.
-
+    //BC Upgrade GUNREM01 >>added new field "Strength Spec. Code" and "Strength Spec. Value" to value entry table from item journal line table
+    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", OnInitValueEntryOnAfterAssignFields, '', false, false)]
+    // local procedure "Item Jnl.-Post Line_OnInitValueEntryOnAfterAssignFields"(var ValueEntry: Record "Value Entry"; ItemLedgEntry: Record "Item Ledger Entry"; ItemJnlLine: Record "Item Journal Line")
+    // begin
+    //     ValueEntry."Strength Spec. Code FND" := itemJnlLine."New Strength 3 Code 111FDW";
+    //     ValueEntry."Strength Spec. Value FND" := itemJnlLine.NewStrength3Value111FDW;
+    // end;
+    //BC Upgrade GUNREM01 <<added new field "Strength Spec. Code" and "Strength Spec. Value" to value entry table from item journal line table
 
     //BC Upgrade GUNREM01 - Codeunit 22 Item Jnl.-Post Line 22.02.26<<
 
@@ -16337,21 +16345,24 @@ codeunit 50280 "Heineken BC Upgrade"
     end;
     //BC Upgrade SHARMP16 END>>--Open Points
     //BC UPGRADE GUPTAK03 WHT Reversal Entry -->>
-    [EventSubscriber(ObjectType::Table, Database::"Reversal Entry", OnBeforeCheckEntries, '', false, false)]
-    local procedure OnBeforeCheckEntries(ReversalEntry: Record "Reversal Entry"; TableID: Integer; var SkipCheck: Boolean)
-    var
-        WHTEntry: Record "WHT Entry FND";
-    begin
-        WHTEntry.LockTable();
-        // RD03 - added setrange -- >>
-        WHTEntry.Reset();
-        WHTEntry.SetRange("Document No.", ReversalEntry."Document No.");
-        // RD03 - added setrange -- <<
-        if WHTEntry.Find('-') then
-            REPEAT
-                ReversalEntry.CheckWHT(WHTEntry);
-            UNTIL WHTEntry.NEXT = 0;
-    end;
+    // BC Upgrade BHARDA11 >> -- Blocked and move this code to Common business extension with some logic LSIT- STP|E2E-146|PID-301| Cannot void check from Check ledger entry getting WHT posting date error
+    // [EventSubscriber(ObjectType::Table, Database::"Reversal Entry", OnBeforeCheckEntries, '', false, false)]
+    // local procedure OnBeforeCheckEntries(ReversalEntry: Record "Reversal Entry"; TableID: Integer; var SkipCheck: Boolean)
+    // var
+    //     WHTEntry: Record "WHT Entry FND";
+    // begin
+    //     WHTEntry.LockTable();
+    //     // RD03 - added setrange -- >>
+    //     WHTEntry.Reset();
+    //     WHTEntry.SetRange("Document No.", ReversalEntry."Document No.");
+    //     // RD03 - added setrange -- <<
+    //     if WHTEntry.Find('-') then
+    //         REPEAT
+    //             ReversalEntry.CheckWHT(WHTEntry);
+    //         UNTIL WHTEntry.NEXT = 0;
+    // end;
+    // BC Upgrade BHARDA11 << -- Blocked and move this code to Common business extension with some logic LSIT- STP|E2E-146|PID-301| Cannot void check from Check ledger entry getting WHT posting date error
+
 
     [EventSubscriber(ObjectType::Table, Database::"Reversal Entry", OnAfterInsertReversalEntry, '', false, false)]
     local procedure OnAfterInsertReversalEntry(Number: Integer; RevType: Option; sender: Record "Reversal Entry"; var NextLineNo: Integer; var TempReversalEntry: Record "Reversal Entry" temporary; var TempRevertTransactionNo: Record Integer)
@@ -16382,4 +16393,13 @@ codeunit 50280 "Heineken BC Upgrade"
             NewCaption := STRSUBSTNO('%1', WHTEntry.TABLECAPTION);
     end;
     // BC UPGRADE GUPTAK03 WHT Reversal Entry -- <<
+
+    //POENAB02, EPM integration, 13.08.2026>>
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Item Jnl.-Post Line", OnInitValueEntryOnAfterAssignFields, '', false, false)]
+    local procedure OnInitValueEntryOnAfterAssignFields(var ValueEntry: Record "Value Entry"; ItemLedgEntry: Record "Item Ledger Entry"; ItemJnlLine: Record "Item Journal Line")
+    begin
+        ValueEntry."Item Ledger EntrySourceTypeFND" := ItemLedgEntry."Source Type";
+        ValueEntry."Item Ledger Entry SourceNo.FND" := ItemLedgEntry."Source No.";
+    end;
+    //POENAB02, EPM integration, 13.08.2026<<
 }

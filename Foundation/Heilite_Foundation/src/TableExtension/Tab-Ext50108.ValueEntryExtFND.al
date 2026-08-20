@@ -436,6 +436,33 @@ tableextension 50108 ValueEntryExtFND extends "Value Entry"
             DecimalPlaces = 0 : 2;
             Editable = false;
         }
+        //POENAB02, EPM integration, 13.08.2026>>
+        field(50073; "Item Ledger EntrySourceTypeFND"; Enum "Analysis Source Type")
+        {
+            Caption = 'Item Ledger Entry Source Type';
+            DataClassification = ToBeClassified;
+            Editable = false;
+            ToolTip = 'Specifies the source type that applies to the source number, shown in the Source No. field.';
+        }
+        field(50074; "Item Ledger Entry SourceNo.FND"; Code[20])
+        {
+            Caption = 'Item Ledger Entry Source No.';
+            DataClassification = ToBeClassified;
+            Editable = false;
+            TableRelation = IF ("Item Ledger EntrySourceTypeFND" = CONST(Customer)) Customer ELSE IF ("Item Ledger EntrySourceTypeFND" = CONST(Vendor)) Vendor ELSE IF ("Item Ledger EntrySourceTypeFND" = CONST(Item)) Item;
+            ToolTip = 'Specifies the source number that applies to the source type, shown in the Source Type field.';
+        }
+        //POENAB02, EPM integration, 13.08.2026<<
+        //BC Upgrade GUNREM01 Added New Fields >>
+        field(50075; "Strength Spec. Code FND"; Code[20])
+        {
+            Caption = 'Strength Spec. Code';
+        }
+        field(50076; "Strength Spec. Value FND"; Decimal)
+        {
+            Caption = 'Strength Spec. Value';
+        }
+        //BC Upgrade GUNREM01 Added New Fields <<
         //#BCUP0-30 Fix -BC Upgrade KAIRAR01 end<<
 
         // field(2013610; "Item DDeposit Group Code"; Code[10])

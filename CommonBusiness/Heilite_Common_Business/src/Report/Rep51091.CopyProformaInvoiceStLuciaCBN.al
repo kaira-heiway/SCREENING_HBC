@@ -114,6 +114,9 @@ report 51091 "Copy Proforma Inv StLucia CBN"
     // - "Standard Text Report"
     // - CustomsDocMgtSetup113FDW
     // BC UPGRADE KUMARR78 <<
+
+    // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+
     DefaultLayout = RDLC;
     RDLCLayout = '.\src\ReportsLayout\Copy Proforma Invoice StLucia.rdl'; // BC Upgrade BHARDA11 -- Add Path
 
@@ -314,6 +317,11 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                     column(InvTotalAmt; InvTotalAmount)
                     {
                     }
+                    // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+                    column(FreeDiscTotal; FreeDiscTotal)
+                    {
+                    }
+                    // BC Upgrade SHUKLP03 << BugID - BCUPO-193
                     column(ShippingChargesAmount; ShippingChargesAmount)
                     {
                     }
@@ -528,6 +536,36 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                                     CurrReport.SKIP;
 
                             //HEI.07<<
+                            // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+                            IF ("Attached Line Type 101FDW" = "Attached Line Type 101FDW"::"EGM 104FDW") THEN
+                                "Unit of Measure Code" := '';
+
+                            SL.Reset();
+                            SL.SetRange("Document No.", "Document No.");
+                            SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                            SL.SetRange("Attached to Line No.", "Line No.");
+                            IF SL.FINDSET() THEN
+                                Repeat
+                                    SL2.Reset();
+                                    SL2.SetRange("Document No.", "Document No.");
+                                    SL2.SetRange("Line No.", "Line No.");
+                                    SL2.SETRANGE(Type, SL2.Type::Item);
+                                    SL2.SetRange("Attached to Line No.", 0);
+                                    IF SL2.FINDFIRST() THEN begin
+                                        IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) AND (SL."Attached to Line No." = "Line No.") THEN // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+                                            "VAT %" := 0
+                                        else
+                                            IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) AND (SL."Attached to Line No." = "Line No.") THEN begin // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                                                var_Dis += ABS(SL."Line Amount");
+                                                LineAmount += SL."Line Amount";
+                                            end;
+                                    end;
+                                until SL.NEXT() = 0;
+                            If ItemCh.GET("No.") AND ItemCh."Hide Item chrg on printout FND" THEN Begin  //HEI.15
+                                CurrReport.SKIP;
+                            end;
+                            // BC Upgrade SHUKLP03 << BugID - BCUPO-193 VAT and DISC calculation logic
+
 
                             NUMLines := NUMLines - 1;
                             LinesPrinted := LinesPrinted + 1;
@@ -535,7 +573,7 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                             TotalInvDis += ABS("Sales Line"."Line Discount Amount");
 
                             //var_Dis := ABS("Line Discount Amount");
-                            var_Dis := "Line Discount Amount"; //HEI.09
+                            // var_Dis := "Line Discount Amount"; //HEI.09    // BC Upgrade SHUKLP03 << BugID - BCUPO-193 VAT and DISC calculation logic
 
                             // IF (Type = Type::"Charge (Item)") AND ("Item Charge Type" = "Item Charge Type"::Discount) THEN // BC Upgrade BHARDA11 ----Drink-It Field ("Item Charge Type")
 
@@ -602,6 +640,7 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                         CLEAR(AmttoPaid);
                         CLEAR(TotalInvDis);
                         CLEAR(ItemChargeDisc);  //HEI.07
+                        Clear(FreeDiscTotal); // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
 
                         DocumentTitleText := STRSUBSTNO(Text52006, CopyText);
                         // BC Upgrade BHARDA11 >> ----Drink-IT Fields ("Item Charge Type")
@@ -630,41 +669,47 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                         TotalFooterAmountText[2] := Text50002;
                         TotalFooterAmountText[6] := Text50003;
 
-                        SalesInvLine.RESET();
-                        SalesInvLine.SETRANGE("Document Type", "Sales Header"."Document Type");
-                        SalesInvLine.SETRANGE("Document No.", "Sales Header"."No.");
-                        SalesInvLine.SETRANGE(Type, SalesInvLine.Type::"G/L Account");
-                        IF SalesInvLine.findset() THEN
-                            REPEAT
-                                CASE SalesInvLine."Attached Line Type 101FDW" OF
-                                    SalesInvLine."Attached Line Type 101FDW"::"TAX 102FDW":
-                                        TotalFooterAmount[1] += SalesInvLine."Line Amount";
-                                    SalesInvLine."Attached Line Type 101FDW"::"EGM 104FDW":
-                                        TotalFooterAmount[2] += SalesInvLine."Line Amount";
-                                    //BC UPGRADE KUMARR78 FDD-MTC-008 >>
-                                    // SalesInvLine."Attached Line Type 101FDW"::ShippingCost:
-                                    //     TotalFooterAmount[3] += SalesInvLine."Line Amount";
-                                    //BC UPGRADE KUMARR78 FDD-MTC-008 <<
+                        SalesInvLineALT.RESET();
+                        SalesInvLineALT.SETRANGE("Document Type", "Sales Header"."Document Type");
+                        SalesInvLineALT.SETRANGE("Document No.", "Sales Header"."No.");
+                        // SalesInvLine.SETRANGE(Type, SalesInvLine.Type::"G/L Account");  // BC Upgrade SHUKLP03 << BugID - BCUPO-193 Filter is not correct.
+                        SalesInvLineALT.SetFilter(Type, '%1|%2', SalesInvLineALT.Type::"Charge (Item)", SalesInvLineALT.Type::"G/L Account");  // BC Upgrade SHUKLP03 << BugID - BCUPO-193 Corrected filter.
+                        REPEAT
+                            CASE SalesInvLineALT."Attached Line Type 101FDW" OF
+                                SalesInvLineALT."Attached Line Type 101FDW"::"TAX 102FDW":
+                                    TotalFooterAmount[1] += SalesInvLineALT."Line Amount";
+                                SalesInvLineALT."Attached Line Type 101FDW"::"EGM 104FDW":
+                                    TotalFooterAmount[2] += SalesInvLineALT."Line Amount";
+                                //BC UPGRADE KUMARR78 FDD-MTC-008 >>
+                                // SalesInvLineALT."Attached Line Type 101FDW"::ShippingCost:
+                                //     TotalFooterAmount[3] += SalesInvLineALT."Line Amount";
+                                //BC UPGRADE KUMARR78 FDD-MTC-008 <<
 
-                                    SalesInvLine."Attached Line Type 101FDW"::"SPC 105FDW":
-                                        //HEI.11>>
-                                        BEGIN
-                                            IF ItemCh.GET(SalesInvLine."No.") AND ItemCh."Transport/Shipping Cost FND" THEN
-                                                TotalFooterAmount[3] += SalesInvLine."Line Amount"
+                                SalesInvLineALT."Attached Line Type 101FDW"::"SPC 105FDW":
+                                    //HEI.11>>
+                                    BEGIN
+                                        IF ItemCh.GET(SalesInvLineALT."No.") AND ItemCh."Transport/Shipping Cost FND" THEN
+                                            TotalFooterAmount[3] += SalesInvLineALT."Line Amount"
 
-                                            else
-                                                //HEI.11<<
-                                                IF SalesInvLine."Show Item charge on Inv. FND" <> SalesInvLine."Show Item charge on Inv. FND"::"Include in item price" THEN
-                                                    //TotalFooterAmount[4] += ABS(SalesInvLine."Line Amount");
-                                                    TotalFooterAmount[4] += SalesInvLine."Line Amount"; //HEI.09
-                                            //BC UPGRADE KUMARR78 FDD-MTC-008<<
-                                        end  //HEI.11
-                                end;
-                            UNTIL SalesInvLine.NEXT() = 0;
+                                        else
+                                            //HEI.11<<
+                                            IF SalesInvLineALT."Show Item charge on Inv. FND" <> SalesInvLineALT."Show Item charge on Inv. FND"::"Include in item price" THEN
+                                                //TotalFooterAmount[4] += ABS(SalesInvLineALT."Line Amount");
+                                                TotalFooterAmount[4] += SalesInvLineALT."Line Amount"; //HEI.09
+                                                                                                       //BC UPGRADE KUMARR78 FDD-MTC-008<<
+                                        IF ItemCh.GET(SalesInvLineALT."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) THEN // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                                            TotalFooterAmount[4] -= SalesInvLineALT."Line Amount";  //HEI.15  // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                                        IF ItemCh.GET(SalesInvLineALT."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) THEN // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                                            TotalFooterAmount[6] += abs(SalesInvLineALT."Line Amount");  //HEI.15  // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+
+                                    end  //HEI.11
+                            end;
+                        UNTIL SalesInvLineALT.NEXT() = 0;
 
                         TaxAmout := TotalFooterAmount[1];
                         DepAmount := TotalFooterAmount[2];
                         ShipAmount := TotalFooterAmount[3];  //HEI.07
+                        FreeDiscTotal := TotalFooterAmount[6]; // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
 
                         SalesInvLine.RESET();
                         SalesInvLine.SETRANGE("Document Type", "Sales Header"."Document Type");
@@ -723,6 +768,7 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                     CLEAR(TotalInvDis);
                     CLEAR(InvLineTotal);
                     CLEAR(ItemChargeDisc);  //HEI.07
+                    Clear(FreeDiscTotal); // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
                 end;
 
                 trigger OnPostDataItem();
@@ -977,6 +1023,20 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                         VatAmt += (SalesInvLine."VAT Base Amount" * SalesInvLine."VAT %") / 100;
                         VATAmount := ABS(VatAmt);
 
+                        // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                        SL.RESET();
+                        SL.SETRANGE("Document No.", "Sales Header"."No.");
+                        SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                        SL.SetRange("Attached to Line No.", SalesInvLine."Line No.");
+                        SL.Setfilter("Attached to Line No.", '<>%1', 0);
+                        IF SL.FINDSET() THEN
+                            Repeat
+                                IF ItemCh.get(SL."No.") AND ItemCh."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) Then
+                                    VATAmount += SL."Line Amount";
+                            Until SL.NEXT() = 0;
+                        // BC Upgrade SHUKLP03 << BugID - BCUPO-193 VAT and DISC calculation logic
+
+
                         //split VAT
                         //IF TEMPAccSchedKPIBuffer.GET(SalesInvLine."VAT %") THEN BEGIN  //commented by HEI.06
                         //HEI.06>>
@@ -990,13 +1050,31 @@ report 51091 "Copy Proforma Inv StLucia CBN"
                             //TEMPAccSchedKPIBuffer."No." := SalesInvLine."VAT %";   //commented by HEI.06
                             //HEI.06>>
                             lineNumberVAT += 1;
-                            TEMPAccSchedKPIBuffer.INIT();
-                            TEMPAccSchedKPIBuffer."No." := lineNumberVAT;
-                            TEMPAccSchedKPIBuffer."Balance at Date Forecast" := SalesInvLine."VAT %";
-                            //HEI.06<<
-                            TEMPAccSchedKPIBuffer."Net Change Budget" += (SalesInvLine."VAT Base Amount" * SalesInvLine."VAT %") / 100;
-                            TEMPAccSchedKPIBuffer.INSERT();
+                            // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+                            VATTrue := false;
+                            SL.RESET();
+                            SL.SETRANGE("Document No.", SalesInvLine."Document No.");
+                            SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                            SL.SetRange("Attached to Line No.", SalesInvLine."Line No.");
+                            SL.Setfilter("Attached to Line No.", '<>%1', 0);
+                            IF SL.FINDSET() THEN
+                                Repeat
+                                    IF ItemCh.get(SL."No.") AND ItemCh."Hide Item chrg on printout FND" AND (ItemCh."Exclude/ Include in Print FND" = ItemCh."Exclude/ Include in Print FND"::Free_VAT) AND (SL."Attached to Line No." = SalesInvLine."Line No.") THEN Begin
+                                        TEMPAccSchedKPIBuffer."Balance at Date Forecast" := 0;
+                                        TEMPAccSchedKPIBuffer."Net Change Budget" := 0;
+                                        VATTrue := TRUE;
+                                    end;
+                                Until SL.NEXT() = 0;
 
+                            IF Not VATTrue THEN BEGIN
+                                TEMPAccSchedKPIBuffer.INIT();
+                                TEMPAccSchedKPIBuffer."No." := lineNumberVAT;
+                                TEMPAccSchedKPIBuffer."Balance at Date Forecast" := SalesInvLine."VAT %";
+                                //HEI.06<<
+                                TEMPAccSchedKPIBuffer."Net Change Budget" += (SalesInvLine."VAT Base Amount" * SalesInvLine."VAT %") / 100;
+                                TEMPAccSchedKPIBuffer.INSERT();
+                            end;
+                            // BC Upgrade SHUKLP03 << BugID - BCUPO-193 VAT and DISC calculation logic
                         end;     //HEI.01 >>
                     UNTIL SalesInvLine.NEXT() = 0;
 
@@ -1084,6 +1162,13 @@ report 51091 "Copy Proforma Inv StLucia CBN"
     end;
 
     var
+        // BC Upgrade SHUKLP03 >> BugID - BCUPO-193 VAT and DISC calculation logic
+        SL: Record "Sales Line";
+        SalesInvLineALT: Record "Sales Line";
+        FreeDiscTotal: Decimal;
+        VATTrue: Boolean;
+        SL2: Record "Sales Line";
+        // BC Upgrade SHUKLP03 << BugID - BCUPO-193 
         TEMPAccSchedKPIBuffer: Record "Acc. Sched. KPI Buffer";
         CompanyInfo: Record "Company Information";
         BillToCountry: Record "Country/Region";

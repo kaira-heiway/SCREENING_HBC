@@ -458,6 +458,7 @@ permissionset 50000 GeneratPermissionFND
         codeunit VATLogicalTests = X,
         codeunit "WHS-UTILS" = X,
         codeunit WHTManagement = X,
+        codeunit "Calendar Management HeiLite" = X,
         page "Account Group List" = X,
         page "Blocked Reasons" = X,
         page "Bus. Org. Segment List" = X,

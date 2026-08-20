@@ -1039,7 +1039,19 @@ codeunit 51035 "Heineken BC Upgrade CBN"
         //HEI.01<<
     end;
     // BC Upgrade PATELS08 <<
-
+    // BC Upgrade BHARDA11 >> Defect-ID BCUP0286 13Aug2026
+    [EventSubscriber(ObjectType::Page, 51008, 'OnBeforeActionEvent', 'SendCustom', false, false)]
+    local procedure P51008OnBeforeSendOrder(var Rec: Record "Purchase Header");
+    var
+        POStatusErr: Label 'Status must be Released or Pending Prepayment';
+    begin
+        //HEI.19>>
+        if (Rec."Document Type" = Rec."Document Type"::Order) then
+            if (Rec.Status <> Rec.Status::Released) and (Rec.Status <> Rec.Status::"Pending Prepayment") then
+                ERROR(POStatusErr);
+        //HEI.19<<
+    end;
+    // BC Upgrade BHARDA11 << Defect-ID BCUP0286 13Aug2026
 
     // Codeunit 427 ICInboxOutboxMgt <<
     var

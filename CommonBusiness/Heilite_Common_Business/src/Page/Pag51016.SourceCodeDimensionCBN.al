@@ -5,6 +5,7 @@ page 51016 "Source Code Dimension CBN"
     // HEI.01 BPMGAP015 IBM SOICAD01 11.07.2017 EBF Matrix & Movement Type
     //   #new page created
     ApplicationArea = All;
+    Caption = 'Source Code Dimension';
 
     layout
     {

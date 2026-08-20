@@ -18,6 +18,7 @@
     }
   ],
   "generateDependencyArtifact": true,
+  "DependencyInstallMode": "upgrade",
   "installApps": [
     "https://github.com/kaira-heiway/dependency/releases/download/ApteanApp/LatestBuildApps.zip"
   ]

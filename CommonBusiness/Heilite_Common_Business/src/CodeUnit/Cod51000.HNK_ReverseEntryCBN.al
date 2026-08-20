@@ -193,6 +193,13 @@ codeunit 51000 "HNK_ReverseEntry CBN"
 
     [EventSubscriber(ObjectType::Table, Database::"Reversal Entry", OnBeforeCheckEntries, '', false, false)]
     local procedure OnBeforeCheckEntries(ReversalEntry: Record "Reversal Entry"; TableID: Integer; var SkipCheck: Boolean)
+    var
+        // GetTransNo: Codeunit "Store Reversal Trans.No CBN";
+        WHTEntry: Record "WHT Entry FND";
+        TransactionNo: Integer;
+        ReversalType: Option Transaction,Register;
+        GLReg: Record "G/L Register";
+        GenLedSetup: Record "General Ledger Setup";
     begin
         if InputReversalPostingDate <> 0D then begin
 
@@ -201,10 +208,57 @@ codeunit 51000 "HNK_ReverseEntry CBN"
                 Database::"Cust. Ledger Entry",
                 Database::"Vendor Ledger Entry",
                 Database::"Bank Account Ledger Entry",
+                Database::"WHT Entry FND",
                 Database::"FA Ledger Entry"]
             then
                 SkipCheck := true;
+            // BC Upgrade BHARDA11 >> 06Aug2026 Adding new code for LSIT STP|E2E-146|PID-301| Cannot void check from Check ledger entry getting WHT posting date error
+            GenLedSetup.Get();
+            if not GenLedSetup."Enable WHT FND" then
+                exit;
+            if TableID in
+         [Database::"WHT Entry FND"] then begin
+                // GetTransNo.GetTransNoAndType(TransactionNo, ReversalType);
+                WHTEntry.LockTable();
+                if ReversalType = ReversalType::Transaction then begin
+                    WHTEntry.SetRange("Transaction No.", TransactionNo);
+                    if WHTEntry.Find('-') then
+                        repeat
+                            ReversalEntry.CheckWHT(WHTEntry);
+                        until WHTEntry.Next() = 0;
+                end else
+                    if ReversalType = ReversalType::Register then begin
+                        if GLReg.Get(TransactionNo) then;
+                        WHTEntry.SetRange("Entry No.", GLReg."From Entry No.", GLReg."To Entry No.");
+                        if WHTEntry.Find('-') then
+                            repeat
+                                ReversalEntry.CheckWHT(WHTEntry);
+                            until WHTEntry.Next() = 0;
+                    end;
+            end;
         end;
+        if TableID in
+              [Database::"WHT Entry FND"] then begin
+            // GetTransNo.GetTransNoAndType(TransactionNo, ReversalType);
+            WHTEntry.LockTable();
+            if ReversalType = ReversalType::Transaction then begin
+                WHTEntry.SetRange("Transaction No.", TransactionNo);
+                if WHTEntry.Find('-') then
+                    repeat
+                        ReversalEntry.CheckWHT(WHTEntry);
+                    until WHTEntry.Next() = 0;
+            end else
+                if ReversalType = ReversalType::Register then begin
+                    if GLReg.Get(TransactionNo) then;
+                    WHTEntry.SetRange("Entry No.", GLReg."From Entry No.", GLReg."To Entry No.");
+                    if WHTEntry.Find('-') then
+                        repeat
+                            ReversalEntry.CheckWHT(WHTEntry);
+                        until WHTEntry.Next() = 0;
+                end;
+        end;
+        // BC Upgrade BHARDA11 << 06Aug2026 STP|E2E-146|PID-301| Cannot void check from Check ledger entry getting WHT posting date error
+
     end;
 
 

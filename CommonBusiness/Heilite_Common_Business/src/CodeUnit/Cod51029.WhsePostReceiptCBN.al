@@ -124,7 +124,7 @@ codeunit 51029 WhsePostReceiptCBN
                             //BC UPGRADE KUMARR78 23-06-2026++
                             IF GateEntryHeader.Registered THEN BEGIN
                                 WhseShippingTruck.GET(GateEntryHeader."Vehicle No.");
-                                WhseShippingTruck."Status FND" := WhseShippingTruck."Status FND"::Open;
+                                // WhseShippingTruck."Status FND" := WhseShippingTruck."Status FND"::Open;
                                 WhseShippingTruck.MODIFY;
                             end;
                             //BC UPGRADE KUMARR78 23-06-2026++

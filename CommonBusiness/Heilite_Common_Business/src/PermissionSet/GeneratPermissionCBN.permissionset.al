@@ -208,7 +208,7 @@ permissionset 51000 GeneratPermissionCBN
         page "Item Local SKU CBN" = X,
         page "JobQ Log Entries Detail CBN" = X,
         page "JQ Log Entries_Auto Sales CBN" = X,
-               page "KS SalesPerson Export CBN" = X,
+        page "KS SalesPerson Export CBN" = X,
         page "Levy Posting Preview CBN" = X,
         page "Loyalty Balance FactBox CBN" = X,
         page "NPO Prepayment Request CBN" = X,
@@ -261,5 +261,9 @@ permissionset 51000 GeneratPermissionCBN
         page "NAV BC Field Mapping CBN" = X,
         query "Bin Content CBN" = X,
         query "ILE Calculate Inventory CBN" = X,
-        query "Warehouse Entry Totals CBN" = X;
+        query "Warehouse Entry Totals CBN" = X,
+        report "Calculate Depreciation-RtR" = X,
+        report "GL Bulk Application Import CBN" = X,
+        codeunit "Clear Trans. Rcpt. Logs CBN" = X,
+        codeunit "Store Reversal Trans.No CBN" = X;
 }

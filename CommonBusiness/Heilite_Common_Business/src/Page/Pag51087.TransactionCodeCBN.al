@@ -7,6 +7,7 @@ page 51087 "Transaction Code CBN"
 
     PageType = List;
     SourceTable = "Transaction Codes FND";
+    Caption = 'Transaction Code';
     ApplicationArea = All; // BC Upgrade SHUKLP03 <<
     UsageCategory = Lists; // BC Upgrade SHUKLP03 <<
 

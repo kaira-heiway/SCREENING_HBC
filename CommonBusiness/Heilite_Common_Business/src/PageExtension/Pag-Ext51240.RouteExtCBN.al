@@ -7,11 +7,11 @@ pageextension 51240 RouteExtCBN extends Routes107FDW
     {
         addafter(Trailer)
         {
-            field("Van Sales Route"; Rec."Van Sales Route FND")
-            {
-                ApplicationArea = All;
-                ToolTip = 'Specifies the value of the Van Sales Route field.';
-            }
+            // field("Van Sales Route"; Rec."Van Sales Route FND")
+            // {
+            //     ApplicationArea = All;
+            //     ToolTip = 'Specifies the value of the Van Sales Route field.';
+            // }
         }
     }
 }

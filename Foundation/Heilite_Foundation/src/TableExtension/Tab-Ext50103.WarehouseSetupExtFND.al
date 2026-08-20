@@ -359,40 +359,36 @@ tableextension 50103 WarehouseSetupExtFND extends "Warehouse Setup"
             Caption = 'Job Queue Run Pre-Close Date Calculation';
             DataClassification = ToBeClassified;
             Description = 'HEI.10';
-            //BC Upgrade PATHAA02 >>
-            // trigger OnValidate();
-            // begin
-            //     //HEI.10<<
-            //     C2SRunningCalendar.RESET;
-            //     C2SRunningCalendar.SETFILTER(Name, '<>%1', Text001);
-            //     if C2SRunningCalendar.findset then
-            //         repeat
-            //             C2SRunningCalendar."Automatic Run Pre-Close Date" := CalendarMgt.CalcNextWorkingDate(Rec."Job Queue Run Pre-Close Date", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code");
-            //             C2SRunningCalendar.MODIFY;
-            //         until C2SRunningCalendar.NEXT = 0;
-            //     //HEI.10>>
-            // end;
-            //BC Upgrade PATHAA02 <<-Dependency on DIT
+            trigger OnValidate();
+            begin
+                //HEI.10<<
+                C2SRunningCalendar.RESET;
+                C2SRunningCalendar.SETFILTER(Name, '<>%1', Text001);
+                if C2SRunningCalendar.findset then
+                    repeat
+                        C2SRunningCalendar."Automatic Run Pre-Close Date" := CalendarMgtHeiLite.CalcNextWorkingDate(Rec."Job Queue Run PreCloseDate FND", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code FND");
+                        C2SRunningCalendar.MODIFY;
+                    until C2SRunningCalendar.NEXT = 0;
+                //HEI.10>>
+            end;
         }
         field(50018; "Job Queue Run Close Date FND"; DateFormula)
         {
             Caption = 'Job Queue Run Close Date Calculation';
             DataClassification = ToBeClassified;
             Description = 'HEI.10';
-            // BC Upgrade PATHAA02 >>-Dependency on DIT
-            // trigger OnValidate();
-            // begin
-            //     //HEI.10<<
-            //     C2SRunningCalendar.RESET;
-            //     C2SRunningCalendar.SETFILTER(Name, '<>%1', Text001);
-            //     if C2SRunningCalendar.findset then
-            //         repeat
-            //             C2SRunningCalendar."Automatic Run Close Date" := CalendarMgt.CalcNextWorkingDate(Rec."Job Queue Run Close Date", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code");
-            //             C2SRunningCalendar.MODIFY;
-            //         until C2SRunningCalendar.NEXT = 0;
-            //     //HEI.10>>
-            // end;
-            // BC Upgrade PATHAA02 <<-Dependency on DIT
+            trigger OnValidate();
+            begin
+                //HEI.10<<
+                C2SRunningCalendar.RESET;
+                C2SRunningCalendar.SETFILTER(Name, '<>%1', Text001);
+                if C2SRunningCalendar.findset then
+                    repeat
+                        C2SRunningCalendar."Automatic Run Close Date" := CalendarMgtHeiLite.CalcNextWorkingDate(Rec."Job Queue Run Close Date FND", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code FND");
+                        C2SRunningCalendar.MODIFY;
+                    until C2SRunningCalendar.NEXT = 0;
+                //HEI.10>>
+            end;
 
         }
         field(50019; "Job Que RunCloseDate Dec. FND"; DateFormula)
@@ -401,20 +397,18 @@ tableextension 50103 WarehouseSetupExtFND extends "Warehouse Setup"
             DataClassification = ToBeClassified;
             Description = 'HEI.10';
 
-            // BC Upgrade PATHAA02 >>-Dependency on DIT
-            // trigger OnValidate();
-            // begin
-            //     //HEI.10<<
-            //     C2SRunningCalendar.RESET;
-            //     C2SRunningCalendar.SETRANGE(Name, Text001);
-            //     if C2SRunningCalendar.findset then
-            //         repeat
-            //             C2SRunningCalendar."Automatic Run Close Date" := CalendarMgt.CalcNextWorkingDate(Rec."Job Queue Run Close Date Dec.", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code");
-            //             C2SRunningCalendar.MODIFY;
-            //         until C2SRunningCalendar.NEXT = 0;
-            //     //HEI.10>>
-            // end;
-            // BC Upgrade PATHAA02 <<-Dependency on DIT
+            trigger OnValidate();
+            begin
+                //HEI.10<<
+                C2SRunningCalendar.RESET;
+                C2SRunningCalendar.SETRANGE(Name, Text001);
+                if C2SRunningCalendar.findset then
+                    repeat
+                        C2SRunningCalendar."Automatic Run Close Date" := CalendarMgtHeiLite.CalcNextWorkingDate(Rec."Job Que RunCloseDate Dec. FND", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code FND");
+                        C2SRunningCalendar.MODIFY;
+                    until C2SRunningCalendar.NEXT = 0;
+                //HEI.10>>
+            end;
 
         }
         field(50020; "Report ID for Job Queue FND"; Integer)
@@ -438,20 +432,18 @@ tableextension 50103 WarehouseSetupExtFND extends "Warehouse Setup"
             Caption = 'Job Queue Run Pre-Close Date Calculation December';
             DataClassification = ToBeClassified;
             Description = 'HEI.10';
-            // BC Upgrade PATHAA02 >>-Dependency on DIT
-            // trigger OnValidate();
-            // begin
-            //     //HEI.10<<
-            //     C2SRunningCalendar.RESET;
-            //     C2SRunningCalendar.SETRANGE(Name, Text001);
-            //     if C2SRunningCalendar.findset then
-            //         repeat
-            //             C2SRunningCalendar."Automatic Run Pre-Close Date" := CalendarMgt.CalcNextWorkingDate(Rec."Job Q. Run Pre-Close Date Dec.", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code");
-            //             C2SRunningCalendar.MODIFY;
-            //         until C2SRunningCalendar.NEXT = 0;
-            //     //HEI.10>>
-            // end;
-            // BC Upgrade PATHAA02 <<-Dependency on DIT
+            trigger OnValidate();
+            begin
+                //HEI.10<<
+                C2SRunningCalendar.RESET;
+                C2SRunningCalendar.SETRANGE(Name, Text001);
+                if C2SRunningCalendar.findset then
+                    repeat
+                        C2SRunningCalendar."Automatic Run Pre-Close Date" := CalendarMgtHeiLite.CalcNextWorkingDate(Rec."Job Q. Run PreCloseDt Dec. FND", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code FND");
+                        C2SRunningCalendar.MODIFY;
+                    until C2SRunningCalendar.NEXT = 0;
+                //HEI.10>>
+            end;
         }
         field(50023; "C2S Base Calendar Code FND"; Code[10])
         {
@@ -510,19 +502,19 @@ tableextension 50103 WarehouseSetupExtFND extends "Warehouse Setup"
             Caption = 'Archive Job Queue Date Calculation';
             DataClassification = ToBeClassified;
             Description = 'HEI.14';
-            // BC Upgrade PATHAA02 >>-Dependency on DIT
-            // trigger OnValidate();
-            // begin
-            //     //HEI.14<<
-            //     C2SRunningCalendar.RESET;
-            //     if C2SRunningCalendar.findset(false) then
-            //         repeat
-            //             C2SRunningCalendar."Automatic Run Archive Date" := CalendarMgt.CalcNextWorkingDate(Rec."Archive JQ Date Calculation", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code");
-            //             C2SRunningCalendar.MODIFY;
-            //         until C2SRunningCalendar.NEXT = 0;
-            //     //HEI.14>>
-            // end;
-            // BC Upgrade PATHAA02 <<-Dependency on DIT        
+            trigger OnValidate();
+            var
+                CalendarMgtHeiLite: Codeunit "Calendar Management HeiLite";
+            begin
+                //HEI.14<<
+                C2SRunningCalendar.RESET;
+                if C2SRunningCalendar.findset(false) then
+                    repeat
+                        C2SRunningCalendar."Automatic Run Archive Date" := CalendarMgtHeiLite.CalcNextWorkingDate(Rec."Archive JQ Date Calc FND", C2SRunningCalendar."Ending Date", "C2S Base Calendar Code FND");
+                        C2SRunningCalendar.MODIFY;
+                    until C2SRunningCalendar.NEXT = 0;
+                //HEI.14>>
+            end;
         }
         field(50358; "Transfer Order Ship Date FND"; Text[30])
         {
@@ -779,6 +771,7 @@ tableextension 50103 WarehouseSetupExtFND extends "Warehouse Setup"
     var
         C2SRunningCalendar: Record "C2S/COGS Running Calendar FND";
         CalendarMgt: Codeunit "Calendar Management";
+        CalendarMgtHeiLite: Codeunit "Calendar Management HeiLite";
         Text001: Label 'December';
         Text2014060: TextConst ENU = 'You cannot change the contents of the %1 field because there is at least one warehouse employee using a physical location.', FRA = 'Vous ne pouvez pas modifier le contenu du champ %1 car il existe au moins encore un magasinier utilisant ce magasin physique.';
         Text2014061: TextConst ENU = 'You have modified the %1 field. Note that you must update the existing warehouse employees manually.', FRA = 'Vous avez modifié le champ %1. Attention, vous devez mettre manuellement à jour les maganisiers existants.';

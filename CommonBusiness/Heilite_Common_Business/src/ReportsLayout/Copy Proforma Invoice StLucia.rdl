@@ -1,14 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>612dc467-308b-45ef-8761-20eac18cbbee</rd:ReportID>
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.1.30001.02</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.1.30001.02</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-08-13T10:42:56.2127465Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
+      <rd:SecurityType>None</rd:SecurityType>
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString />
       </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>e24afdd2-572b-47b6-ab5e-ab0dd3e26a53</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -2889,19 +2902,19 @@ Fields!SubTotal.Value) + Fields!InvDisAmount.Value + SUM(Fields!DiscIncluded.Val
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox35">
-                                            <rd:DefaultName>Textbox35</rd:DefaultName>
+                                          <rd:Selected>true</rd:Selected>
+                                          <Textbox Name="Textbox44">
+                                            <rd:DefaultName>Textbox44</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!InvDisAmount.Value</Value>
+                                                    <Value>=Fields!InvDisAmount.Value + Fields!FreeDiscTotal.Value</Value>
                                                     <Style>
                                                       <FontFamily>Calibri</FontFamily>
                                                       <FontSize>9pt</FontSize>
-                                                      <Format>=Fields!TotalInvDisFormat.Value</Format>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
@@ -7791,6 +7804,12 @@ End Function
         </Field>
         <Field Name="InvTotalAmtFormat">
           <DataField>InvTotalAmtFormat</DataField>
+        </Field>
+        <Field Name="FreeDiscTotal">
+          <DataField>FreeDiscTotal</DataField>
+        </Field>
+        <Field Name="FreeDiscTotalFormat">
+          <DataField>FreeDiscTotalFormat</DataField>
         </Field>
         <Field Name="ShippingChargesAmount">
           <DataField>ShippingChargesAmount</DataField>

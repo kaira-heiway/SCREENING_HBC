@@ -1178,6 +1178,7 @@ codeunit 51033 "Purch Post Custom CU CBN"
         TempInvoicePostBuffer: Record "Invoice Posting Buffer";
         TotalInvAmount: Decimal;
         PurchFAGRIR: Record "purchase FA Heilite GRIR FND";
+        SourceCodeSetup: Record "Source Code Setup";
     begin
         //HEI.02>>
         FASetup.GET();
@@ -1194,7 +1195,10 @@ codeunit 51033 "Purch Post Custom CU CBN"
            PurchHeader."Posting Date", PurchHeader."Document Date", PurchHeader."Posting Date", PurchHeader."Posting Description",
            PurchHeader."Shortcut Dimension 1 Code", PurchHeader."Shortcut Dimension 2 Code",
            PurchHeader."Dimension Set ID", PurchHeader."Reason Code");
-
+        // BC Upgrade BHARDA11 >> --14Aug2026
+        SourceCodeSetup.Get();
+        GenJnlLine."Source Code" := SourceCodeSetup.Purchases;
+        // BC Upgrade BHARDA11 << --14Aug2026
         //GenJnlLine.CopyDocumentFields(GenJnlLine."Document Type"::"Purchase Receipt", SingleInsCU.GetValue(), ExtDocNo, SourceCode, '');
         GenJnlLine.CopyDocumentFields(DocType, DocNo, ExtDocNo, SourceCode, '');
         GenJnlLine."Account Type" := GenJnlLine."Account Type"::"G/L Account";

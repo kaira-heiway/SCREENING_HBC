@@ -519,7 +519,13 @@ tableextension 50053 ItemLedgerEntryExtFND extends "Item Ledger Entry"
             Description = 'FDD GAPL0G002';
             Caption = 'Vendor Name';
         }
-
+  //BC Upgrade GUNREM01 Added New Field >>
+        field(80002; "Bin Code FND"; Code[20])
+        {
+            Caption = 'Bin Code FND';
+            Description = 'MANXL7.00.001';
+        }
+        //BC Upgrade GUNREM01 Added New Field <<
         //BC Upgrade KAMNAY01 >>>> 
         // field(2013610;"Item DDeposit Group Code";Code[10])
         // {
