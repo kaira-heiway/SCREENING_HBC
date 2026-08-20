@@ -3,5 +3,6 @@
   "type": "PTE",
   "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
   "useProjectDependencies": true,
-  "templateSha": "a3877dcad8a18d304995e52367f0e0b54d35f534"
+  "templateSha": "a3877dcad8a18d304995e52367f0e0b54d35f534",
+  "DependencyInstallMode": "upgrade"
 }
