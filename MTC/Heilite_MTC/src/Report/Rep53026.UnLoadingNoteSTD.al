@@ -80,9 +80,9 @@ report 53026 "UnLoading Note STD"
             column(Driver_Code_Whse_Shipment_Header; "Log Driver 107FDW" + '   ' + DriverName)
             {
             }
-            column(Truck_Code_Whse_Shipment_Header; "Vehicle Code 101FDW" + '   ' + WhseShippingTruck.Description)
-            {
-            }
+            // column(Truck_Code_Whse_Shipment_Header; "Vehicle Code 101FDW" + '   ' + WhseShippingTruck.Description)
+            // {
+            // }
             column(Route_WarehouseShipmentHeader; "Route 107FDW")
             {
             }
@@ -219,7 +219,7 @@ report 53026 "UnLoading Note STD"
                 */
 
                 if Location.Get("Location Code") then;
-                if WhseShippingTruck.GET("Vehicle Code 101FDW") then;  // BC Upgrade SHUKLP03>> DIT Fields.
+                // if WhseShippingTruck.GET("Vehicle Code 101FDW") then;  // BC Upgrade SHUKLP03>> DIT Fields.
                 WarehouseShipmentLine.Reset();
                 WarehouseShipmentLine.SetRange("No.", "No.");
                 if WarehouseShipmentLine.FindFirst() then
@@ -329,7 +329,7 @@ report 53026 "UnLoading Note STD"
         Location: Record Location;
         SalesHeader: Record "Sales Header";
         WarehouseShipmentLine: Record "Warehouse Receipt Line";
-        WhseShippingTruck: Record Vehicle101FDW;//"Whse. Shipping Truck"; // BC Upgrade SHUKLP03>> DIT Variables
+        // WhseShippingTruck: Record Vehicle101FDW;//"Whse. Shipping Truck"; // BC Upgrade SHUKLP03>> DIT Variables
         ShowSOList: Boolean;
         BoxQty: Decimal;
         NBBulkPallet: Decimal;

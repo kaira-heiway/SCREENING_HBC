@@ -793,14 +793,12 @@ report 53084 "Create Unit Testing Val MtC"
                        //HEI.14<<
                        (TestCode = 'LOGNEW1') or (TestCode = 'LOG020') //HEI.03
                     then begin
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route >>
                         //BC UPGRADE VAMSIU01 Added Route replacement table from Aptean >>
                         //InitUnitTestingValues(TestCode, TestDescription, DATABASE::Route, UnitTestingValue);
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Route107FDW, UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, FindRoute(LocationCode));
                         UnitTestingValue.MODIFY(true);
                         //BC UPGRADE VAMSIU01 Added Route replacement table from Aptean <<
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route <<
                     end;
 
                     if (TestCode = 'LOG019') or (TestCode = 'OTC001') or (TestCode = 'OTC011') or (TestCode = 'OTC017') or
@@ -825,7 +823,6 @@ report 53084 "Create Unit Testing Val MtC"
                     then begin
                         //Shipping Agent Service
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                        //BC Upgrade KAPOOV01 Commented Code block based on DRINK-IT Table-Route >>
                         //BC UPGRADE VAMSIU01 Added Route replacement table from Aptean. >>
                         if Route."Shipping Agent Service Code" <> '' then begin
                             ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
@@ -836,7 +833,6 @@ report 53084 "Create Unit Testing Val MtC"
                             end;
                         end else
                         //BC UPGRADE VAMSIU01 Added Route replacement table from Aptean. <<
-                        //BC Upgrade KAPOOV01 Commented Code block based on DRINK-IT Table-Route <<
                         begin
                             ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                             if ShippingAgentServices.FINDFIRST() then
@@ -852,7 +848,6 @@ report 53084 "Create Unit Testing Val MtC"
 
                         //Driver
                         // InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Whse. Shipping Driver", UnitTestingValue); //BC Upgrade KAPOOV01 Commented DRINK-IT Table-"Whse. Shipping Driver"
-                        InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                         //BC Upgrade KAPOOV01 Commented Code block based on DRINK-IT Table-Route >>
                         // if Route."Driver Code" <> '' then
                         //     UnitTestingValue.VALIDATE(Value, Route."Driver Code")
@@ -919,11 +914,9 @@ report 53084 "Create Unit Testing Val MtC"
                       //HEI.10<<
                       (TestCode = 'OTC008')
                     then begin
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Document Subtype Code" >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Document Subtype Code FND", UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, 'SALES_DEF');
                         UnitTestingValue.MODIFY(true);
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Document Subtype Code" <<
                     end;
                     //HEI.02<<
 
@@ -976,7 +969,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Document Subtype
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Document Subtype Code" >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Document Subtype Code FND", UnitTestingValue);
                     if TestCode = 'OTC018' then
                         UnitTestingValue.VALIDATE(Value, 'PC1')
@@ -989,7 +981,6 @@ report 53084 "Create Unit Testing Val MtC"
                                 UnitTestingValue.VALIDATE(Value, 'SO2');
                     //HEI.02<<
                     UnitTestingValue.MODIFY(true);
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Document Subtype Code" <<
 
                     //HEI.02>>
                     if TestCode = 'OTC029' then begin
@@ -1044,9 +1035,9 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Route replacement table from Aptean <<
                     //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route <<
+
                     //Shipping Agent Service
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route >>
                     if Route."Shipping Agent Service Code" <> '' then begin
                         ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
                         ShippingAgentServices.SETFILTER("Shipping Agent Code", '<>%1', '');
@@ -1054,9 +1045,7 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, Route."Shipping Agent Service Code");
                             ShippAgentCode := ShippingAgentServices."Shipping Agent Code";
                         end;
-                    end else
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route <<
-                    begin
+                    end else begin
                         ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                         if ShippingAgentServices.FINDFIRST() then
                             UnitTestingValue.VALIDATE(Value, ShippingAgentServices.Code);
@@ -1070,7 +1059,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Driver
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Whse. Shipping Driver,Route >>
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                     if Route.Driver <> '' then
@@ -1079,10 +1067,8 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindDriver());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Whse. Shipping Driver,Route <<
 
                     //Truck
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route >>
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                     if Route.Vehicle <> '' then
@@ -1091,7 +1077,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindTruck());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle <<
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route <<
                 end;
 
             'OTC119',
@@ -1179,7 +1164,6 @@ report 53084 "Create Unit Testing Val MtC"
 
                     //Shipping Agent Service
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route >>
                     if Route."Shipping Agent Service Code" <> '' then begin
                         ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
                         ShippingAgentServices.SETRANGE("Shipping Agent Code", '<>%1', '');
@@ -1187,9 +1171,7 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, Route."Shipping Agent Service Code");
                             ShippAgentCode := ShippingAgentServices."Shipping Agent Code";
                         end;
-                    end else
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route <<
-                    begin
+                    end else begin
                         ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                         if ShippingAgentServices.FINDFIRST() then
                             UnitTestingValue.VALIDATE(Value, ShippingAgentServices.Code);
@@ -1202,7 +1184,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Driver
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route >>
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                     if Route.Driver <> '' then
@@ -1211,10 +1192,8 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindDriver());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route <<
 
                     //Truck
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route >>
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                     if Route.Vehicle <> '' then
@@ -1223,7 +1202,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindTruck());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route <<
                 end;
 
             'OTC130':
@@ -1265,7 +1243,6 @@ report 53084 "Create Unit Testing Val MtC"
 
                     //Shipping Agent Service
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route >>
                     if Route."Shipping Agent Service Code" <> '' then begin
                         ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
                         ShippingAgentServices.SETRANGE("Shipping Agent Code", '<>%1', '');
@@ -1273,9 +1250,7 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, Route."Shipping Agent Service Code");
                             ShippAgentCode := ShippingAgentServices."Shipping Agent Code";
                         end;
-                    end else
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-Route <<
-                    begin
+                    end else begin
                         ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                         if ShippingAgentServices.FINDFIRST() then
                             UnitTestingValue.VALIDATE(Value, ShippingAgentServices.Code);
@@ -1288,7 +1263,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Driver
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route >>
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                     if Route.Driver <> '' then
@@ -1297,10 +1271,8 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindDriver());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route <<
 
                     //Truck
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route >>
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                     if Route.Vehicle <> '' then
@@ -1309,7 +1281,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindTruck());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route <<
 
                     //GL Account
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::"G/L Account", UnitTestingValue);
@@ -1430,13 +1401,11 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Delivery Type
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Delivery Type" >>
                         //BC Upgrade VAMSIU01 Replaced table Delivery Type with DeliveryType107FDW >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::DeliveryType107FDW, UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, FindDeliveryType());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Replaced table Delivery Type with DeliveryType107FDW <<
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Delivery Type" <<
 
                         //Location
                         if LocationCode = '' then
@@ -1459,13 +1428,11 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Tax Office
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Tax Office" >>
                         //BC Upgrade VAMSIU01 Replaced table Taxoffice >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::TaxOffice102FDW, UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, FindTaxOffice());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Replaced table Taxoffice >>
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Tax Office" <<
 
                         //License Type
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::"License Type FND", UnitTestingValue);
@@ -1562,13 +1529,11 @@ report 53084 "Create Unit Testing Val MtC"
                         //Deposit Group
                         if (TestCode = 'SLS018') or (TestCode = 'SLS021') then begin //HEI.09
 
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Drink Deposit Group" >>
                             //BC Upgrade VAMSIU01 Replaced Drink Deposit Group table with BusinessGroup104FDW >>
                             InitUnitTestingValues(TestCode, TestDescription, DATABASE::BusinessGroup104FDW, UnitTestingValue);
                             UnitTestingValue.VALIDATE(Value, FindDepositGroup());
                             UnitTestingValue.MODIFY(true);
                             //BC Upgrade VAMSIU01 Replaced Drink Deposit Group table with BusinessGroup104FDW >>
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Drink Deposit Group" <<
                         end; //HEI.09
                     end; //HEI.08
 
@@ -1604,13 +1569,11 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Customer DDeposit Group
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Drink Deposit Group" >>
                         //BC Upgrade VAMSIU01 Replaced Drink Deposit Group table with BusinessGroup104FDW >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::BusinessGroup104FDW, UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, FindDepositGroup());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Replaced Drink Deposit Group table with BusinessGroup104FDW >>
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Drink Deposit Group" <<
                     end;
                     //HEI.08<<
 
@@ -1714,7 +1677,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Driver
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Driver",Route >>
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                     if Route.Driver <> '' then
@@ -1723,10 +1685,8 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindDriver());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Driver",Route <<
 
                     //Truck
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Truck",Route >>
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                     if Route.Vehicle <> '' then
@@ -1735,7 +1695,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindTruck());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Truck",Route <<
                 end;
 
             'OTC014':
@@ -1848,7 +1807,6 @@ report 53084 "Create Unit Testing Val MtC"
 
                         //Shipping Agent Service
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route >>
                         if Route."Shipping Agent Service Code" <> '' then begin
                             ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
                             ShippingAgentServices.SETRANGE("Shipping Agent Code", '<>%1', '');
@@ -1856,9 +1814,7 @@ report 53084 "Create Unit Testing Val MtC"
                                 UnitTestingValue.VALIDATE(Value, Route."Shipping Agent Service Code");
                                 ShippAgentCode := ShippingAgentServices."Shipping Agent Code";
                             end;
-                        end else
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route <<
-                        begin
+                        end else begin
                             ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                             if ShippingAgentServices.FINDFIRST() then
                                 UnitTestingValue.VALIDATE(Value, ShippingAgentServices.Code);
@@ -1871,7 +1827,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Driver
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Driver", Route >>
                         //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                         if Route.Driver <> '' then
@@ -1880,11 +1835,9 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, FindDriver());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Driver", Route <<
 
                         //Truck
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Truck", Route >>
-                        // //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
+                        //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                         if Route.Vehicle <> '' then
                             UnitTestingValue.VALIDATE(Value, Route.Vehicle)
@@ -1892,14 +1845,11 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, FindTruck());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Whse. Shipping Truck", Route <<
 
                         //Document Subtype Code
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Document Subtype Code" >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Document Subtype Code FND", UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, 'SALES_DEF');
                         UnitTestingValue.MODIFY(true);
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Document Subtype Code" <<
                     end;
                 end;
 
@@ -1935,20 +1885,16 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Route
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Route107FDW, UnitTestingValue);
                         UnitTestingValue.VALIDATE(Value, FindRoute(LocationCode));
                         UnitTestingValue.MODIFY(true);
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route <<
 
                         if (TestCode = 'OTC096') or (TestCode = 'LOG025_2') then begin
                             if TestCode = 'OTC096' then begin
                                 //Document Subtype Code
-                                //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Document Subtype Code" >>
                                 InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Document Subtype Code FND", UnitTestingValue);
                                 UnitTestingValue.VALIDATE(Value, 'SALES_DEF');
                                 UnitTestingValue.MODIFY(true);
-                                //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- "Document Subtype Code" <<
                             end;
 
                             //Zone
@@ -1967,7 +1913,6 @@ report 53084 "Create Unit Testing Val MtC"
 
                             //Shipping Agent Service
                             InitUnitTestingValues(TestCode, TestDescription, DATABASE::"Shipping Agent Services", UnitTestingValue);
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route >>
                             if Route."Shipping Agent Service Code" <> '' then begin
                                 ShippingAgentServices.SETRANGE(Code, Route."Shipping Agent Service Code");
                                 ShippingAgentServices.SETRANGE("Shipping Agent Code", '<>%1', '');
@@ -1975,9 +1920,7 @@ report 53084 "Create Unit Testing Val MtC"
                                     UnitTestingValue.VALIDATE(Value, Route."Shipping Agent Service Code");
                                     ShippAgentCode := ShippingAgentServices."Shipping Agent Code";
                                 end;
-                            end else
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route <<
-                            begin
+                            end else begin
                                 ShippingAgentServices.SETRANGE(Code, FindShippingAgService(ShippAgentCode));
                                 if ShippingAgentServices.FINDFIRST() then
                                     UnitTestingValue.VALIDATE(Value, ShippingAgentServices.Code);
@@ -1990,7 +1933,6 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.MODIFY(true);
 
                             //Driver
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route, "Whse. Shipping Driver" >>
                             //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                             InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                             if Route.Driver <> '' then
@@ -1999,10 +1941,8 @@ report 53084 "Create Unit Testing Val MtC"
                                 UnitTestingValue.VALIDATE(Value, FindDriver());
                             UnitTestingValue.MODIFY(true);
                             //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route, "Whse. Shipping Driver" <<
 
                             //Truck
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route, "Whse. Shipping Truck" >>
                             // //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                             InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                             if Route.Vehicle <> '' then
@@ -2011,7 +1951,6 @@ report 53084 "Create Unit Testing Val MtC"
                                 UnitTestingValue.VALIDATE(Value, FindTruck());
                             UnitTestingValue.MODIFY(true);
                             //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                            //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table- Route, "Whse. Shipping Truck" <<
 
                             if TestCode = 'LOG025_2' then begin
                                 //Dimension Value
@@ -2240,7 +2179,6 @@ report 53084 "Create Unit Testing Val MtC"
                     UnitTestingValue.MODIFY(true);
 
                     //Driver
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route >>
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                     if Route.Driver <> '' then
@@ -2249,10 +2187,8 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindDriver());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver",Route <<
 
                     //Truck
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route >>
                     // //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                     InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                     if Route.Vehicle <> '' then
@@ -2261,7 +2197,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.VALIDATE(Value, FindTruck());
                     UnitTestingValue.MODIFY(true);
                     //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                    //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck",Route <<
 
                     if (TestCode <> 'LOG_IC_001') then //HEI.22
                         if TestCode <> 'LOGNEW22' then begin //HEI.12
@@ -2529,7 +2464,6 @@ report 53084 "Create Unit Testing Val MtC"
                         UnitTestingValue.MODIFY(true);
 
                         //Driver
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver" >>
                         //BC Upgrade VAMSIU01 Added Driver table, Route.driver >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Driver107FDW, UnitTestingValue);
                         if Route.Driver <> '' then
@@ -2538,11 +2472,9 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, FindDriver());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Added Driver table, Route.driver <<
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Driver" <<
 
                         //Truck
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck" >>
-                        // //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
+                        //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
                         InitUnitTestingValues(TestCode, TestDescription, DATABASE::Vehicle101FDW, UnitTestingValue);
                         if Route.Vehicle <> '' then
                             UnitTestingValue.VALIDATE(Value, Route.Vehicle)
@@ -2550,7 +2482,6 @@ report 53084 "Create Unit Testing Val MtC"
                             UnitTestingValue.VALIDATE(Value, FindTruck());
                         UnitTestingValue.MODIFY(true);
                         //BC Upgrade VAMSIU01 Added Vehicle table, Route.Vehicle >>
-                        //BC Upgrade KAPOOV01 Commented code dependent on DRINK-IT Table-"Whse. Shipping Truck" <<
                     end;
                 end;
         //HEI.15>>
@@ -3150,7 +3081,7 @@ report 53084 "Create Unit Testing Val MtC"
         if ReturnReason.FINDFIRST() then
             exit(ReturnReason.Code);
     end;
-    //BC Upgrade KAPOOV01 Commented procedure FindDriver based on DRINK-IT Table-"Whse. Shipping Driver" >> 
+
     local procedure FindDriver(): Code[20];
     var
         //Driver: Record "Whse. Shipping Driver";
@@ -3159,7 +3090,6 @@ report 53084 "Create Unit Testing Val MtC"
         if Driver.FINDFIRST then
             exit(Driver.Code);
     end;
-    //BC Upgrade KAPOOV01 Commented procedure FindDriver based on DRINK-IT Table-"Whse. Shipping Driver" <<
 
     //BC Upgrade KAPOOV01 Commented procedure FindTruck() based on DRINK-IT Table-"Whse. Shipping Truck" >>
     local procedure FindTruck(): Code[20];

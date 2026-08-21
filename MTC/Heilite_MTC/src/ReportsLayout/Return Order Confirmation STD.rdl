@@ -11,7 +11,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.1.30001.02</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-01-29T15:50:01.1348190Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-18T10:54:03.2674528Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -50,7 +50,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Code.IsNewPage(0,Fields!SalesHDocNo.Value,Fields!OutputNo.Value)</Value>
+                                      <Value>=First(Fields!TotalInvoice.Value)</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -2910,7 +2910,7 @@ Fields!SubTotal.Value) + Fields!InvDisAmount.Value + SUM(Fields!DiscIncluded.Val
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!InvDisAmount.Value</Value>
+                                                    <Value>=Fields!InvDisAmount.Value + Fields!FreeDiscTotal.Value</Value>
                                                     <Style>
                                                       <FontFamily>Calibri</FontFamily>
                                                       <FontSize>9pt</FontSize>
@@ -5921,7 +5921,8 @@ Cstr(Fields!SalesHDueDate.Value) + Chr(177) +
 Cstr(Fields!SalesPersonCode.Value) + Chr(177) +
 Cstr(Fields!CurrencyCode.Value) + Chr(177) +
 Cstr(Fields!OriginalCopy.Value)+ Chr(177) +
-Cstr(Fields!SalesHCustNo.Value) ,2)</Hidden>
+Cstr(Fields!SalesHCustNo.Value)+ Chr(177) +
+Cstr(Fields!SalesHOrdNo.Value) ,2)</Hidden>
                               </Visibility>
                               <Style>
                                 <Border>
@@ -8053,6 +8054,35 @@ Cstr(Fields!SalesHCustNo.Value) ,2)</Hidden>
                 </Border>
               </Style>
             </Textbox>
+            <Textbox Name="SalesHShipDate2">
+              <rd:DefaultName>SalesHShipDate</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Code.GetData(29,2)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.90859in</Top>
+              <Left>6.25809in</Left>
+              <Height>9.99992pt</Height>
+              <Width>3.63592cm</Width>
+              <ZIndex>71</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -9482,6 +9512,12 @@ End Function
         </Field>
         <Field Name="InvTotalAmtFormat">
           <DataField>InvTotalAmtFormat</DataField>
+        </Field>
+        <Field Name="FreeDiscTotal">
+          <DataField>FreeDiscTotal</DataField>
+        </Field>
+        <Field Name="FreeDiscTotalFormat">
+          <DataField>FreeDiscTotalFormat</DataField>
         </Field>
         <Field Name="ShippingChargesAmount">
           <DataField>ShippingChargesAmount</DataField>

@@ -44,6 +44,8 @@ report 53008 "Credit Note STD"
     // 10. Old Report ID - 50262
     // BC Upgrade RAHUL<<
 
+    // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+
     DefaultLayout = RDLC;
 
     RDLCLayout = '.\src\ReportsLayout\Credit Note STD.rdl';
@@ -232,6 +234,11 @@ report 53008 "Credit Note STD"
                     column(InvTotalAmt; InvTotalAmount)
                     {
                     }
+                    // Bug ID- BCUPO-193
+                    column(FreeDiscTotal; FreeDiscTotal)
+                    {
+                    }
+                    // Bug ID- BCUPO-193
                     column(ShippingChargesAmount; ShippingChargesAmount)
                     {
                     }
@@ -344,7 +351,7 @@ report 53008 "Credit Note STD"
                     {
                         DataItemLink = "Document No." = field("No.");
                         DataItemLinkReference = "Sales Cr.Memo Header";
-                        DataItemTableView = sorting("Document No.", "Line No.") where(Type = filter(Item | Resource | "Fixed Asset" | "Charge (Item)")); // BC Upgrade Rahul Adding as Wrong Expression was Used('"Charge (Item)"').
+                        DataItemTableView = sorting("Document No.", "Line No.") where(Type = filter(Item | Resource | "Fixed Asset" | "Charge (Item)" | "G/L Account")); // BC Upgrade Rahul << Wrong Expression was Used('"Charge (Item)"'). // BC Upgrade SHUKLP03 << BCUPO-193
                         column(SalesLType; "Sales Cr.Memo Line".Type)
                         {
                         }
@@ -401,14 +408,14 @@ report 53008 "Credit Note STD"
                             UnitPrice := "Unit Price";
                             LineAmount := "Line Amount";
 
-                            if Type <> Type::"Charge (Item)" then begin
+                            if (Type <> Type::"Charge (Item)") AND (Type <> Type::"G/L Account") then begin // BC Upgrade SHUKLP03 << BCUPO-193
                                 //Include in Item Price
                                 SalesInvoiceLine.Reset();
                                 SalesInvoiceLine.SetRange("Document No.", "Document No.");
-                                SalesInvoiceLine.SetRange(Type, SalesInvoiceLine.Type::"Charge (Item)");
+                                SalesInvoiceLine.SetFilter(Type, '%1|%2', SalesInvoiceLine.Type::"Charge (Item)", SalesInvoiceLine.Type::"G/L Account");   // BC Upgrade SHUKLP03 << BCUPO-193
                                 SalesInvoiceLine.SetRange("Attached to Line No.", "Line No.");
-                                // SalesInvoiceLine.SETRANGE("Item Charge Type", SalesInvoiceLine."Item Charge Type"::Discount); // BC Upgrade RAHUL << - Blocked as dependency on Drink-IT Field
-                                // SalesInvoiceLine.SETRANGE("Show Item charge on Invoice", SalesInvoiceLine."Show Item charge on Invoice"::"Include in item price"); // BC Upgrade RAHUL << - Blocked as dependency on Drink-IT Field
+                                SalesInvoiceLine.SETRANGE("Attached Line Type 101FDW", SalesInvoiceLine."Attached Line Type 101FDW"::"SPC 105FDW"); // BC Upgrade SHUKLP03 <<  BCUPO-193
+                                SalesInvoiceLine.SETRANGE("Show Item charge on Inv. FND", SalesInvoiceLine."Show Item charge on Inv. FND"::"Include in item price"); // BC Upgrade SHUKLP03 <<  BCUPO-193
                                 if SalesInvoiceLine.FindSet() then
                                     repeat
                                         if ItemCh.Get(SalesInvoiceLine."No.") and not ItemCh."Transport/Shipping Cost FND" then begin  //HEI.09
@@ -419,20 +426,51 @@ report 53008 "Credit Note STD"
                                                 UnitPrice := LineAmount / Abs(Quantity);
                                         end  //HEI.09
                                     until SalesInvoiceLine.Next() = 0;
-                                //BC Upgrade RAHUL >> Blocking Lope DIT Field
-                                // end else if ("Sales Invoice Line"."Item Charge Type" = "Sales Invoice Line"."Item Charge Type"::Discount) and
-                                //   ("Show Item charge on Invoice" = "Show Item charge on Invoice"::"Include in item price") then
-                                //         if ItemCh.GET("No.") and not ItemCh."Transport/Shipping Cost" then   //HEI.09
-                                //             CurrReport.SKIP;
-                                //BC Upgrade RAHUL << Blocking Lope DIT Field
-                                //HEI.07<<
-                            end;
+                                //BC Upgrade SHUKLP03 >>
+                            end else
+                                if ("Attached Line Type 101FDW" = "Attached Line Type 101FDW"::"SPC 105FDW") and
+                                  ("Show Item charge on Inv. FND" = "Show Item charge on Inv. FND"::"Include in item price") then
+                                    if ItemCh.GET("No.") and not ItemCh."Transport/Shipping Cost FND" then   //HEI.09
+                                        CurrReport.SKIP();
+                            //BC Upgrade SHUKLP03 <<
+                            //HEI.07<<
                             /*//commented by HEI.07 >>
                             IF ("Sales Cr.Memo Line".Type = "Sales Cr.Memo Line".Type::"Charge (Item)")
                               AND ("Sales Cr.Memo Line"."Item Charge Type" <> "Sales Cr.Memo Line"."Item Charge Type"::" ") THEN
                                 CurrReport.SKIP
                             ELSE BEGIN
                             *///HEI.07<<
+                              // BCUPO-193 >>
+                            IF ("Sales Cr.Memo Line"."Attached Line Type 101FDW" = "Sales Cr.Memo Line"."Attached Line Type 101FDW"::"EGM 104FDW") THEN
+                                "Sales Cr.Memo Line"."Unit of Measure Code" := '';
+
+                            Var_dis := 0;
+                            SL.Reset();
+                            SL.SetRange("Document No.", "Sales Cr.Memo Line"."Document No.");
+                            SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                            SL.SetRange("Attached to Line No.", "Sales Cr.Memo Line"."Line No.");
+                            IF SL.FINDSET() THEN
+                                Repeat
+                                    SL2.Reset();
+                                    SL2.SetRange("Document No.", "Sales Cr.Memo Line"."Document No.");
+                                    SL2.SetRange("Line No.", "Sales Cr.Memo Line"."Line No.");
+                                    SL2.SETRANGE(Type, SL2.Type::Item);
+                                    SL2.SetRange("Attached to Line No.", 0);
+                                    IF SL2.FINDFIRST() THEN
+                                        // IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) AND (SL."Attached to Line No." = "Sales Invoice Line"."Line No.") THEN // BCUPO-193
+                                        //     "Sales Invoice Line"."VAT %" := 0
+                                        // else
+                                        IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) AND (SL."Attached to Line No." = "Sales Cr.Memo Line"."Line No.") THEN begin // BCUPO-193
+                                            var_Dis += ABS(SL."Line Amount");
+                                            LineAmount += SL."Line Amount";
+                                        end;
+                                until SL.NEXT() = 0;
+                            // << BCUPO-193
+                            // Bug ID- BCUPO-193 >>
+                            If ItemCh.GET("No.") AND ItemCh."Hide Item chrg on printout FND" THEN   //HEI.15
+                                CurrReport.SKIP();
+                            // Bug ID- BCUPO-193 <<
+
                             NUMLines := NUMLines - 1;
                             LinesPrinted := LinesPrinted + 1;
 
@@ -440,13 +478,13 @@ report 53008 "Credit Note STD"
                             //END;  //commented by HEI.07
 
                             //var_Dis := ABS("Line Discount Amount");
-                            var_Dis := "Line Discount Amount"; //HEI.09
+                            // var_Dis := "Line Discount Amount"; //HEI.09  // Bug ID- BCUPO-193
 
-                            // if (Type = Type::"Charge (Item)") and ("Item Charge Type" = "Item Charge Type"::Discount) then //BC Upgrade RAHUL << Blocking  DIT Field
+                            if (Type = Type::"Charge (Item)") and ("Attached Line Type 101FDW" = "Attached Line Type 101FDW"::"SPC 105FDW") then //BC Upgrade SHUKLP03 <<  BCUPO-193
 
                             if ItemCh.Get("No.") and not ItemCh."Transport/Shipping Cost FND" then  //HEI.11
-                                                                                                //var_Dis += ABS("Line Amount");
-                                var_Dis += "Line Amount"; //HEI.09
+                                                                                                    //var_Dis += ABS("Line Amount");
+                                    var_Dis += "Line Amount"; //HEI.09
 
 
                         end;
@@ -484,55 +522,62 @@ report 53008 "Credit Note STD"
                         Clear(AmttoPaid);
                         Clear(TotalInvDis);
                         Clear(ItemChargeDisc);  //HEI.07
+                        Clear(FreeDiscTotal); // Bug ID- BCUPO-193
 
                         DocumentTitleText := StrSubstNo(Text52006, CopyText);
 
-                        // BC Upgrade RAHUL << - Blocked whole loop as dependency on Drink-IT Field
-                        // SalesInvLineAmt.RESET;
-                        // SalesInvLineAmt.SETRANGE("Document No.", "Sales Cr.Memo Header"."No.");
-                        // //SalesInvLineAmt.SETFILTER(Type,'%1|%2|%3|%4',SalesInvLineAmt.Type::Item,SalesInvLineAmt.Type::Resource,SalesInvLineAmt.Type::"Fixed Asset",SalesInvLineAmt.Type::"G/L Account");  //commented by HEI.11
-                        // if SalesInvLineAmt.FINDSET then
-                        //     repeat
-                        //         if (SalesInvLineAmt.Type <> SalesInvLineAmt.Type::"Charge (Item)") or (SalesInvLineAmt."Item Charge Type" = SalesInvLineAmt."Item Charge Type"::" ") then  //HEI.11
-                        //             InvLineTotal += SalesInvLineAmt."Line Amount";
-                        //     until SalesInvLineAmt.NEXT = 0;
-                        // BC Upgrade RAHUL >> - Blocked whole loop as dependency on Drink-IT Field
+                        // BC Upgrade SHUKLP03 << BCUPO-193
+                        SalesInvLineAmt.RESET();
+                        SalesInvLineAmt.SETRANGE("Document No.", "Sales Cr.Memo Header"."No.");
+                        //SalesInvLineAmt.SETFILTER(Type,'%1|%2|%3|%4',SalesInvLineAmt.Type::Item,SalesInvLineAmt.Type::Resource,SalesInvLineAmt.Type::"Fixed Asset",SalesInvLineAmt.Type::"G/L Account");  //commented by HEI.11
+                        if SalesInvLineAmt.FINDSET() then
+                            repeat
+                                if (SalesInvLineAmt.Type <> SalesInvLineAmt.Type::"Charge (Item)") AND (SalesInvLineAmt.Type <> SalesInvLineAmt.Type::"G/L Account") then  //HEI.11   // BC Upgrade SHUKLP03 << 
+                                    InvLineTotal += SalesInvLineAmt."Line Amount";
+                            until SalesInvLineAmt.NEXT() = 0;
+                        // BC Upgrade SHUKLP03 >> BCUPO-193
 
                         TotalFooterAmountText[1] := Text50001;
                         TotalFooterAmountText[2] := Text50002;
                         TotalFooterAmountText[6] := Text50003;
 
-                        // BC Upgrade RAHUL >> - Blocked whole for loop  as dependency on DIT
-                        // SalesInvLine.RESET;
-                        // SalesInvLine.SETRANGE("Document No.", "Sales Cr.Memo Header"."No.");
-                        // SalesInvLine.SETRANGE(Type, SalesInvLine.Type::"Charge (Item)");
-                        // if SalesInvLine.FINDSET then
-                        //     repeat
-                        //         case SalesInvLine."Item Charge Type" of
-                        //             SalesInvLine."Item Charge Type"::Tax:
-                        //                 TotalFooterAmount[1] += SalesInvLine."Line Amount";
-                        //             SalesInvLine."Item Charge Type"::Deposit:
-                        //                 TotalFooterAmount[2] += SalesInvLine."Line Amount";
-                        //             SalesInvLine."Item Charge Type"::"Shipping Cost":
-                        //                 TotalFooterAmount[3] += SalesInvLine."Line Amount";
-                        //             SalesInvLine."Item Charge Type"::Discount:
-                        //                 //HEI.11>>
-                        //                 begin
-                        //                     if ItemCh.GET(SalesInvLine."No.") and ItemCh."Transport/Shipping Cost" then
-                        //                         TotalFooterAmount[3] += SalesInvLine."Line Amount"
-                        //                     else
-                        //                         //HEI.11<<
-                        //                         if SalesInvLine."Show Item charge on Invoice" <> SalesInvLine."Show Item charge on Invoice"::"Include in item price" then
-                        //                             //TotalFooterAmount[4] += ABS(SalesInvLine."Line Amount");
-                        //                             TotalFooterAmount[4] += SalesInvLine."Line Amount"; //HEI.09
-                        //                 end;  //HEI.11
-                        //         end;
-                        //     until SalesInvLine.NEXT = 0;
-                        // BC Upgrade RAHUL << - Blocked whole loop as dependency on Drink-IT Field
+                        // BC Upgrade SHUKLP03 >> BCUPO-193
+                        SalesInvLine.RESET();
+                        SalesInvLine.SETRANGE("Document No.", "Sales Cr.Memo Header"."No.");
+                        SalesInvLine.SETFILTER(Type, '%1|%2', SalesInvLine.Type::"Charge (Item)", SalesInvLine.Type::"G/L Account"); // BC Upgrade SHUKLP03 << BCUPO-193
+                        if SalesInvLine.FINDSET() then
+                            repeat
+                                case SalesInvLine."Attached Line Type 101FDW" of
+                                    SalesInvLine."Attached Line Type 101FDW"::"TAX 102FDW":
+                                        TotalFooterAmount[1] += SalesInvLine."Line Amount";
+                                    SalesInvLine."Attached Line Type 101FDW"::"EGM 104FDW":
+                                        TotalFooterAmount[2] += SalesInvLine."Line Amount";
+                                    // SalesInvLine."Attached Line Type 101FDW"::"Shipping Cost":
+                                    //     TotalFooterAmount[3] += SalesInvLine."Line Amount";
+                                    SalesInvLine."Attached Line Type 101FDW"::"SPC 105FDW":
+                                        //HEI.11>>
+                                        begin
+                                            if ItemCh.GET(SalesInvLine."No.") and ItemCh."Transport/Shipping Cost FND" then
+                                                TotalFooterAmount[3] += SalesInvLine."Line Amount"
+                                            else
+                                                //HEI.11<<
+                                                if SalesInvLine."Show Item charge on Inv. FND" <> SalesInvLine."Show Item charge on Inv. FND"::"Include in item price" then
+                                                    //TotalFooterAmount[4] += ABS(SalesInvLine."Line Amount");
+                                                    TotalFooterAmount[4] += SalesInvLine."Line Amount"; //HEI.09
+                                            IF ItemCh.GET(SalesInvLine."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) THEN // BCUPO-193
+                                                TotalFooterAmount[4] -= SalesInvLine."Line Amount";  //HEI.15  // BCUPO-193
+                                            IF ItemCh.GET(SalesInvLine."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) THEN // BCUPO-193
+                                                TotalFooterAmount[6] += abs(SalesInvLine."Line Amount");  //HEI.15  // BCUPO-193
+
+                                        end;  //HEI.11
+                                end;
+                            until SalesInvLine.NEXT() = 0;
+                        // BC Upgrade SHUKLP03 << BCUPO-193
 
                         TaxAmout := TotalFooterAmount[1];
                         DepAmount := TotalFooterAmount[2];
                         ShipAmount := TotalFooterAmount[3];  //HEI.07
+                        FreeDiscTotal := TotalFooterAmount[6]; // Bug ID- BCUPO-193
 
                         SalesInvLine.Reset();
                         SalesInvLine.SetRange("Document No.", "Sales Cr.Memo Header"."No.");
@@ -567,6 +612,7 @@ report 53008 "Credit Note STD"
                     Clear(TotalInvDis);
                     Clear(InvLineTotal);
                     Clear(ItemChargeDisc);  //HEI.07
+                    clear(FreeDiscTotal); // Bug ID- BCUPO-193
                 end;
 
                 trigger OnPostDataItem();
@@ -605,34 +651,32 @@ report 53008 "Credit Note STD"
                 Clear(i);
                 Clear(TextFooter);
                 Evaluate(CurrReportID, CopyStr(CurrReport.ObjectId(false), 8));
-                // BC Upgrade RAHUL >> ----Drink-IT Table ("StandardTextReport")
-                // StandardTextReport.SETRANGE("Report ID", CurrReportID);
-                // StandardTextReport.SETRANGE("Position Text", StandardTextReport."Position Text"::Footer);
-                // if StandardTextReport.FINDSET then
-                //     repeat
-                //         i := 1;
-                //         ExtendedTextHeader.Reset();
-                //         ExtendedTextHeader.SetRange("Table Name", ExtendedTextHeader."Table Name"::"Standard Text");
-                //         ExtendedTextHeader.SETRANGE("No.", StandardTextReport."Standard Text Code");
-                //         if ExtendedTextHeader.FindSet() then begin
-                //             repeat
-                //                 ExtendedTextLine.Reset();
-                //                 ExtendedTextLine.SetRange("Table Name", ExtendedTextHeader."Table Name");
-                //                 ExtendedTextLine.SetRange("No.", ExtendedTextHeader."No.");
-                //                 ExtendedTextLine.SetRange("Text No.", ExtendedTextHeader."Text No.");
-                //                 ExtendedTextLine.SetRange("Language Code", "Language Code");
-                //                 if ExtendedTextHeader."All Language Codes" then
-                //                     ExtendedTextLine.SetRange("Language Code", ExtendedTextHeader."Language Code");
-                //                 if ExtendedTextLine.FindSet() then begin
-                //                     repeat
-                //                         TextFooter[i] += ' ' + (ExtendedTextLine.Text);
-                //                     until (ExtendedTextLine.Next() = 0) or (i > ArrayLen(TextFooter));
-                //                 end;
-                //                 i += 1;
-                //             until (ExtendedTextHeader.Next() = 0);
-                //         end;
-                //     until (StandardTextReport.NEXT = 0);
-                // BC Upgrade RAHUL << ----Drink-IT Table ("StandardTextReport")
+                // BC Upgrade SHUKLP03 >>  ("StandardTextReport") BCUPO-193
+                StandardTextReport.SETRANGE("Report ID", CurrReportID);
+                StandardTextReport.SETRANGE("Position Text", StandardTextReport."Position Text"::Footer);
+                if StandardTextReport.FINDSET() then
+                    repeat
+                        i := 1;
+                        ExtendedTextHeader.Reset();
+                        ExtendedTextHeader.SetRange("Table Name", ExtendedTextHeader."Table Name"::"Standard Text");
+                        ExtendedTextHeader.SETRANGE("No.", StandardTextReport."Standard Text Code");
+                        if ExtendedTextHeader.FindSet() then
+                            repeat
+                                ExtendedTextLine.Reset();
+                                ExtendedTextLine.SetRange("Table Name", ExtendedTextHeader."Table Name");
+                                ExtendedTextLine.SetRange("No.", ExtendedTextHeader."No.");
+                                ExtendedTextLine.SetRange("Text No.", ExtendedTextHeader."Text No.");
+                                ExtendedTextLine.SetRange("Language Code", "Language Code");
+                                if ExtendedTextHeader."All Language Codes" then
+                                    ExtendedTextLine.SetRange("Language Code", ExtendedTextHeader."Language Code");
+                                if ExtendedTextLine.FindSet() then
+                                    repeat
+                                        TextFooter[i] += ' ' + (ExtendedTextLine.Text);
+                                    until (ExtendedTextLine.Next() = 0) or (i > ArrayLen(TextFooter));
+                                i += 1;
+                            until (ExtendedTextHeader.Next() = 0);
+                    until (StandardTextReport.NEXT() = 0);
+                // BC Upgrade SHUKLP03 << Table ("StandardTextReport") BCUPO-193
                 //HEI.10<<
 
                 //HEI.05>>
@@ -651,10 +695,11 @@ report 53008 "Credit Note STD"
                     if CountryInfo.Get(CompanyInfo."Country/Region Code") then
                         CompanyText += ', ' + CompanyInfo."Country/Region Code" + ' ' + CountryInfo.Name;
 
-                // BC Upgrade RAHUL << - Blocked whole loop as dependency on Drink-IT Field
-                // if CompanyInfo."Tax Registration No." <> '' then
-                //     CompanyText += ', ' + TaxNoID + ' ' + CompanyInfo."Tax Registration No.";
-                // BC Upgrade RAHUL >> - Blocked whole loop as dependency on Drink-IT Field
+                // BC Upgrade SHUKLP03 >> ---- Field ("Tax Registration No.") BCUPO-193
+                CUSTOMSDOCManage.get();
+                IF CUSTOMSDOCManage."Tax Registration No." <> '' THEN
+                    CompanyText += ', ' + TaxNoID + ' ' + CUSTOMSDOCManage."Tax Registration No.";
+                // BC Upgrade SHUKLP03 << ---- Field ("Tax Registration No.") BCUPO-193
 
                 //CompanyText += ', ' + ChOfComm;
                 if CompanyInfo."Phone No." <> '' then
@@ -878,7 +923,14 @@ report 53008 "Credit Note STD"
     end;
 
     var
+        // BC Upgrade SHUKLP03 >> BUG-BCUPO-193
+        SL: Record "Sales Cr.Memo Line";
+        FreeDiscTotal: Decimal;
+        VATTrue: Boolean;
+        SL2: Record "Sales Cr.Memo Line";
+        // BC Upgrade SHUKLP03 << BUG-BCUPO-193
         CompanyInfo: Record "Company Information";
+        CUSTOMSDOCManage: Record CustomsDocMgtSetup113FDW; // BC Upgrade SHUKLP03 <<
         LanguageG: Codeunit Language;//BC UPGRADE RAHUL Adding Codeunit as Function Moved from Record to Codeunit.
         Country: Record "Country/Region";
         VATEntry: Record "VAT Entry";
@@ -984,7 +1036,7 @@ report 53008 "Credit Note STD"
         LineAmount: Decimal;
         DiscIncluded: Decimal;
         var_Dis: Decimal;
-        // StandardTextReport: Record "Standard Text Report"; // BC Upgrade RAHUL << ----Drink-IT Table ("StandardTextReport")
+        StandardTextReport: Record "Standard Text Report FND"; // BC Upgrade SHUKLP03 << 
         TextFooter: array[3] of Text;
         CurrencyCode: Code[10];
         ItemCh: Record "Item Charge";

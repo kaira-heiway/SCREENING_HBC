@@ -34,6 +34,8 @@ report 53005 "Order Confirmation STD"
     // # Added condition to execute the "Sales-Printed" codeunit from the CopyLoop - OnPostDataItem trigger as per HEI.11 tag
     // BC PATELP08 <<
 
+    // BC Upgrade SHUKLP03 >> BugID - BCUPO-193
+
 
     DefaultLayout = RDLC;
 
@@ -221,6 +223,11 @@ report 53005 "Order Confirmation STD"
                     column(InvTotalAmt; InvTotalAmount)
                     {
                     }
+                    // Bug ID- BCUPO-193
+                    column(FreeDiscTotal; FreeDiscTotal)
+                    {
+                    }
+                    // Bug ID- BCUPO-193
                     column(ShippingChargesAmount; ShippingChargesAmount)
                     {
                     }
@@ -535,6 +542,38 @@ report 53005 "Order Confirmation STD"
                                         CurrReport.SKIP;
                             //BC Upgrade RAHUL << Blocking Lope DIT Field
                             //HEI.06<<
+                            // BCUPO-193 >>
+                            IF ("Sales Invoice Line"."Attached Line Type 101FDW" = "Sales Invoice Line"."Attached Line Type 101FDW"::"EGM 104FDW") THEN
+                                "Sales Invoice Line"."Unit of Measure Code" := '';
+
+                            Var_dis := 0;
+                            SL.Reset();
+                            SL.SetRange("Document No.", "Sales Invoice Line"."Document No.");
+                            SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                            SL.SetRange("Attached to Line No.", "Sales Invoice Line"."Line No.");
+                            IF SL.FINDSET() THEN
+                                Repeat
+                                    SL2.Reset();
+                                    SL2.SetRange("Document No.", "Sales Invoice Line"."Document No.");
+                                    SL2.SetRange("Line No.", "Sales Invoice Line"."Line No.");
+                                    SL2.SETRANGE(Type, SL2.Type::Item);
+                                    SL2.SetRange("Attached to Line No.", 0);
+                                    IF SL2.FINDFIRST() THEN
+                                        // IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) AND (SL."Attached to Line No." = "Sales Invoice Line"."Line No.") THEN // BCUPO-193
+                                        //     "Sales Invoice Line"."VAT %" := 0
+                                        // else
+                                        IF ItemCh.GET(SL."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) AND (SL."Attached to Line No." = "Sales Invoice Line"."Line No.") THEN begin // BCUPO-193
+                                            var_Dis += ABS(SL."Line Amount");
+                                            LineAmount += SL."Line Amount";
+                                        end;
+                                until SL.NEXT() = 0;
+                            // << BCUPO-193
+                            // Bug ID- BCUPO-193 >>
+                            If ItemCh.GET("No.") AND ItemCh."Hide Item chrg on printout FND" THEN Begin  //HEI.15
+                                CurrReport.SKIP;
+                            end;
+                            // Bug ID- BCUPO-193 <<
+
                             //end;
                             HideDiscount := false;
 
@@ -557,7 +596,7 @@ report 53005 "Order Confirmation STD"
                                     Var_typechargeItem := false;
 
                             //HEI.06>>
-                            var_Dis := Abs("Line Discount Amount");
+                            // var_Dis := Abs("Line Discount Amount"); // Bug ID- BCUPO-193
                             if (Type = Type::"Charge (Item)") and ("Attached Line Type 101FDW" = "Attached Line Type 101FDW"::"SPC 105FDW") then //BC Upgrade RAHUL << Blocking DIT Field
                                 if ItemCh.Get("No.") and not ItemCh."Transport/Shipping Cost FND" then  //HEI.09
                                     var_Dis += Abs("Line Amount");
@@ -691,6 +730,7 @@ report 53005 "Order Confirmation STD"
                         Clear(InvTotalAmount);
                         Clear(AmttoPaid);
                         Clear(TotalInvDis);
+                        Clear(FreeDiscTotal); // Bug ID- BCUPO-193
 
                         //IF NOT ExportInvoice THEN
                         DocumentTitleText := StrSubstNo(Text52006, CopyText);
@@ -704,7 +744,7 @@ report 53005 "Order Confirmation STD"
                         //SalesInvLineAmt.SETFILTER(Type,'%1|%2|%3',SalesInvLineAmt.Type::Item,SalesInvLineAmt.Type::Resource,SalesInvLineAmt.Type::"Fixed Asset"); //commented by HEI.09
                         if SalesInvLineAmt.FINDSET then
                             repeat
-                                if (SalesInvLineAmt.Type <> SalesInvLineAmt.Type::"Charge (Item)") or (SalesInvLineAmt."Type" = SalesInvLineAmt.Type::"G/L Account") then  //HEI.09
+                                if (SalesInvLineAmt.Type <> SalesInvLineAmt.Type::"Charge (Item)") AND (SalesInvLineAmt."Type" <> SalesInvLineAmt.Type::"G/L Account") then  //HEI.09 // BC Upgrade SHUKLP03 << Bug ID - BCUPO-193
                                     InvLineTotal += SalesInvLineAmt."Line Amount";
                             until SalesInvLineAmt.NEXT = 0;
                         // BC Upgrade RAHUL >> - Blocked whole loop as dependency on Drink-IT Field
@@ -717,7 +757,7 @@ report 53005 "Order Confirmation STD"
                         SalesInvLine.RESET;
                         SalesInvLine.SETRANGE("Document Type", "Sales Invoice Header"."Document Type");
                         SalesInvLine.SETRANGE("Document No.", "Sales Invoice Header"."No.");
-                        SalesInvLine.SETRANGE(Type, SalesInvLine.Type::"Charge (Item)");
+                        SalesInvLine.SETFILTER(Type, '%1|%2', SalesInvLine.Type::"Charge (Item)", SalesInvLine.Type::"G/L Account"); // BC Upgrade SHUKLP03 << Bug ID - BCUPO-193
                         if SalesInvLine.FINDSET then
                             repeat
                                 case SalesInvLine."Attached Line Type 101FDW" of
@@ -770,6 +810,11 @@ report 53005 "Order Confirmation STD"
                                                                                                                //TotalInvDis += SalesInvLine."Line Amount";
                                                                                                              END;
                                                                                                             END;*/ //commented by HEI.06 <<
+                                            IF ItemCh.GET(SalesInvLine."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) THEN // BCUPO-193
+                                                TotalFooterAmount[4] -= SalesInvLine."Line Amount";  //HEI.15  // BCUPO-193
+                                            IF ItemCh.GET(SalesInvLine."No.") AND Itemch."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_DISC) THEN // BCUPO-193
+                                                TotalFooterAmount[6] += abs(SalesInvLine."Line Amount");  //HEI.15  // BCUPO-193
+
                                         end  //HEI.09
                                 end;
                             until SalesInvLine.NEXT = 0;
@@ -778,6 +823,7 @@ report 53005 "Order Confirmation STD"
                         TaxAmout := TotalFooterAmount[1];
                         DepAmount := TotalFooterAmount[2];
                         ShipAmount := TotalFooterAmount[3];
+                        FreeDiscTotal := TotalFooterAmount[6]; // Bug ID- BCUPO-193
 
                         ShippingChrgAmnt := TotalFooterAmount[6];
 
@@ -817,6 +863,7 @@ report 53005 "Order Confirmation STD"
                     Clear(AmttoPaid);
                     Clear(TotalInvDis);
                     Clear(InvLineTotal);
+                    clear(FreeDiscTotal); // Bug ID- BCUPO-193
                 end;
 
                 trigger OnPostDataItem();
@@ -967,6 +1014,24 @@ report 53005 "Order Confirmation STD"
                         VatAmt += (SalesInvLine."VAT Base Amount" * SalesInvLine."VAT %") / 100;
                         VATAmount := Abs(VatAmt);
 
+                        // BC Upgrade SHUKLP03 >> BUG-BCUPO-193- Subtracted the VAT amount for the line with No. = 'FREE_VAT' from the total VAT amount   
+                        SL.RESET();
+                        SL.SETRANGE("Document No.", "Sales Invoice Header"."No.");
+                        SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                        SL.SetRange("Attached to Line No.", SalesInvLine."Line No.");
+                        SL.Setfilter("Attached to Line No.", '<>%1', 0);
+                        IF SL.FINDSET() THEN
+                            Repeat
+                                IF ItemCh.get(SL."No.") AND ItemCh."Hide Item chrg on printout FND" AND (Itemch."Exclude/ Include in Print FND" = Itemch."Exclude/ Include in Print FND"::Free_VAT) Then Begin
+                                    VATAmount += SL."Line Amount";
+                                    VATAmount := abs(ROUND(VATAmount, 0.01, '='));
+                                    If VATAmount = 0.01 then
+                                        VATAmount := 0;
+                                End;
+                            Until SL.NEXT() = 0;
+                        // BC Upgrade SHUKLP03 << BUG-BCUPO-193- Subtracted the VAT amount for the line with No. = 'FREE_VAT' from the total VAT amount   
+
+
                         //split VAT
                         //IF TEMPAccSchedKPIBuffer.GET(SalesInvLine."VAT %") THEN BEGIN  //commented by HEI.04
                         //HEI.04>>
@@ -989,12 +1054,24 @@ report 53005 "Order Confirmation STD"
                         end;
                     until SalesInvLine.Next() = 0;
 
+                VATTrue := false;
                 SalesInvLine.Reset();
                 SalesInvLine.SetRange("Document Type", "Sales Invoice Header"."Document Type");
                 SalesInvLine.SetRange("Document No.", "Sales Invoice Header"."No.");
-                if SalesInvLine.FindFirst() then
-                    DocumentTotals.CalculateSalesTotals(TotalSalesline, VATAmount, SalesInvLine);
-
+                if SalesInvLine.FindFirst() then Begin
+                    SL.RESET();
+                    SL.SETRANGE("Document No.", "Sales Invoice Header"."No.");
+                    SL.SETRANGE(Type, SL.Type::"Charge (Item)");
+                    SL.SetRange("Attached to Line No.", SalesInvLine."Line No.");
+                    SL.Setfilter("Attached to Line No.", '<>%1', 0);
+                    IF SL.FINDSET() THEN
+                        Repeat
+                            IF ItemCh.get(SL."No.") AND ItemCh."Hide Item chrg on printout FND" AND (ItemCh."Exclude/ Include in Print FND" = ItemCh."Exclude/ Include in Print FND"::Free_VAT) AND (SL."Attached to Line No." = SalesInvLine."Line No.") THEN
+                                VATTrue := TRUE;
+                        Until SL.NEXT() = 0;
+                    IF Not VATTrue THEN
+                        DocumentTotals.CalculateSalesTotals(TotalSalesline, VATAmount, SalesInvLine);
+                end;
                 TEMPAccSchedKPIBuffer.Reset();
                 if TEMPAccSchedKPIBuffer.FindSet() then
                     repeat
@@ -1090,6 +1167,12 @@ report 53005 "Order Confirmation STD"
     end;
 
     var
+        // BC Upgrade SHUKLP03 >> BUG-BCUPO-193
+        SL: Record "Sales Line";
+        FreeDiscTotal: Decimal;
+        VATTrue: Boolean;
+        SL2: Record "Sales Line";
+        // BC Upgrade SHUKLP03 << BUG-BCUPO-193
         TEMPAccSchedKPIBuffer: Record "Acc. Sched. KPI Buffer";
         VATEntry: Record "Area";
         CompanyInfo: Record "Company Information";

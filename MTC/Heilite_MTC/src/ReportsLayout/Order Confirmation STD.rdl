@@ -11,7 +11,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.1.30001.02</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-05-07T09:04:46.4201463Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-13T13:40:20.4437845Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -2901,6 +2901,7 @@ Fields!SubTotal.Value) + Fields!InvDisAmount.Value + SUM(Fields!DiscIncluded.Val
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <rd:Selected>true</rd:Selected>
                                           <Textbox Name="Textbox35">
                                             <rd:DefaultName>Textbox35</rd:DefaultName>
                                             <CanGrow>true</CanGrow>
@@ -2909,7 +2910,7 @@ Fields!SubTotal.Value) + Fields!InvDisAmount.Value + SUM(Fields!DiscIncluded.Val
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!InvDisAmount.Value</Value>
+                                                    <Value>=Fields!InvDisAmount.Value + Fields!FreeDiscTotal.Value</Value>
                                                     <Style>
                                                       <FontFamily>Calibri</FontFamily>
                                                       <FontSize>9pt</FontSize>
@@ -9513,6 +9514,12 @@ End Function
         </Field>
         <Field Name="InvTotalAmtFormat">
           <DataField>InvTotalAmtFormat</DataField>
+        </Field>
+        <Field Name="FreeDiscTotal">
+          <DataField>FreeDiscTotal</DataField>
+        </Field>
+        <Field Name="FreeDiscTotalFormat">
+          <DataField>FreeDiscTotalFormat</DataField>
         </Field>
         <Field Name="ShippingChargesAmount">
           <DataField>ShippingChargesAmount</DataField>

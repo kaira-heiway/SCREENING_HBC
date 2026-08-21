@@ -191,7 +191,8 @@ report 53092 "Aged Accounts Receivable Copy"
                 }
                 dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
                 {
-                    DataItemLink = "Customer No." = field("No."), "Customer Posting Group" = field("Customer Posting Group");
+                    // DataItemLink = "Customer No." = field("No."), "Customer Posting Group" = field("Customer Posting Group"); // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
+                    DataItemLink = "Customer No." = field("No.");  // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
                     DataItemTableView = sorting("Customer No.", "Posting Date", "Currency Code");
 
                     trigger OnAfterGetRecord()
@@ -204,7 +205,7 @@ report 53092 "Aged Accounts Receivable Copy"
                         else
                             CustLedgEntry.SetRange("Closed by Entry No.", "Entry No.");
                         CustLedgEntry.SetRange("Posting Date", 0D, EndingDate);
-                        CustLedgEntry.SETRANGE("Customer Posting Group", Customer."Customer Posting Group");//BC UPGRADE KUMARR78 ++
+                        // CustLedgEntry.SETRANGE("Customer Posting Group", Customer."Customer Posting Group");//BC UPGRADE KUMARR78 ++ // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
                         CopyDimFiltersFromCustomer(CustLedgEntry);
                         if CustLedgEntry.FindSet(false) then
                             repeat
@@ -214,7 +215,7 @@ report 53092 "Aged Accounts Receivable Copy"
                         CustLedgEntry.Reset();
                         CustLedgEntry.SetRange("Entry No.", "Closed by Entry No.");
                         CustLedgEntry.SetRange("Posting Date", 0D, EndingDate);
-                        CustLedgEntry.SETRANGE("Customer Posting Group", Customer."Customer Posting Group");//BC UPGRADE KUMARR78 ++
+                        // CustLedgEntry.SETRANGE("Customer Posting Group", Customer."Customer Posting Group");//BC UPGRADE KUMARR78 ++ // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
                         CopyDimFiltersFromCustomer(CustLedgEntry);
                         if CustLedgEntry.FindSet(false) then
                             repeat
@@ -231,12 +232,13 @@ report 53092 "Aged Accounts Receivable Copy"
                         Customer.CopyFilter("Currency Filter", "Currency Code");
                         // Customer.COPYFILTER("Item Charge Type Filter", "Item Charge Type");// BC UPGRADE KUMARR78 Blocking to Change variable in place of "Item Charge Type Filter"
                         Customer.COPYFILTER("CM Incl. EG Limit Filter APS", "Cust. Ledger Entry"."CM Incl. EG. Lim. Warn APS");// BC UPGRADE KUMARR78 Adding
-                        Customer.COPYFILTER("Customer Posting Group", "Cust. Ledger Entry"."Customer Posting Group"); // BC UPGRADE KUMARR78 Adding
+                        // Customer.COPYFILTER("Customer Posting Group", "Cust. Ledger Entry"."Customer Posting Group"); // BC UPGRADE KUMARR78 Adding // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
                     end;
                 }
                 dataitem(OpenCustLedgEntry; "Cust. Ledger Entry")
                 {
-                    DataItemLink = "Customer No." = field("No."), "Customer Posting Group" = field("Customer Posting Group");
+                    // DataItemLink = "Customer No." = field("No."), "Customer Posting Group" = field("Customer Posting Group"); // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
+                    DataItemLink = "Customer No." = field("No.");       // BC Upgrade SHUKLP03 << Removed filter because report is not fatching data of deposit line because of this filter.
                     DataItemTableView = sorting("Customer No.", Open, Positive, "Due Date", "Currency Code");
 
                     trigger OnAfterGetRecord()

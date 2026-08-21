@@ -3964,9 +3964,6 @@ End Function
         <Field Name="Driver_Code_Whse_Shipment_Header">
           <DataField>Driver_Code_Whse_Shipment_Header</DataField>
         </Field>
-        <Field Name="Truck_Code_Whse_Shipment_Header">
-          <DataField>Truck_Code_Whse_Shipment_Header</DataField>
-        </Field>
         <Field Name="Route_WarehouseShipmentHeader">
           <DataField>Route_WarehouseShipmentHeader</DataField>
         </Field>
