@@ -935,7 +935,7 @@ codeunit 58083 "Ortec & KStore Interface Mgmt."
                 //Route.GET(InterfaceEntryHeader."External Contract No.");
                 Route.SETRANGE(Driver, InterfaceEntryHeader."External Contract No.");
                 if Route.FINDFIRST() then begin
-                    Route.TESTFIELD("Van Sales Route FND");
+                    // Route.TESTFIELD("Van Sales Route FND");
                     // Route.TESTFIELD("Salesperson/Purchaser Code"); HEI.05
                     Route.TESTFIELD(Driver);
                     Route.TESTFIELD(Vehicle);

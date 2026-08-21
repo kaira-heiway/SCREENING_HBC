@@ -11127,15 +11127,15 @@ codeunit 58128 "Unit Testing - Sales"
         //BC UPGRADE KUMARR78 >> Blocking DIT Code
         UnitTestingValues.RESET;
         UnitTestingValues.GET('LOG076', COMPANYNAME, DATABASE::Vehicle101FDW);
-        IF NOT Truck.GET(UnitTestingValues.Value) THEN BEGIN
-            Truck.INIT;
-            Truck.Code := 'LOG076';
-            Truck.INSERT;
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        // IF NOT Truck.GET(UnitTestingValues.Value) THEN BEGIN
+        //     Truck.INIT;
+        //     Truck.Code := 'LOG076';
+        //     Truck.INSERT;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
 
         //Check default value for Driver
@@ -11494,13 +11494,14 @@ codeunit 58128 "Unit Testing - Sales"
             Truck.INIT;
             Truck.Code := 'LOG077';
             Truck.INSERT;
-        END ELSE
-            //BC UPGRADE KUMARR78 << 02-06-2026
+        End;
+        // END ELSE
+        //     //BC UPGRADE KUMARR78 << 02-06-2026
 
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << 02-06-2026
 
         //Check default value for Driver
@@ -11818,15 +11819,15 @@ codeunit 58128 "Unit Testing - Sales"
 
         UnitTestingValues.RESET;
         UnitTestingValues.GET('LOG078', COMPANYNAME, DATABASE::Vehicle101FDW);
-        IF NOT Truck.GET(UnitTestingValues.Value) THEN BEGIN
-            Truck.INIT;
-            Truck.Code := 'LOG078';
-            Truck.INSERT;
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        // IF NOT Truck.GET(UnitTestingValues.Value) THEN BEGIN
+        //     Truck.INIT;
+        //     Truck.Code := 'LOG078';
+        //     Truck.INSERT;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
         //BC UPGRADE KUMARR78 << Unblocking 01-06-2026
 
@@ -12206,13 +12207,14 @@ codeunit 58128 "Unit Testing - Sales"
             Truck.Code := 'LOG079';
             Truck.INSERT;
             //BC UPGRADE KUMARR78 << 01-06-2026
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-                //BC UPGRADE KUMARR78 << 01-06-2026
+        End;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //         //BC UPGRADE KUMARR78 << 01-06-2026
 
-            END;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
 
         //Check the default value for Driver
@@ -12640,11 +12642,12 @@ codeunit 58128 "Unit Testing - Sales"
             Truck.INIT;
             Truck.Code := 'LOG080';
             Truck.INSERT;
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        end;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
 
         //HEI.20<<
@@ -12833,7 +12836,7 @@ codeunit 58128 "Unit Testing - Sales"
         GateEntryOutbound.FILTER.SETFILTER("Gate Entry Document No.", GateEntryNo);
         // GateEntryOutbound.Action55001.INVOKE;//BC UPGRADE KUMARR78 Blocking to Change Action.
         GateEntryOutbound.Register.INVOKE;//BC UPGRADE KUMARR78 Adding with Changed Action Name
-        //HEI.08>>
+                                          //HEI.08>>
     end;
 
     [Test]
@@ -12976,11 +12979,12 @@ codeunit 58128 "Unit Testing - Sales"
             Truck.INIT;
             Truck.Code := 'LOG081';
             Truck.INSERT;
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        end;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
 
         //Check default value for Driver
@@ -13200,7 +13204,7 @@ codeunit 58128 "Unit Testing - Sales"
         //Step 20 - Gate entry is also registerd
         // GateEntryInbound.Action55001.INVOKE;//BC UPGRADE KUMARR78 Blocking As Action Name Changed
         GateEntryInbound.Register.INVOKE;//BC UPGRADE KUMARR78 Adding with Change Action Name
-        //HEI.08>>
+                                         //HEI.08>>
     end;
 
     [Test]
@@ -13324,11 +13328,12 @@ codeunit 58128 "Unit Testing - Sales"
             Truck.INIT;
             Truck.Code := 'LOG082';
             Truck.INSERT;
-        END ELSE
-            IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
-                Truck."Status FND" := Truck."Status FND"::Open;
-                Truck.MODIFY;
-            END;
+        end;
+        // END ELSE
+        //     IF Truck."Status FND" <> Truck."Status FND"::Open THEN BEGIN
+        //         Truck."Status FND" := Truck."Status FND"::Open;
+        //         Truck.MODIFY;
+        //     END;
         //BC UPGRADE KUMARR78 << Blocking DIT Code
 
         //Check default value for Driver
