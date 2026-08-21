@@ -439,7 +439,7 @@ report 52042 "BPM Item Charges"
 
         ItemCharge.RESET;
         //ItemCharge.SETRANGE("Item Charge Type", ItemCharge."Item Charge Type"::ShippingCost); //BC Upgrade KAPOOV01 Commented DRINK-IT Field-"Item Charge Type"  related code 
-        ItemCharge.SetRange("Shipping Cost BPM FND", true); //#BCUP0-RTR-BPM Item Charges BC Upgrade KAIRAR01
+        // ItemCharge.SetRange("Shipping Cost BPM FND", true); //#BCUP0-RTR-BPM Item Charges BC Upgrade KAIRAR01
         if ItemChargeExclusion <> '' then
             ItemCharge.SETFILTER("No.", '<>%1', '*' + ItemChargeExclusion + '*');
         NoOfItemCharges := ItemCharge.COUNT;

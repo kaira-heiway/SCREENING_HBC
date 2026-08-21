@@ -1815,19 +1815,19 @@ codeunit 52004 HeinekenBCUpgrade_STP
     [EventSubscriber(ObjectType::Table, Database::Currency, 'OnAfterInitRoundingPrecision', '', false, false)]
     local procedure OnAfterInitRoundingPrecision(var Currency: Record Currency; var xCurrency: Record Currency; var GeneralLedgerSetup: Record "General Ledger Setup")
     var
-        TaxManagementSetup: Record "TaxManagementSetup102FDW"; // For this we need to add dependency Aptean Beverage Tax Management for Drink-IT Edition
+        // TaxManagementSetup: Record "TaxManagementSetup102FDW"; // For this we need to add dependency Aptean Beverage Tax Management for Drink-IT Edition
         TransferLine: Record "Transfer Shipment Line";
         PurLine: Record "Purchase Line";
     begin
         // 
-        IF TaxManagementSetup."Amount Rnd. Prec. 102FDW" <> 0 THEN
-            Currency."Tax Amount Rounding Prec.1 FND" := TaxManagementSetup."Amount Rnd. Prec. 102FDW"
-        ELSE
-            Currency."Tax Amount Rounding Prec.1 FND" := 0.01;
-        IF TaxManagementSetup."Unit Amt Rnd Prec. 102FDW" <> 0 THEN
-            Currency."Tax UnitAmt Rounding Prec1 FND" := TaxManagementSetup."Unit Amt Rnd Prec. 102FDW"
-        ELSE
-            Currency."Tax UnitAmt Rounding Prec1 FND" := 0.00001;
+        // IF TaxManagementSetup."Amount Rnd. Prec. 102FDW" <> 0 THEN
+        //     Currency."Tax Amount Rounding Prec.1 FND" := TaxManagementSetup."Amount Rnd. Prec. 102FDW"
+        // ELSE
+        //     Currency."Tax Amount Rounding Prec.1 FND" := 0.01;
+        // IF TaxManagementSetup."Unit Amt Rnd Prec. 102FDW" <> 0 THEN
+        //     Currency."Tax UnitAmt Rounding Prec1 FND" := TaxManagementSetup."Unit Amt Rnd Prec. 102FDW"
+        // ELSE
+        //     Currency."Tax UnitAmt Rounding Prec1 FND" := 0.00001;
         // 
 
         // DITW15.00.00.24 DDR
