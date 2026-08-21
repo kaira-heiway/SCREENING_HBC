@@ -171,7 +171,7 @@ report 54027 "Combined Pick STD"
                         if RoutePlanningNo <> '' then begin
                             if RoutePlanningWorksheet.GET(RoutePlanningNo) then begin
                                 RoutePlanningLocationNo := RoutePlanningWorksheet."Shipping Location";
-                                WarehouseEmployee := RoutePlanningWorksheet."Warehouse Employee FND";
+                                // WarehouseEmployee := RoutePlanningWorksheet."Warehouse Employee FND";
                                 User.RESET;
                                 User.SETRANGE("User Name", WarehouseEmployee);
                                 if User.FINDFIRST then begin
@@ -181,7 +181,7 @@ report 54027 "Combined Pick STD"
                                         WarehouseEmployeeName := WarehouseEmployee;
                                 end;
 
-                                WarehouseResponsible := RoutePlanningWorksheet."Warehouse Responsible FND";
+                                // WarehouseResponsible := RoutePlanningWorksheet."Warehouse Responsible FND";
                                 User.RESET;
                                 User.SETRANGE("User Name", WarehouseResponsible);
                                 if User.FINDFIRST then begin
