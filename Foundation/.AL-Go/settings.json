@@ -3,6 +3,9 @@
   "country": "w1",
   "appFolders": [],
   "testFolders": [],
+  "excludeEnvironments": [
+    "HeiliteBC_RTR_4"
+  ],
   "bcptTestFolders": [],
   "generateDependencyArtifact": true,
   "DependencyInstallMode": "forceUpgrade",
