@@ -4,5 +4,8 @@
   "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
   "useProjectDependencies": true,
   "templateSha": "b7dd1f32feb254e07086096e8970fba1187d9a6e",
-  "DependencyInstallMode": "forceUpgrade"
+  "DependencyInstallMode": "forceUpgrade",
+  "excludeEnvironments": [
+    "HeiliteBC_RTR_4"
+  ]
 }
