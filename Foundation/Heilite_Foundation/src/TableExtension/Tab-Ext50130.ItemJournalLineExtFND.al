@@ -7757,7 +7757,8 @@ tableextension 50130 ItemJournalLineExtFND extends "Item Journal Line"
         Item: Record "Item";
         UomMgt: Codeunit "Unit of Measure Management";
         RecItemUOM: Record "Item Unit of Measure";
-    //MfgCostCalculationManagement: Codeunit "Mfg. Cost Calculation Mgt."; //BC UPGRADE PATHAA02
+        MfgCostCalculationMgt: Codeunit "Mfg. Cost Calculation Mgt."; // BC29 Version Compatible Fix SAIA01.
+                                                                      //MfgCostCalculationManagement: Codeunit "Mfg. Cost Calculation Mgt."; //BC UPGRADE PATHAA02
     begin
         //<<DITW110.00.12A HBA 07/06/2018 NRQ#51782
         OutputjnlLine.RESET;
