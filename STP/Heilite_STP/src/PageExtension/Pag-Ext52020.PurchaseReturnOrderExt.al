@@ -965,10 +965,13 @@ pageextension 52020 PurchaseReturnOrderExt extends "Purchase Return Order"
         {
             CaptionML = ENU = '&Return Order', FRA = '&Retour';
         }
-        modify(Statistics)
-        {
-            CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
-        }
+        // BC29 Version Compatible Fix SAIA01 >>
+        // 'Statistics' action is being replaced by 'PurchaseOrderStatistics'.
+        // modify(Statistics)
+        // {
+        //     CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
+        // }
+        // BC29 Version Compatible Fix SAIA01 <<
         modify(Vendor)
         {
             CaptionML = ENU = 'Vendor', FRA = 'Fournisseur';

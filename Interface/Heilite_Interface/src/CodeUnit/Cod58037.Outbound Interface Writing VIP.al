@@ -258,7 +258,7 @@ codeunit 58037 "Outbound Interface Writing VIP"
         Header := '<?xml version="1.0" encoding="UTF-8"?>' +
           '<' + TempXMLBuffer.GetElementName + ' ';
 
-        DefaultNamespace := TempXMLBuffer.GetAttributeValue('xmlns');
+        DefaultNamespace := TempXMLBuffer.GetAttributeValueAsText('xmlns'); // BC29 Version Compatible Fix SAIA01
         if TempXMLBuffer.FindAttributes(TempAttributeXMLBuffer) then
             repeat
                 Header += TempAttributeXMLBuffer.Name + '="' + TempAttributeXMLBuffer.Value + '" ';

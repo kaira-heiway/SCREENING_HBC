@@ -314,12 +314,12 @@ pageextension 51012 GeneralLedgerEntriesExtCBN extends "General Ledger Entries"
             //     Description = 'FINXL7.00.001';
             //     Editable = false;
             // }//BC Upgrade KAPOOV01 Fields already in Base page.
-            field("Transaction No."; Rec."Transaction No.")
-            {
-                Editable = false;
-                ApplicationArea = All;
-                ToolTip = 'Specifies the value of the Transaction No. field.';
-            }
+            // field("Transaction No."; Rec."Transaction No.")
+            // {
+            //     Editable = false;
+            //     ApplicationArea = All;
+            //     ToolTip = 'Specifies the value of the Transaction No. field.';
+            // }
             field("<Source Description>"; txtSourceDescription)
             {
                 CaptionML = ENU = 'Source Description',

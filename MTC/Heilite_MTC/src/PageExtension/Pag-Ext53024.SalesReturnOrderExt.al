@@ -1194,10 +1194,11 @@ pageextension 53024 SalesReturnOrderExt extends "Sales Return Order"
         {
             CaptionML = ENU = '&Return Order', FRA = '&Retour';
         }
-        modify(Statistics)
-        {
-            CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
-        }
+        // BC29 Version Compatible Fix SAIA01 >>
+        // modify(Statistics)
+        // {
+        //     CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
+        // }
         //BC UPGRADE SIVA >>
         // modify(Card)
         // {

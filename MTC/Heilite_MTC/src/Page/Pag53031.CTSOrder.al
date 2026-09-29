@@ -2053,30 +2053,30 @@ page 53031 "CTS Order"
                 CaptionML = ENU = 'O&rder',
                             FRA = '&Commande';
                 Image = "Order";
-                action(Statistics)
-                {
-                    ApplicationArea = Basic, Suite;
-                    CaptionML = ENU = 'Statistics',
-                                FRA = 'Statistiques';
-                    Image = Statistics;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    PromotedOnly = true;
-                    ShortCutKey = 'F7';
-                    ToolTipML = ENU = 'View statistical information, such as the value of posted entries, for the record.',
-                                FRA = 'Affichez les informations statistiques telles que la valeur des écritures validées pour l''enregistrement.';
+                // action(Statistics)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     CaptionML = ENU = 'Statistics',
+                //                 FRA = 'Statistiques';
+                //     Image = Statistics;
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     PromotedOnly = true;
+                //     ShortCutKey = 'F7';
+                //     ToolTipML = ENU = 'View statistical information, such as the value of posted entries, for the record.',
+                //                 FRA = 'Affichez les informations statistiques telles que la valeur des écritures validées pour l''enregistrement.';
 
-                    trigger OnAction();
-                    var
-                        Handled: Boolean;
-                    begin
-                        OnBeforeStatisticsAction(Rec, Handled);
-                        IF NOT Handled THEN BEGIN
-                            Rec.OpenSalesOrderStatistics();
-                            SalesCalcDiscountByType.ResetRecalculateInvoiceDisc(Rec);
-                        END
-                    end;
-                }
+                //     trigger OnAction();
+                //     var
+                //         Handled: Boolean;
+                //     begin
+                //         OnBeforeStatisticsAction(Rec, Handled);
+                //         IF NOT Handled THEN BEGIN
+                //             Rec.OpenSalesOrderStatistics();
+                //             SalesCalcDiscountByType.ResetRecalculateInvoiceDisc(Rec);
+                //         END
+                //     end;
+                // }
                 action(Card)
                 {
                     ApplicationArea = Basic, Suite;

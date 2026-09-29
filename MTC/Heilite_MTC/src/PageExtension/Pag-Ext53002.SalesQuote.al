@@ -611,10 +611,11 @@ pageextension 53002 SalesQuoteExtension extends "Sales Quote"
         // {
         //     CaptionML = ENU = '&Quote', FRA = '&Devis';
         // } //BC Upgrade GUNREM01 Commented becuase in bc &Quote is group
-        modify(Statistics)
-        {
-            CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
-        }
+        // BC29 Version Compatible Fix SAIA01 >>
+        // modify(Statistics)
+        // {
+        //     CaptionML = ENU = 'Statistics', FRA = 'Statistiques';
+        // }
         modify("Co&mments")
         {
             CaptionML = ENU = 'Co&mments', FRA = 'Co&mmentaires';
