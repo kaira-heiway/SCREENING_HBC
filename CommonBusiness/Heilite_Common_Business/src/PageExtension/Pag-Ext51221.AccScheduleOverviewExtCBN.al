@@ -236,16 +236,18 @@ pageextension 51221 AccScheduleOverviewExtCBN extends "Acc. Schedule Overview"
         {
             CaptionML = ENU = 'Export to Excel', FRA = 'Exporter vers Excel';
         }
-        modify("Create New Document")
-        {
-            CaptionML = ENU = 'Create New Document', FRA = 'Créer un document';
-            ToolTipML = ENU = 'Open the account schedule overview in a new Excel workbook. This creates an Excel workbook on your device.', FRA = 'Ouvrez l''aperçu du tableau d''analyse dans un nouveau classeur Excel. Cela crée un classeur Excel sur votre appareil.';
-        }
-        modify("Update Existing Document")
-        {
-            CaptionML = ENU = 'Update Existing Document', FRA = 'Mettre à jour le document existant';
-            ToolTipML = ENU = 'Refresh the data in an existing Excel workbook. You must specify the workbook that you want to update.', FRA = 'Actualisez les données dans un classeur Excel existant. Vous devez spécifier le classeur que vous voulez mettre à jour.';
-        }
+        // BC29 Version Compatible Fix SAIA01 >>
+        // modify("Create New Document")
+        // {
+        //     CaptionML = ENU = 'Create New Document', FRA = 'Créer un document';
+        //     ToolTipML = ENU = 'Open the account schedule overview in a new Excel workbook. This creates an Excel workbook on your device.', FRA = 'Ouvrez l''aperçu du tableau d''analyse dans un nouveau classeur Excel. Cela crée un classeur Excel sur votre appareil.';
+        // }
+        // modify("Update Existing Document")
+        // {
+        //     CaptionML = ENU = 'Update Existing Document', FRA = 'Mettre à jour le document existant';
+        //     ToolTipML = ENU = 'Refresh the data in an existing Excel workbook. You must specify the workbook that you want to update.', FRA = 'Actualisez les données dans un classeur Excel existant. Vous devez spécifier le classeur que vous voulez mettre à jour.';
+        // }
+        // BC29 Version Compatible Fix SAIA01 <<
     }
 
     trigger OnOpenPage()

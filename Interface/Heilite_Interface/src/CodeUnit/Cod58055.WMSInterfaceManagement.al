@@ -167,7 +167,7 @@ codeunit 58055 "WMS Interface Management"
     end;
 
     var
-        enumvalue : Enum "Reservation Status";
+        enumvalue: Enum "Reservation Status";
         GLSetup: Record "General Ledger Setup";
         SalesSetup: Record "Sales & Receivables Setup";
         GeneralOpCoSetup: Record "General OpCo Setup FND";
@@ -1655,7 +1655,9 @@ codeunit 58055 "WMS Interface Management"
                             GetSourceDocuments.SetHideDialog(true);
                             GetSourceDocuments.RUNMODAL;
 
-                            WhseShptHeader."Document Status" := WhseShptHeader.GetDocumentStatus(0);
+                            // BC29 Version Compatible Fix SAIA01 >>
+                            WhseShptHeader."Document Status" := WhseShptHeader.GetShipmentStatus(0);
+                            // BC29 Version Compatible Fix SAIA01 <<
                             WhseShptHeader.MODIFY;
                         end;  //HEI.28
                     end;  //HEI.28
@@ -3374,7 +3376,9 @@ codeunit 58055 "WMS Interface Management"
                             GetSourceDocuments.SetHideDialog(true);
                             GetSourceDocuments.RUNMODAL;
 
-                            WhseShptHeader."Document Status" := WhseShptHeader.GetDocumentStatus(0);
+                            // BC29 Version Compatible Fix SAIA01 >>
+                            WhseShptHeader."Document Status" := WhseShptHeader.GetShipmentStatus(0);
+                            // BC29 Version Compatible Fix SAIA01 << 
                             WhseShptHeader.MODIFY;
                         end;
                     end;

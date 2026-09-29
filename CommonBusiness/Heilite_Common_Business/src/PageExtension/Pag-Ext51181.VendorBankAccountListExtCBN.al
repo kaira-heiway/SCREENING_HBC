@@ -128,10 +128,10 @@ pageextension 51181 VendorBankAccountListExtCBN extends "Vendor Bank Account Lis
     {
         addfirst(Navigation)
         {
-            action(ApprovalEntries)
+            action(ApprovalEntriesCustom)
             {
                 ApplicationArea = ALL;
-                Caption = 'Approval Entries';
+                Caption = 'Approval Entries Custom';
                 Promoted = TRUE;
                 Image = Approvals;
                 PromotedCategory = Process;
